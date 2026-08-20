@@ -1791,6 +1791,43 @@
         }
       });
     });
+
+    // ==========================================================================
+    // 11. DRAG TO SCROLL FOR WORK TRACK
+    // ==========================================================================
+    const workTrack = document.querySelector('.work-track');
+    if (workTrack) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      workTrack.addEventListener('mousedown', (e) => {
+        isDown = true;
+        workTrack.style.cursor = 'grabbing';
+        startX = e.pageX - workTrack.offsetLeft;
+        scrollLeft = workTrack.scrollLeft;
+      });
+
+      workTrack.addEventListener('mouseleave', () => {
+        isDown = false;
+        workTrack.style.cursor = 'grab';
+      });
+
+      workTrack.addEventListener('mouseup', () => {
+        isDown = false;
+        workTrack.style.cursor = 'grab';
+      });
+
+      workTrack.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - workTrack.offsetLeft;
+        const walk = (x - startX) * 2;
+        workTrack.scrollLeft = scrollLeft - walk;
+      });
+
+      workTrack.style.cursor = 'grab';
+    }
   </script>
 </body>
 
