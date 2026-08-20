@@ -263,6 +263,42 @@
       z-index: 1;
     }
 
+    .hero-big-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: clamp(120px, 15vw, 280px);
+      font-weight: 700;
+      letter-spacing: -8px;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(224, 225, 221, 0.08);
+      white-space: nowrap;
+      z-index: 2;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .hero-big-text-accent {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateY(80px);
+      font-family: var(--font-display);
+      font-size: clamp(80px, 10vw, 180px);
+      font-weight: 700;
+      letter-spacing: -4px;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(119, 141, 169, 0.12);
+      white-space: nowrap;
+      z-index: 2;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
     .morph-scene {
       width: 100%;
       height: 100%;
@@ -956,6 +992,8 @@
         <div class="morph-scene">
           <canvas class="morph-canvas" id="morphCanvas"></canvas>
         </div>
+        <div class="hero-big-text">DESIGN</div>
+        <div class="hero-big-text-accent">GRÁFICO</div>
       </div>
 
       <div class="hero-content-side">
