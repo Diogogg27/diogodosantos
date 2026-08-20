@@ -1804,11 +1804,12 @@
     // 11. DRAG TO SCROLL FOR WORK TRACK
     // ==========================================================================
     const workTrack = document.querySelector('.work-track');
+    let hasMoved = false;
+
     if (workTrack) {
       let isDown = false;
       let startX;
       let scrollLeft;
-      let hasMoved = false;
 
       workTrack.addEventListener('mousedown', (e) => {
         isDown = true;
@@ -1846,7 +1847,11 @@
     const workItems = document.querySelectorAll('.work-item');
     workItems.forEach(item => {
       item.addEventListener('click', function(e) {
-        if (hasMoved) return;
+        e.stopPropagation();
+        if (hasMoved) {
+          hasMoved = false;
+          return;
+        }
         const isActive = this.classList.contains('active');
         workItems.forEach(i => i.classList.remove('active'));
         if (!isActive) {
