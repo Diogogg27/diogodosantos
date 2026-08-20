@@ -8,16 +8,19 @@
   <meta name="description"
     content="Diogo dos Santos - Designer Gráfico e Editor de Vídeo. Criação de identidades visuais, artes digitais e produções audiovisuais impactantes." />
 
-  <!-- Fontes Futurísticas e Premium -->
+  <!-- Fontes Premium -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syncopate:wght@700&family=Orbitron:wght@400;700;900&family=Michroma&family=IBM+Plex+Mono:wght@400;600&family=Syne:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     /* ==========================================================================
-       1. VARIÁVEIS E TEMA (SISTEMA DE DESIGN)
+       1. VARIÁVEIS E TEMA
        ========================================================================== */
     :root {
       --bg-dark: #0a0a0f;
@@ -39,15 +42,9 @@
 
       --font-display: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
-      --font-logo: 'Space Grotesk', sans-serif;
-      --font-tech: 'IBM Plex Mono', monospace;
+      --font-mono: 'JetBrains Mono', monospace;
 
       --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      --glow-light: 0 0 20px rgba(99, 102, 241, 0.15);
-      --glow-heavy: 0 0 40px rgba(139, 92, 246, 0.2);
-      --neon-cyan: 0 0 8px rgba(139, 92, 246, 0.3), 0 0 16px rgba(139, 92, 246, 0.15);
-      --neon-blue: 0 0 8px rgba(99, 102, 241, 0.3), 0 0 16px rgba(99, 102, 241, 0.15);
     }
 
     /* ==========================================================================
@@ -61,112 +58,16 @@
       -webkit-user-drag: none;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     html,
     body {
       background-color: var(--bg-dark);
       color: var(--text-primary);
       font-family: var(--font-body);
       overflow-x: hidden;
-      scroll-behavior: auto;
-      /* Controlado pelo Lenis */
-    }
-
-    body {
-      position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: -4;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-        linear-gradient(180deg, #0a0a0f 0%, #0f0f18 50%, #0a0a0f 100%);
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.4;
-    }
-
-    /* Formas finas decorativas */
-    .bg-shapes {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .bg-shape {
-      position: absolute;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 50%;
-    }
-
-    .bg-shape-1 {
-      width: 600px;
-      height: 600px;
-      top: -200px;
-      right: -200px;
-      animation: floatShape 20s ease-in-out infinite;
-    }
-
-    .bg-shape-2 {
-      width: 400px;
-      height: 400px;
-      bottom: -100px;
-      left: -100px;
-      animation: floatShape 25s ease-in-out infinite reverse;
-    }
-
-    .bg-shape-3 {
-      width: 300px;
-      height: 300px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: floatShape 30s ease-in-out infinite;
-    }
-
-    @keyframes floatShape {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(20px, -20px) rotate(5deg); }
-      50% { transform: translate(-10px, 10px) rotate(-3deg); }
-      75% { transform: translate(15px, 5px) rotate(3deg); }
-    }
-
-    @keyframes bgPulse {
-      0% {
-        transform: scale(1) translate3d(0, 0, 0);
-        filter: saturate(100%);
-      }
-
-      100% {
-        transform: scale(1.04) translate3d(0, -8px, 0);
-        filter: saturate(122%);
-      }
-    }
-
-    @keyframes gridDrift {
-      0% {
-        background-position: 0 0, 0 0;
-      }
-
-      100% {
-        background-position: 42px 42px, -42px -42px;
-      }
     }
 
     ::selection {
@@ -174,2142 +75,1290 @@
       color: var(--text-primary);
     }
 
-    /* Scrollbar Customizada */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(218, 218, 218, 0.3);
-      border-radius: 10px;
-      border: 2px solid var(--bg-dark);
-      transition: var(--transition-smooth);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary);
-    }
-
-    /* Canvas de Fundo */
-
-    /* Gradientes Radiais de Iluminação Ambientais */
-
     /* ==========================================================================
-       3. ESTRUTURA GERAL & UTILITIES
-       ========================================================================= */
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 24px;
-      }
-    }
-
-    section {
-      padding: 120px 0;
-      position: relative;
-    }
-
-    @media (max-width: 768px) {
-      section {
-        padding: 80px 0;
-      }
-    }
-
-    /* Botão Base Premium (Magnético) */
-    .btn-premium {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px 36px;
-      border-radius: 50px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: var(--text-primary);
-      background: rgba(8, 8, 8, 0.801);
-      border: 1px solid rgba(137, 233, 255, 0.45);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: var(--transition-smooth);
-    }
-
-    .btn-premium::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      opacity: 0;
-      z-index: -1;
-      transition: var(--transition-smooth);
-    }
-
-    .btn-premium:hover {
-      border-color: transparent;
-      box-shadow: 0 10px 25px rgba(188, 231, 255, 0.32), var(--neon-cyan);
-      transform: translateY(-2px);
-    }
-
-    .btn-premium:hover::before {
-      opacity: 1;
-    }
-
-    .btn-premium.active-btn {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-color: transparent;
-      box-shadow: 0 10px 25px rgba(15, 44, 58, 0.78), var(--neon-blue);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
-    }
-
-    /* Cursor Trail Customizado */
-    #custom-cursor {
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1.5px solid rgba(255, 255, 255, 0.6);
-      border-radius: 50%;
+       3. NOISE GRAIN OVERLAY (Canvas)
+       ========================================================================== */
+    .noise-layer {
       position: fixed;
       top: 0;
       left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 0.035;
+      mix-blend-mode: overlay;
+    }
+
+    /* ==========================================================================
+       4. CURSOR ORB
+       ========================================================================== */
+    .cursor-orb {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
       mix-blend-mode: difference;
-      transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-size: 0.55rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
-    #custom-cursor.hovered {
+    .cursor-orb.hovered {
       width: 60px;
       height: 60px;
-      background-color: var(--text-primary);
-      border-color: transparent;
-    }
-
-    #custom-cursor.portfolio-hover::after {
-      content: 'VER';
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.8);
     }
 
     @media (max-width: 1024px) {
-      #custom-cursor {
-        display: none !important;
+      .cursor-orb {
+        display: none;
       }
     }
 
-    /* Cabeçalhos de Seção */
-    .section-header {
-      margin-bottom: 70px;
-      max-width: 700px;
+    /* ==========================================================================
+       5. PIXEL GRID DECORATIONS
+       ========================================================================== */
+    .pixel-grid {
+      position: absolute;
+      display: grid;
+      gap: 1px;
+      pointer-events: none;
     }
 
-    .section-header span {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--secondary);
-      display: inline-block;
-      margin-bottom: 12px;
+    .pixel-cell {
+      background: var(--primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .section-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.1;
-      color: var(--text-primary);
-      text-shadow: 0 0 16px rgba(0, 183, 255, 0.3);
+    .pixel-grid.visible .pixel-cell {
+      opacity: 1;
     }
 
     /* ==========================================================================
-       4. CABEÇALHO & NAVEGAÇÃO
+       6. CORNER DECORATIONS
        ========================================================================== */
-    header {
+    .corner-cross {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .corner-cross::before,
+    .corner-cross::after {
+      content: '';
+      position: absolute;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .corner-cross::before {
+      width: 1px;
+      height: 100%;
+      left: 50%;
+    }
+
+    .corner-cross::after {
+      width: 100%;
+      height: 1px;
+      top: 50%;
+    }
+
+    .corner-cross.tl { top: 20px; left: 20px; }
+    .corner-cross.tr { top: 20px; right: 20px; }
+    .corner-cross.bl { bottom: 20px; left: 20px; }
+    .corner-cross.br { bottom: 20px; right: 20px; }
+
+    /* ==========================================================================
+       7. HEADER / TOPBAR
+       ========================================================================== */
+    .topbar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 15px 0;
-      z-index: 1000;
-      transition: var(--transition-smooth);
-    }
-
-    header.scrolled {
-      padding: 5px 0;
-      background: rgba(1, 38, 44, 0.86);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(137, 233, 255, 0.45);
-      box-shadow: 0 8px 30px rgba(0, 183, 255, 0.16);
-    }
-
-    .nav-wrapper {
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 1000;
+      mix-blend-mode: difference;
     }
 
-    .logo {
-      font-family: var(--font-logo);
-      font-weight: 700;
-      font-size: 1.25rem;
+    .topbar-name {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
       letter-spacing: 2px;
+      text-transform: uppercase;
       color: var(--text-primary);
-      text-decoration: none;
+    }
+
+    .topbar-nav {
       display: flex;
-      align-items: center;
-      gap: 5px;
+      gap: 32px;
     }
 
-    .logo span {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.45));
-    }
-
-    .logo-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent);
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-    }
-
-    .nav-link {
-      font-size: 0.95rem;
+    .topbar-nav a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       font-weight: 500;
       text-decoration: none;
-      color: var(--text-secondary);
+      color: var(--text-primary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
       transition: var(--transition-smooth);
       position: relative;
-      padding: 6px 0;
     }
 
-    .nav-link::after {
+    .topbar-nav a::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: -4px;
       left: 0;
       width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: var(--transition-smooth);
+      height: 1px;
+      background: var(--text-primary);
+      transition: width 0.3s ease;
     }
 
-    .nav-link:hover {
-      color: var(--text-primary);
-      text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
-    }
-
-    .nav-link:hover::after {
+    .topbar-nav a:hover::after {
       width: 100%;
     }
 
-    /* Mobile Hamburger */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 6px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 1100;
-    }
-
-    .menu-toggle span {
-      display: block;
-      width: 28px;
-      height: 2px;
-      background-color: var(--text-primary);
-      transition: var(--transition-smooth);
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
-    }
-
-    @media (max-width: 991px) {
-      .menu-toggle {
-        display: flex;
+    @media (max-width: 768px) {
+      .topbar {
+        padding: 16px 24px;
       }
 
-      .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        height: 100vh;
-        background: rgba(7, 7, 9, 0.98);
-        backdrop-filter: blur(25px);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-        z-index: 1050;
-      }
-
-      .nav-menu.active {
-        right: 0;
-      }
-
-      .nav-menu .nav-link {
-        font-size: 1.4rem;
-        font-family: var(--font-display);
-        font-weight: 700;
-      }
-
-      .nav-menu .btn-premium {
-        margin-top: 20px;
+      .topbar-nav {
+        display: none;
       }
     }
 
     /* ==========================================================================
-       5. HERO SECTION
+       8. HERO SECTION
        ========================================================================== */
-    .hero-section {
-      min-height: 100vh;
+    .hero-stage {
+      position: relative;
+      height: 300vh;
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
       display: flex;
       align-items: center;
-      padding-top: 140px;
-      padding-bottom: 60px;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .morph-scene {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .morph-canvas {
+      width: 100%;
+      height: 100%;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-    }
-
-    .hero-tags {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 900px;
     }
 
     .hero-tag {
-      background: rgba(0, 0, 0, 0.61);
-      border: 1px solid rgba(214, 214, 214, 0.25);
-      color: var(--primary);
-      padding: 6px 16px;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      font-family: var(--font-tech);
-      letter-spacing: 1px;
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
       text-transform: uppercase;
-    }
-
-    .hero-tag.alt {
-      background: rgba(0, 242, 254, 0.08);
-      border: 1px solid rgba(0, 242, 254, 0.25);
-      color: var(--secondary);
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding: 6px 16px;
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 50px;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 8vw, 5.8rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -2px;
-      margin-bottom: 30px;
-      text-shadow: 0 0 18px rgba(0, 183, 255, 0.22);
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -3px;
+      margin-bottom: 32px;
     }
 
-    .hero-title span.grad {
-      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-size: 200% auto;
-      animation: gradientFlow 6s linear infinite;
-    }
-
-    @keyframes gradientFlow {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    .hero-title span.outline {
+    .hero-title .outline {
       color: transparent;
-      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3);
       transition: var(--transition-smooth);
     }
 
-    .hero-title span.outline:hover {
-      -webkit-text-stroke: 1.5px var(--secondary);
-      filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.5));
+    .hero-title .outline:hover {
+      -webkit-text-stroke: 1.5px var(--accent);
     }
 
-    .hero-description {
-      font-size: clamp(1.05rem, 2vw, 1.3rem);
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.2rem);
       color: var(--text-secondary);
-      max-width: 650px;
-      line-height: 1.6;
-      margin-bottom: 48px;
-      text-shadow: 0 0 12px rgba(0, 183, 255, 0.1);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text-primary);
+      padding: 16px 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      transition: var(--transition-smooth);
+      letter-spacing: 1px;
     }
 
-    .hero-scroll-indicator {
+    .hero-cta:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .scroll-indicator {
       position: absolute;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+    }
+
+    .scroll-indicator span {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
       color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ==========================================================================
+       9. ABOUT SECTION
+       ========================================================================== */
+    .about-section {
+      position: relative;
+      padding: 160px 40px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .about-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-label {
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      text-decoration: none;
-      transition: var(--transition-smooth);
+      color: var(--accent);
+      margin-bottom: 24px;
     }
 
-    .hero-scroll-indicator:hover {
-      color: var(--text-primary);
-    }
-
-    .scroll-mouse {
-      width: 24px;
-      height: 40px;
-      border: 2px solid var(--text-muted);
-      border-radius: 12px;
-      position: relative;
-    }
-
-    .scroll-wheel {
-      width: 4px;
-      height: 8px;
-      background-color: var(--secondary);
-      border-radius: 2px;
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: mouseScroll 1.5s ease-in-out infinite;
-    }
-
-    @keyframes mouseScroll {
-      0% {
-        opacity: 0;
-        top: 6px;
-      }
-
-      20% {
-        opacity: 1;
-      }
-
-      80% {
-        opacity: 0;
-        top: 20px;
-      }
-
-      100% {
-        opacity: 0;
-        top: 20px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-section {
-        padding-top: 120px;
-      }
-
-      .hero-actions .btn-premium {
-        width: 100%;
-      }
-
-      .hero-scroll-indicator {
-        display: none;
-      }
-    }
-
-    /* ==========================================================================
-       6. SEÇÃO ESTATÍSTICAS
-       ========================================================================== */
-    .stats-section {
-      padding: 60px 0;
-      border-top: 1px solid var(--border-glass);
-      border-bottom: 1px solid var(--border-glass);
-      background: rgba(7, 7, 9, 0.4);
-      backdrop-filter: blur(10px);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-num {
+    .about-heading {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 5vw, 4.2rem);
-      font-weight: 800;
-      line-height: 1;
-      background: linear-gradient(135deg, var(--text-primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.35));
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      font-family: var(--font-tech);
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    @media (max-width: 991px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-    }
-
-    /* ==========================================================================
-       7. SEÇÃO SOBRE
-       ========================================================================== */
-    .about-text {
-      max-width: 800px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 32px;
+      letter-spacing: -1px;
     }
 
     .about-text p {
       color: var(--text-secondary);
+      font-size: 1.05rem;
       line-height: 1.8;
       margin-bottom: 24px;
-      font-size: 1.05rem;
     }
 
-    .about-text p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* ==========================================================================
-       8. BENTO SERVICES (SEÇÃO HABILIDADES)
-       ========================================================================== */
-    .services-bento {
+    .about-gallery {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 280px;
-      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .bento-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(164, 230, 245, 0.46);
-      backdrop-filter: blur(12px);
-      border-radius: 32px;
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
-      overflow: hidden;
-      transition: var(--transition-smooth);
-    }
-
-    .bento-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
+    .about-img {
       width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.5s;
-      pointer-events: none;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 12px;
+      filter: grayscale(0.3);
+      transition: filter 0.5s ease;
     }
 
-    .bento-card:hover {
-      border-color: var(--border-glass-hover);
-      background: var(--bg-card-hover);
-      transform: translateY(-5px);
-      box-shadow: var(--glow-light), 0 0 28px rgba(0, 183, 255, 0.24);
+    .about-img:hover {
+      filter: grayscale(0);
     }
 
-    .bento-card:hover::before {
-      opacity: 1;
-    }
-
-    .bento-icon-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-glass);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      margin-bottom: auto;
-      transition: var(--transition-bounce);
-    }
-
-    .bento-card:hover .bento-icon-box {
-      transform: scale(1.1) rotate(5deg);
-      background: var(--primary);
-      color: var(--text-primary);
-      box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-    }
-
-    .bento-card.cyan-accent:hover .bento-icon-box {
-      background: var(--secondary);
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
-    }
-
-    .bento-card.pink-accent:hover .bento-icon-box {
-      background: var(--accent);
-      box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
-    }
-
-    .bento-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .bento-card p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Modificadores de Grade Bento */
-    .bento-col-2 {
-      grid-column: span 2;
-    }
-
-    .bento-row-2 {
+    .about-img.tall {
       grid-row: span 2;
-      justify-content: space-between;
     }
 
-    .bento-showcase {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .skills-list {
+      margin-top: 48px;
     }
 
-    /* Gráficos Abstratos no Hover */
-    .bento-abstract-graphic {
-      position: absolute;
-      top: 10%;
-      right: 10%;
-      width: 140px;
-      height: 140px;
-      border: 2px dashed rgba(255, 255, 255, 0.08);
-      border-radius: 50%;
+    .skill-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: var(--transition-bounce);
-      pointer-events: none;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-glass);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
     }
 
-    .bento-abstract-inner {
-      width: 100px;
-      height: 100px;
-      border: 2px solid var(--secondary);
-      opacity: 0.15;
-      border-radius: 50%;
-      transition: var(--transition-bounce);
-    }
-
-    .bento-card:hover .bento-abstract-graphic {
-      transform: rotate(45deg) scale(1.1);
-      border-color: rgba(0, 242, 254, 0.3);
-    }
-
-    .bento-card:hover .bento-abstract-inner {
-      opacity: 0.6;
-      border-color: var(--accent);
-      box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+    .skill-num {
+      color: var(--accent);
+      font-weight: 600;
     }
 
     @media (max-width: 991px) {
-      .services-bento {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 260px;
-      }
-
-      .bento-col-2 {
-        grid-column: span 2;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .services-bento {
+      .about-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: auto;
+        gap: 48px;
       }
 
-      .bento-col-2 {
-        grid-column: span 1;
-      }
-
-      .bento-row-2 {
-        grid-row: span 1;
-      }
-
-      .bento-card {
-        padding: 30px;
-        min-height: 250px;
-      }
-
-      .bento-abstract-graphic {
-        display: none;
+      .about-section {
+        padding: 100px 24px;
       }
     }
 
     /* ==========================================================================
-       8. SEÇÃO PORTFÓLIO (FILTRÁVEL E DESSIMÉTRICA)
+       10. WORK/PORTFOLIO SECTION
        ========================================================================== */
-    .portfolio-filters {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 50px;
-      flex-wrap: wrap;
+    .work-section {
+      position: relative;
+      padding: 160px 40px;
     }
 
-    .portfolio-grid {
+    .work-header {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+    }
+
+    .work-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .work-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -2px;
+    }
+
+    .work-grid {
+      max-width: 1200px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+      gap: 24px;
     }
 
-    .portfolio-item {
-      background: var(--bg-card);
-      border: 1px solid rgba(164, 230, 245, 0.46);
-      border-radius: 36px;
-      overflow: hidden;
+    .work-item {
       position: relative;
+      border-radius: 16px;
+      overflow: hidden;
       cursor: pointer;
-      transition: var(--transition-smooth);
+      aspect-ratio: 4/3;
+      background: var(--bg-card);
     }
 
-    /* Efeito de Altura Variada (Grid Assimétrico Elegante) */
-    .portfolio-item.tall {
+    .work-item.tall {
       grid-row: span 2;
-      height: calc(100% - 32px);
+      aspect-ratio: auto;
     }
 
-    .portfolio-img-container {
-      width: 100%;
-      height: 480px;
-      overflow: hidden;
-      position: relative;
-      background: #000;
-    }
-
-    .portfolio-item.tall .portfolio-img-container {
-      height: 700px;
-    }
-
-    .portfolio-img {
+    .work-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .portfolio-overlay {
+    .work-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .work-item-overlay {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 40px;
-      background: linear-gradient(to top, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.5) 60%, transparent 100%);
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 10, 15, 0.9) 0%, transparent 60%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      padding: 32px;
       opacity: 0;
-      transform: translateY(20px);
-      transition: var(--transition-smooth);
+      transition: opacity 0.5s ease;
     }
 
-    .portfolio-item:hover {
-      border-color: var(--border-glass-hover);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.56), 0 0 30px rgba(0, 242, 254, 0.22);
-    }
-
-    .portfolio-item:hover .portfolio-img {
-      transform: scale(1.08) rotate(1deg);
-    }
-
-    .portfolio-item:hover .portfolio-overlay {
+    .work-item:hover .work-item-overlay {
       opacity: 1;
-      transform: translateY(0);
     }
 
-    .portfolio-cat {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--secondary);
-      text-transform: uppercase;
+    .work-item-cat {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
       letter-spacing: 2px;
+      text-transform: uppercase;
       margin-bottom: 8px;
     }
 
-    .portfolio-title {
+    .work-item-title {
       font-family: var(--font-display);
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 8px;
     }
 
-    .portfolio-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* Transição ao Filtrar */
-    .portfolio-item {
-      display: block;
-    }
-
-    .portfolio-item.hidden {
-      display: none;
-    }
-
-    @media (max-width: 991px) {
-      .portfolio-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .portfolio-item.tall {
-        grid-row: span 1;
-        height: auto;
-      }
-
-      .portfolio-img-container,
-      .portfolio-item.tall .portfolio-img-container {
-        height: 380px;
-      }
-
-      .portfolio-overlay {
-        opacity: 1;
-        transform: translateY(0);
-        padding: 24px;
-        background: linear-gradient(to top, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.3) 100%);
-      }
-    }
-
-    /* ==========================================================================
-       9. SEÇÃO PROCESSO CRIATIVO
-       ========================================================================== */
-    .process-timeline {
-      position: relative;
-      margin-top: 60px;
-    }
-
-    .process-line {
+    /* Pixel decomposition effect on hover */
+    .work-item .pixel-decompose {
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--primary), var(--secondary), transparent);
-      opacity: 0.3;
+      inset: 0;
+      display: grid;
+      gap: 2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
 
-    .process-step {
-      display: flex;
-      margin-bottom: 100px;
-      position: relative;
-      z-index: 2;
+    .work-item:hover .pixel-decompose {
+      opacity: 1;
     }
 
-    .process-step:last-child {
-      margin-bottom: 0;
+    .pixel-decompose .px {
+      background: var(--primary);
+      opacity: 0;
+      animation: pixelFade 0.5s ease forwards;
     }
 
-    .process-step.reverse {
-      flex-direction: row-reverse;
-    }
-
-    .process-content {
-      width: 45%;
-      padding: 40px;
-      background: var(--bg-card);
-      border: 1px solid rgba(164, 230, 245, 0.46);
-      backdrop-filter: blur(10px);
-      border-radius: 32px;
-      transition: var(--transition-smooth);
-    }
-
-    .process-content:hover {
-      border-color: var(--border-glass-hover);
-      transform: translateY(-5px);
-      box-shadow: var(--glow-light), 0 0 24px rgba(0, 183, 255, 0.22);
-    }
-
-    .process-number {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
-    }
-
-    .process-content h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .process-content p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .process-node {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translate(-50%, 0);
-      width: 20px;
-      height: 20px;
-      background-color: var(--bg-dark);
-      border: 4px solid var(--secondary);
-      border-radius: 50%;
-      box-shadow: 0 0 15px var(--secondary);
-      transition: var(--transition-bounce);
-    }
-
-    .process-step:nth-child(even) .process-node {
-      border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent);
-    }
-
-    .process-step:hover .process-node {
-      transform: translate(-50%, 0) scale(1.3);
+    @keyframes pixelFade {
+      0% { opacity: 0.8; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(1); }
     }
 
     @media (max-width: 768px) {
-      .process-line {
-        left: 20px;
-        transform: none;
+      .work-grid {
+        grid-template-columns: 1fr;
       }
 
-      .process-step,
-      .process-step.reverse {
-        flex-direction: row;
-        margin-bottom: 60px;
+      .work-item.tall {
+        grid-row: span 1;
       }
 
-      .process-content {
-        width: calc(100% - 60px);
-        margin-left: 60px;
-        padding: 30px;
-      }
-
-      .process-node {
-        left: 20px;
-        transform: translate(-50%, 0);
-      }
-
-      .process-step:hover .process-node {
-        transform: translate(-50%, 0) scale(1.2);
+      .work-section {
+        padding: 100px 24px;
       }
     }
 
     /* ==========================================================================
-       10. SEÇÃO CONTATO & FORMULÁRIO EXCLUSIVO
+       11. QUOTE SECTION
        ========================================================================== */
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 60px;
-      background: var(--bg-card);
-      border: 1px solid rgba(164, 230, 245, 0.52);
-      backdrop-filter: blur(12px);
-      border-radius: 40px;
-      padding: 60px;
-      overflow: hidden;
+    .quote-section {
       position: relative;
-      box-shadow: inset 0 0 35px rgba(0, 242, 254, 0.06), 0 0 26px rgba(0, 183, 255, 0.12);
+      padding: 160px 40px;
+      text-align: center;
+      overflow: hidden;
     }
 
-    .contact-wrapper::after {
-      content: '';
+    .quote-bg {
       position: absolute;
-      bottom: -10%;
-      right: -10%;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(138, 43, 226, 0.08) 0%, transparent 70%);
-      z-index: -1;
-      pointer-events: none;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      grid-template-rows: repeat(12, 1fr);
+      gap: 1px;
+      opacity: 0.03;
     }
 
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .quote-bg-cell {
+      background: var(--accent);
     }
 
-    .contact-meta h3 {
+    .quote-text {
+      position: relative;
+      z-index: 2;
       font-family: var(--font-display);
-      font-size: 2.2rem;
+      font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 700;
-      margin-bottom: 24px;
+      line-height: 1.2;
+      max-width: 900px;
+      margin: 0 auto;
+      letter-spacing: -1px;
     }
 
-    .contact-meta p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 40px;
-    }
-
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .contact-detail-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-glass);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--secondary);
-    }
-
-    .contact-detail-text span {
+    .quote-author {
+      position: relative;
+      z-index: 2;
+      font-family: var(--font-mono);
       font-size: 0.8rem;
       color: var(--text-muted);
-      display: block;
+      margin-top: 32px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .contact-detail-text b {
-      font-size: 1rem;
-      color: var(--text-primary);
-    }
-
-    /* Formulário com Inputs Flutuantes */
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .form-group {
-      position: relative;
-      width: 100%;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 18px 24px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(164, 230, 245, 0.38);
-      border-radius: 16px;
-      font-family: var(--font-body);
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      transition: var(--transition-smooth);
-      outline: none;
-    }
-
-    .form-input:focus {
-      border-color: var(--primary);
-      background: rgba(0, 183, 255, 0.07);
-      box-shadow: 0 0 0 2px rgba(0, 242, 254, 0.22), 0 0 18px rgba(0, 183, 255, 0.24);
-    }
-
-    .form-label {
-      position: absolute;
-      left: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      pointer-events: none;
-      transition: var(--transition-smooth);
-    }
-
-    /* Estado Ativo do Input Flutuante */
-    .form-input:focus~.form-label,
-    .form-input:not(:placeholder-shown)~.form-label {
-      top: 0;
-      left: 18px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--secondary);
-      background-color: #0d0d14;
-      padding: 2px 10px;
-      border-radius: 4px;
-    }
-
-    textarea.form-input {
-      height: 150px;
-      resize: none;
-    }
-
-    textarea.form-input~.form-label {
-      top: 24px;
-      transform: none;
-    }
-
-    textarea.form-input:focus~.form-label,
-    textarea.form-input:not(:placeholder-shown)~.form-label {
-      top: 0;
-      transform: translateY(-50%);
-    }
-
-    @media (max-width: 991px) {
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-        padding: 40px;
-        gap: 48px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .contact-wrapper {
-        padding: 30px 20px;
-      }
     }
 
     /* ==========================================================================
-       11. FOOTER (RODAPÉ)
+       12. CONTACT / FOOTER
        ========================================================================== */
-    footer {
-      border-top: 1px solid var(--border-glass);
-      padding: 80px 0 40px;
-      background: rgba(7, 7, 9, 0.8);
+    .footer {
       position: relative;
+      padding: 120px 40px 40px;
+      border-top: 1px solid var(--border-glass);
     }
 
-    .footer-top {
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
       gap: 60px;
-      margin-bottom: 60px;
     }
 
-    .footer-brand p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-top: 20px;
-      max-width: 320px;
+    .footer-cta {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 32px;
+      letter-spacing: -1px;
+    }
+
+    .footer-cta a {
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      transition: var(--transition-smooth);
+    }
+
+    .footer-cta a:hover {
+      color: var(--accent);
     }
 
     .footer-links h4 {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
       margin-bottom: 24px;
-      letter-spacing: 1px;
     }
 
     .footer-links ul {
       list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
     }
 
     .footer-links a {
+      font-size: 0.95rem;
       color: var(--text-secondary);
       text-decoration: none;
-      transition: var(--transition-smooth);
-      font-size: 0.95rem;
+      transition: color 0.3s ease;
     }
 
     .footer-links a:hover {
-      color: var(--secondary);
-      padding-left: 4px;
-    }
-
-    .footer-social-row {
-      display: flex;
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .social-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-glass);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-secondary);
-      transition: var(--transition-bounce);
-      text-decoration: none;
-    }
-
-    .social-btn:hover {
-      background: var(--primary);
       color: var(--text-primary);
-      border-color: transparent;
-      transform: translateY(-4px) scale(1.1);
-      box-shadow: 0 5px 15px rgba(0, 183, 255, 0.45), var(--neon-blue);
     }
 
     .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 30px;
+      max-width: 1200px;
+      margin: 60px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-glass);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-bottom p {
-      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
       color: var(--text-muted);
-    }
-
-    .footer-bottom-links {
-      display: flex;
-      gap: 24px;
-    }
-
-    .footer-bottom-links a {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: var(--transition-smooth);
-    }
-
-    .footer-bottom-links a:hover {
-      color: var(--secondary);
+      letter-spacing: 1px;
     }
 
     @media (max-width: 768px) {
-      .footer-top {
+      .footer-content {
         grid-template-columns: 1fr;
         gap: 40px;
       }
 
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
+      .footer {
+        padding: 80px 24px 24px;
       }
     }
 
-    /* Modal de Sucesso Customizado */
-    .success-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(7, 7, 9, 0.85);
-      backdrop-filter: blur(15px);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* ==========================================================================
+       13. SCROLL ANIMATIONS
+       ========================================================================== */
+    .reveal {
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    .success-modal.active {
+    .reveal.visible {
       opacity: 1;
-      pointer-events: auto;
+      transform: translateY(0);
     }
 
-    .success-content {
-      background: #0d0d14;
-      border: 1px solid var(--border-glass-hover);
-      padding: 50px 40px;
-      border-radius: 32px;
-      text-align: center;
-      max-width: 420px;
-      box-shadow: var(--glow-heavy), 0 0 28px rgba(0, 242, 254, 0.25);
-      transform: scale(0.85);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .success-modal.active .success-content {
-      transform: scale(1);
-    }
-
-    .success-icon-box {
-      width: 80px;
-      height: 80px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 2px solid var(--secondary);
-      color: var(--secondary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      animation: pulseGlow 2s infinite;
-    }
-
-    @keyframes pulseGlow {
-      0% {
-        box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4);
-      }
-
-      70% {
-        box-shadow: 0 0 0 15px rgba(0, 242, 254, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(0, 242, 254, 0);
-      }
-    }
-
-    .success-content h4 {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .success-content p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 30px;
-    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
   </style>
 </head>
 
 <body>
 
-  <!-- Cursor Personalizado -->
-  <div id="custom-cursor"></div>
+  <!-- Corner Decorations -->
+  <div class="corner-cross tl"></div>
+  <div class="corner-cross tr"></div>
+  <div class="corner-cross bl"></div>
+  <div class="corner-cross br"></div>
 
-  <!-- Formas de fundo -->
-  <div class="bg-shapes">
-    <div class="bg-shape bg-shape-1"></div>
-    <div class="bg-shape bg-shape-2"></div>
-    <div class="bg-shape bg-shape-3"></div>
-  </div>
+  <!-- Noise Grain Overlay -->
+  <canvas class="noise-layer" id="noiseCanvas"></canvas>
 
-  <!-- ==========================================================================
-       CABECALHO / NAVBAR
-       ========================================================================== */ -->
-  <header id="header">
-    <div class="container nav-wrapper">
-      <a href="#inicio" class="logo cursor-hover">
-        <span>DIOGO</span>DOS SANTOS<span class="logo-dot"></span>
-      </a>
+  <!-- Cursor Orb -->
+  <div class="cursor-orb" id="cursorOrb"></div>
 
-      <nav class="nav-menu" id="navMenu">
-        <a href="#inicio" class="nav-link cursor-hover">Início</a>
-        <a href="#sobre" class="nav-link cursor-hover">Sobre</a>
-        <a href="#portfolio" class="nav-link cursor-hover">Portfólio</a>
-        <a href="#contato" class="btn-premium magnetic-btn cursor-hover">Contato</a>
-      </nav>
-
-      <button class="menu-toggle cursor-hover" id="menuToggle" aria-label="Abrir Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="topbar-name">Diogo dos Santos</div>
+    <nav class="topbar-nav">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <!-- ==========================================================================
-       HERO SECTION
-       ========================================================================== */ -->
-  <section class="hero-section" id="inicio">
-    <div class="container hero-content">
-      <div class="hero-tags">
-        <span class="hero-tag">Design Gráfico</span>
-        <span class="hero-tag alt">Editor de Vídeo</span>
+  <!-- Hero Section -->
+  <section class="hero-stage">
+    <div class="hero-sticky">
+      <div class="morph-scene">
+        <canvas class="morph-canvas" id="morphCanvas"></canvas>
       </div>
-      <h1 class="hero-title">
-        DIOGO<br>
-        <span class="grad">DOS SANTOS</span>
-      </h1>
-      <p class="hero-description">
-        Meu nome é Diogo, tenho 36 anos e sou apaixonado por design gráfico. Nos últimos 4 anos, tenho me dedicado intensamente ao estudo e à prática desta arte, desenvolvendo minhas habilidades e expandindo meu conhecimento técnico nos programas da Adobe, como Photoshop e Premiere.
-      </p>
-      <div class="hero-actions">
-        <a href="#portfolio" class="btn-premium active-btn magnetic-btn cursor-hover">Ver Portfólio</a>
-        <a href="#contato" class="btn-premium magnetic-btn cursor-hover">Falar Comigo</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- ==========================================================================
-       SEÇÃO SOBRE
-       ========================================================================== */ -->
-  <section id="sobre">
-    <div class="container">
-      <div class="section-header">
-        <span>SOBRE MIM</span>
-        <h2>Conheça um pouco da minha história</h2>
-      </div>
-      <div class="about-text">
-        <p>
-          Durante esse período, criei diversos projetos que me permitiram explorar e dominar aspectos cruciais do design, como manipulação de imagens, edição de vídeos e criação de peças gráficas impactantes. Além disso, sempre busco me manter atualizado com as tendências e inovações do mercado, participando de workshops e cursos online para aprimorar continuamente minhas competências.
+      <div class="hero-content">
+        <div class="hero-tag">Design Gráfico & Edição de Vídeo</div>
+        <h1 class="hero-title">
+          DIOGO<br>
+          <span class="outline">DOS SANTOS</span>
+        </h1>
+        <p class="hero-subtitle">
+          Meu nome é Diogo, tenho 36 anos e sou apaixonado por design gráfico. Nos últimos 4 anos, tenho me dedicado intensamente ao estudo e à prática desta arte.
         </p>
-        <p>
-          Minha dedicação e paixão pelo design gráfico são impulsionadas pela crença de que a criatividade pode transformar marcas, contar histórias poderosas e cativar audiências. Estou ansioso por uma oportunidade que me permita aplicar meu conhecimento em um ambiente profissional, colaborando com uma equipe talentosa e contribuindo para o sucesso de projetos inspiradores.
+        <a href="#work" class="hero-cta">Ver Trabalhos →</a>
+      </div>
+
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="about-grid">
+      <div class="about-content">
+        <div class="about-label reveal">Sobre Mim</div>
+        <h2 class="about-heading reveal reveal-delay-1">
+          Criatividade que transforma marcas e conta histórias
+        </h2>
+        <div class="about-text">
+          <p class="reveal reveal-delay-2">
+            Durante esse período, criei diversos projetos que me permitiram explorar e dominar aspectos cruciais do design, como manipulação de imagens, edição de vídeos e criação de peças gráficas impactantes.
+          </p>
+          <p class="reveal reveal-delay-3">
+            Minha dedicação e paixão pelo design gráfico são impulsionadas pela crença de que a criatividade pode transformar marcas, contar histórias poderosas e cativar audiências.
+          </p>
+        </div>
+
+        <div class="skills-list reveal reveal-delay-4">
+          <div class="skill-item">
+            <span class="skill-num">01</span>
+            <span>Design Gráfico & Identidade Visual</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-num">02</span>
+            <span>Edição de Vídeo & Motion</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-num">03</span>
+            <span>Artes para Redes Sociais</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-num">04</span>
+            <span>Adobe Photoshop & Premiere</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-num">05</span>
+            <span>Inteligência Artificial no Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-gallery reveal">
+        <img src="assets/DIOGOSANTOS.PERFIL.png" alt="Diogo dos Santos" class="about-img tall">
+        <img src="assets/STUDIO 1.png" alt="Trabalho 1" class="about-img">
+        <img src="assets/STUDIO 2.png" alt="Trabalho 2" class="about-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Section -->
+  <section class="work-section" id="work">
+    <div class="work-header">
+      <div class="work-label reveal">Portfólio</div>
+      <h2 class="work-heading reveal reveal-delay-1">Trabalhos Selecionados</h2>
+    </div>
+
+    <div class="work-grid">
+      <div class="work-item tall reveal">
+        <img src="assets/STUDIO 3.png" alt="Trabalho 1">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Branding</span>
+          <h3 class="work-item-title">Projeto 1</h3>
+        </div>
+      </div>
+
+      <div class="work-item reveal reveal-delay-1">
+        <img src="assets/STUDIO 4.png" alt="Trabalho 2">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Poster</span>
+          <h3 class="work-item-title">Projeto 2</h3>
+        </div>
+      </div>
+
+      <div class="work-item reveal reveal-delay-2">
+        <img src="assets/STUDIO 5.png" alt="Trabalho 3">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Web Design</span>
+          <h3 class="work-item-title">Projeto 3</h3>
+        </div>
+      </div>
+
+      <div class="work-item tall reveal reveal-delay-1">
+        <img src="assets/Prancheta 1.png" alt="Trabalho 4">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Editorial</span>
+          <h3 class="work-item-title">Projeto 4</h3>
+        </div>
+      </div>
+
+      <div class="work-item reveal reveal-delay-2">
+        <img src="assets/Prancheta 2.png" alt="Trabalho 5">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Mockup</span>
+          <h3 class="work-item-title">Projeto 5</h3>
+        </div>
+      </div>
+
+      <div class="work-item reveal reveal-delay-3">
+        <img src="assets/Prancheta 3.png" alt="Trabalho 6">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Ilustração</span>
+          <h3 class="work-item-title">Projeto 6</h3>
+        </div>
+      </div>
+
+      <div class="work-item reveal reveal-delay-2">
+        <img src="assets/PASCOA-POST.png" alt="Trabalho 7">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Social Media</span>
+          <h3 class="work-item-title">Projeto 7</h3>
+        </div>
+      </div>
+
+      <div class="work-item reveal reveal-delay-3">
+        <img src="assets/MISTERDOG-LOGO-GAROTA 2 HOT.png" alt="Trabalho 8">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Logo</span>
+          <h3 class="work-item-title">Projeto 8</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section class="quote-section">
+    <div class="quote-bg" id="quoteBg"></div>
+    <p class="quote-text reveal">
+      "A criatividade pode transformar marcas, contar histórias poderosas e cativar audiências."
+    </p>
+    <p class="quote-author reveal reveal-delay-1">Diogo dos Santos</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="footer-content">
+      <div>
+        <p class="footer-cta">
+          Vamos criar algo <a href="mailto:diogogg27@gmail.com">incrível</a> juntos?
         </p>
-        <p>
-          Com uma combinação de habilidades técnicas sólidas, um olhar afiado para detalhes e um comprometimento inabalável com a excelência, estou confiante de que posso agregar valor e crescer junto à sua empresa. Estou à disposição para entrevistas e para demonstrar como posso ser um recurso valioso para a sua equipe.
-        </p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="mailto:diogogg27@gmail.com">diogogg27@gmail.com</a></li>
+          <li><a href="https://wa.me/5564993405740">(64) 99340-5740</a></li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- ==========================================================================
-       SEÇÃO CONTATO
-       ========================================================================== */ -->
-  <section id="portfolio">
-    <div class="container">
-      <div class="section-header">
-        <span>PORTFÓLIO</span>
-        <h2>Biblioteca dos meus trabalhos</h2>
-      </div>
-
-      <div class="portfolio-grid">
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/STUDIO 1.png" alt="Trabalho 1" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/STUDIO 2.png" alt="Trabalho 2" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/STUDIO 3.png" alt="Trabalho 3" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/STUDIO 4.png" alt="Trabalho 4" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/STUDIO 5.png" alt="Trabalho 5" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Prancheta 1.png" alt="Trabalho 6" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Prancheta 2.png" alt="Trabalho 7" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Prancheta 3.png" alt="Trabalho 8" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Prancheta 4.png" alt="Trabalho 9" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/02. Fast Food Mockup.png" alt="Trabalho 10" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/02.png" alt="Trabalho 11" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/146-shopping-bag-mockup-01.png" alt="Trabalho 12" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/60.png" alt="Trabalho 13" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Free Embossed Paper Logo Mockup.png" alt="Trabalho 14" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Gellato_Doces_engraved_sand_2K_202607302246.jpeg" alt="Trabalho 15" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/sticker_minimalist_sticker.png" alt="Trabalho 16" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Artboard 3.png" alt="Trabalho 17" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/FEED-MORANGO_1ARQUIVO.png" alt="Trabalho 18" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/FEED-TODOS-SABORESARQUIVO.png" alt="Trabalho 19" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/MISTERDOG-LOGO-GAROTA 2 HOT.png" alt="Trabalho 20" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/PASCOA-POST.png" alt="Trabalho 21" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/projeto-01.jpeg" alt="Trabalho 22" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/projeto-03.jpeg" alt="Trabalho 23" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/projeto-04.diogo.png" alt="Trabalho 24" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/projeto-13.png" alt="Trabalho 25" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/projeto-15.png" alt="Trabalho 26" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/promo Magnus.png" alt="Trabalho 27" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item tall cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/Gemini_Generated_Image_b7iukdb7iukdb7iu.png" alt="Trabalho 28" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/A_stunning_professional_3D_transformation_202605172004.jpeg" alt="Trabalho 29" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-
-        <div class="portfolio-item cursor-portfolio-hover">
-          <div class="portfolio-img-container">
-            <img src="assets/agora_depois_da_mordida_no_202605171342.jpeg" alt="Trabalho 30" class="portfolio-img" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="contato">
-    <div class="container">
-      <div class="contact-wrapper">
-        <div class="contact-info">
-          <div class="contact-meta">
-            <span>CONTATO</span>
-            <h3>Vamos trabalhar juntos?</h3>
-            <p>Estou disponível para oportunidades de trabalho presencial, home office e início imediato.</p>
-          </div>
-          <div class="contact-details">
-            <div class="contact-detail-item">
-              <div class="contact-icon">
-                <i data-lucide="mail"></i>
-              </div>
-              <div class="contact-detail-text">
-                <span>E-mail</span>
-                <b>diogogg27@gmail.com</b>
-              </div>
-            </div>
-            <div class="contact-detail-item">
-              <div class="contact-icon">
-                <i data-lucide="phone"></i>
-              </div>
-              <div class="contact-detail-text">
-                <span>WhatsApp</span>
-                <b>(64) 99340-5740</b>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <form class="contact-form" id="projectForm">
-          <div class="form-group">
-            <input type="text" id="name" class="form-input cursor-hover" placeholder=" " required autocomplete="off">
-            <label for="name" class="form-label">Seu Nome</label>
-          </div>
-
-          <div class="form-group">
-            <input type="email" id="email" class="form-input cursor-hover" placeholder=" " required autocomplete="off">
-            <label for="email" class="form-label">E-mail</label>
-          </div>
-
-          <div class="form-group">
-            <textarea id="message" class="form-input cursor-hover" placeholder=" " required></textarea>
-            <label for="message" class="form-label">Mensagem...</label>
-          </div>
-
-          <button type="submit" class="btn-premium active-btn magnetic-btn cursor-hover"
-            style="width: 100%; height: 58px;">Enviar Mensagem <i data-lucide="send"></i></button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       RODAPÉ (FOOTER)
-       ========================================================================== */ -->
-  <footer>
-    <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2026 Diogo dos Santos. Todos os direitos reservados.</p>
-      </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Diogo dos Santos</span>
+      <span>Design & Code</span>
     </div>
   </footer>
 
-  <!-- Modal de Sucesso -->
-  <div class="success-modal" id="successModal">
-    <div class="success-content">
-      <div class="success-icon-box">
-        <i data-lucide="check" style="width: 40px; height: 40px;"></i>
-      </div>
-      <h4>Mensagem Enviada!</h4>
-      <p>Obrigado pelo contato. Um de nossos principais designers entrará em contato via e-mail ou WhatsApp nas próximas
-        horas.</p>
-      <button class="btn-premium cursor-hover" onclick="closeSuccessModal()" style="width: 120px;">Fechar</button>
-    </div>
-  </div>
-
   <!-- ==========================================================================
-       12. SCRIPTS - INTERATIVIDADES E ANIMAÇÕES
-       ========================================================================== */ -->
-  <!-- GSAP e ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <!-- Lenis Smooth Scroll -->
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+       SCRIPTS
+       ========================================================================== -->
   <script>
-    // Inicializar Lucide Icons
-    lucide.createIcons();
-
-    // Registrar plugins do GSAP
-    gsap.registerPlugin(ScrollTrigger);
-
     // ==========================================================================
-    // 1. LENIS SMOOTH SCROLLING
+    // 1. NOISE GRAIN OVERLAY
     // ==========================================================================
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
+    const noiseCanvas = document.getElementById('noiseCanvas');
+    const noiseCtx = noiseCanvas.getContext('2d');
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    function resizeNoise() {
+      noiseCanvas.width = window.innerWidth;
+      noiseCanvas.height = window.innerHeight;
     }
-    requestAnimationFrame(raf);
+    resizeNoise();
+    window.addEventListener('resize', resizeNoise);
 
-    // Conectar ScrollTrigger ao Lenis
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
+    function drawNoise() {
+      const w = noiseCanvas.width;
+      const h = noiseCanvas.height;
+      const imageData = noiseCtx.createImageData(w, h);
+      const data = imageData.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const v = Math.random() * 255;
+        data[i] = v;
+        data[i + 1] = v;
+        data[i + 2] = v;
+        data[i + 3] = 255;
+      }
+
+      noiseCtx.putImageData(imageData, 0, 0);
+      requestAnimationFrame(drawNoise);
+    }
+    drawNoise();
+
+    // ==========================================================================
+    // 2. CURSOR ORB
+    // ==========================================================================
+    const cursorOrb = document.getElementById('cursorOrb');
+    let orbX = 0, orbY = 0;
+    let targetOrbX = 0, targetOrbY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      targetOrbX = e.clientX;
+      targetOrbY = e.clientY;
     });
-    gsap.ticker.lagSmoothing(0);
 
-    // Suavizar clique em links internos
+    function animateOrb() {
+      orbX += (targetOrbX - orbX) * 0.12;
+      orbY += (targetOrbY - orbY) * 0.12;
+      cursorOrb.style.left = orbX + 'px';
+      cursorOrb.style.top = orbY + 'px';
+      requestAnimationFrame(animateOrb);
+    }
+    animateOrb();
+
+    document.querySelectorAll('a, .work-item, .hero-cta').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorOrb.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cursorOrb.classList.remove('hovered'));
+    });
+
+    // ==========================================================================
+    // 3. 3D MORPH SCENE (Three.js)
+    // ==========================================================================
+    const morphCanvas = document.getElementById('morphCanvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: morphCanvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Create goo geometry
+    const geometry = new THREE.IcosahedronGeometry(1.5, 64);
+    const originalPositions = geometry.attributes.position.array.slice();
+
+    // Shader material for goo effect
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uScrollProgress: { value: 0 },
+        uMouse: { value: new THREE.Vector2(0, 0) },
+        uColor1: { value: new THREE.Color(0x6366f1) },
+        uColor2: { value: new THREE.Color(0x8b5cf6) },
+      },
+      vertexShader: `
+        uniform float uTime;
+        uniform float uScrollProgress;
+        uniform vec2 uMouse;
+        varying vec3 vNormal;
+        varying float vDisplacement;
+
+        // Simplex noise
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+        vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+
+        float snoise(vec3 v) {
+          const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+          const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+          vec3 i = floor(v + dot(v, C.yyy));
+          vec3 x0 = v - i + dot(i, C.xxx);
+          vec3 g = step(x0.yzx, x0.xyz);
+          vec3 l = 1.0 - g;
+          vec3 i1 = min(g.xyz, l.zxy);
+          vec3 i2 = max(g.xyz, l.zxy);
+          vec3 x1 = x0 - i1 + C.xxx;
+          vec3 x2 = x0 - i2 + C.yyy;
+          vec3 x3 = x0 - D.yyy;
+          i = mod289(i);
+          vec4 p = permute(permute(permute(
+            i.z + vec4(0.0, i1.z, i2.z, 1.0))
+            + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+            + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+          float n_ = 0.142857142857;
+          vec3 ns = n_ * D.wyz - D.xzx;
+          vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+          vec4 x_ = floor(j * ns.z);
+          vec4 y_ = floor(j - 7.0 * x_);
+          vec4 x = x_ * ns.x + ns.yyyy;
+          vec4 y = y_ * ns.x + ns.yyyy;
+          vec4 h = 1.0 - abs(x) - abs(y);
+          vec4 b0 = vec4(x.xy, y.xy);
+          vec4 b1 = vec4(x.zw, y.zw);
+          vec4 s0 = floor(b0)*2.0 + 1.0;
+          vec4 s1 = floor(b1)*2.0 + 1.0;
+          vec4 sh = -step(h, vec4(0.0));
+          vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
+          vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+          vec3 p0 = vec3(a0.xy, h.x);
+          vec3 p1 = vec3(a0.zw, h.y);
+          vec3 p2 = vec3(a1.xy, h.z);
+          vec3 p3 = vec3(a1.zw, h.w);
+          vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+          p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+          vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+          m = m * m;
+          return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+        }
+
+        void main() {
+          vNormal = normal;
+          
+          float noise = snoise(position * 1.5 + uTime * 0.3);
+          float noise2 = snoise(position * 3.0 + uTime * 0.2);
+          
+          float displacement = noise * 0.3 + noise2 * 0.15;
+          
+          // Morph toward cube on scroll
+          vec3 cubePos = normalize(position) * 1.2;
+          vec3 pos = mix(position, cubePos, uScrollProgress * 0.8);
+          
+          pos += normal * displacement * (1.0 - uScrollProgress * 0.5);
+          
+          vDisplacement = displacement;
+          
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uColor1;
+        uniform vec3 uColor2;
+        uniform float uScrollProgress;
+        varying vec3 vNormal;
+        varying float vDisplacement;
+
+        void main() {
+          vec3 color = mix(uColor1, uColor2, vDisplacement * 0.5 + 0.5);
+          
+          float fresnel = pow(1.0 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+          color += fresnel * 0.3;
+          
+          float alpha = 0.6 + fresnel * 0.3;
+          
+          gl_FragColor = vec4(color, alpha);
+        }
+      `,
+      transparent: true,
+      wireframe: false,
+      side: THREE.DoubleSide,
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    // Wireframe overlay
+    const wireMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uScrollProgress: { value: 0 },
+      },
+      vertexShader: `
+        uniform float uTime;
+        uniform float uScrollProgress;
+        varying float vDisplacement;
+
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+        vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+
+        float snoise(vec3 v) {
+          const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+          const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+          vec3 i = floor(v + dot(v, C.yyy));
+          vec3 x0 = v - i + dot(i, C.xxx);
+          vec3 g = step(x0.yzx, x0.xyz);
+          vec3 l = 1.0 - g;
+          vec3 i1 = min(g.xyz, l.zxy);
+          vec3 i2 = max(g.xyz, l.zxy);
+          vec3 x1 = x0 - i1 + C.xxx;
+          vec3 x2 = x0 - i2 + C.yyy;
+          vec3 x3 = x0 - D.yyy;
+          i = mod289(i);
+          vec4 p = permute(permute(permute(
+            i.z + vec4(0.0, i1.z, i2.z, 1.0))
+            + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+            + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+          float n_ = 0.142857142857;
+          vec3 ns = n_ * D.wyz - D.xzx;
+          vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+          vec4 x_ = floor(j * ns.z);
+          vec4 y_ = floor(j - 7.0 * x_);
+          vec4 x = x_ * ns.x + ns.yyyy;
+          vec4 y = y_ * ns.x + ns.yyyy;
+          vec4 h = 1.0 - abs(x) - abs(y);
+          vec4 b0 = vec4(x.xy, y.xy);
+          vec4 b1 = vec4(x.zw, y.zw);
+          vec4 s0 = floor(b0)*2.0 + 1.0;
+          vec4 s1 = floor(b1)*2.0 + 1.0;
+          vec4 sh = -step(h, vec4(0.0));
+          vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
+          vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+          vec3 p0 = vec3(a0.xy, h.x);
+          vec3 p1 = vec3(a0.zw, h.y);
+          vec3 p2 = vec3(a1.xy, h.z);
+          vec3 p3 = vec3(a1.zw, h.w);
+          vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+          p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+          vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+          m = m * m;
+          return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+        }
+
+        void main() {
+          float noise = snoise(position * 1.5 + uTime * 0.3);
+          float noise2 = snoise(position * 3.0 + uTime * 0.2);
+          float displacement = noise * 0.3 + noise2 * 0.15;
+          
+          vec3 cubePos = normalize(position) * 1.2;
+          vec3 pos = mix(position, cubePos, uScrollProgress * 0.8);
+          pos += normal * displacement * (1.0 - uScrollProgress * 0.5);
+          
+          vDisplacement = displacement;
+          
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying float vDisplacement;
+
+        void main() {
+          float alpha = 0.08 + vDisplacement * 0.05;
+          gl_FragColor = vec4(1.0, 1.0, 1.0, alpha);
+        }
+      `,
+      transparent: true,
+      wireframe: true,
+      side: THREE.DoubleSide,
+    });
+
+    const wireMesh = new THREE.Mesh(geometry, wireMaterial);
+    scene.add(wireMesh);
+
+    camera.position.z = 4;
+
+    // ==========================================================================
+    // 4. SCROLL-DRIVEN ANIMATIONS
+    // ==========================================================================
+    let scrollProgress = 0;
+
+    function updateScroll() {
+      const heroSection = document.querySelector('.hero-stage');
+      const rect = heroSection.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const total = rect.height - window.innerHeight;
+      scrollProgress = Math.max(0, Math.min(1, scrolled / total));
+    }
+
+    window.addEventListener('scroll', updateScroll);
+
+    // ==========================================================================
+    // 5. MOUSE TRACKING FOR 3D
+    // ==========================================================================
+    let mouseX = 0, mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // ==========================================================================
+    // 6. ANIMATION LOOP
+    // ==========================================================================
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const elapsed = clock.getElapsedTime();
+
+      // Update uniforms
+      material.uniforms.uTime.value = elapsed;
+      material.uniforms.uScrollProgress.value = scrollProgress;
+      wireMaterial.uniforms.uTime.value = elapsed;
+      wireMaterial.uniforms.uScrollProgress.value = scrollProgress;
+
+      // Rotate mesh
+      mesh.rotation.x = mouseY * 0.2 + elapsed * 0.1;
+      mesh.rotation.y = mouseX * 0.2 + elapsed * 0.15;
+      wireMesh.rotation.x = mesh.rotation.x;
+      wireMesh.rotation.y = mesh.rotation.y;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // ==========================================================================
+    // 7. RESIZE HANDLER
+    // ==========================================================================
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // ==========================================================================
+    // 8. SCROLL REVEAL ANIMATIONS
+    // ==========================================================================
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ==========================================================================
+    // 9. QUOTE BACKGROUND GRID
+    // ==========================================================================
+    const quoteBg = document.getElementById('quoteBg');
+    for (let i = 0; i < 240; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'quote-bg-cell';
+      quoteBg.appendChild(cell);
+    }
+
+    // ==========================================================================
+    // 10. SMOOTH SCROLL FOR NAV LINKS
+    // ==========================================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          lenis.scrollTo(targetElement, { offset: -50 });
-
-          // Fechar menu mobile se estiver aberto
-          document.getElementById('navMenu').classList.remove('active');
-          document.getElementById('menuToggle').classList.remove('active');
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
-
-
-    // ==========================================================================
-    // 2. CURSOR TRAIL CUSTOMIZADO
-    // ==========================================================================
-    const cursor = document.getElementById('custom-cursor');
-    let cursorX = 0, cursorY = 0;
-    let targetX = 0, targetY = 0;
-    const speed = 0.15; // Velocidade do lag suave do cursor
-
-    document.addEventListener('mousemove', (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-    });
-
-    function animateCursor() {
-      // Interpolar posições para rolagem suavizada
-      cursorX += (targetX - cursorX) * speed;
-      cursorY += (targetY - cursorY) * speed;
-      cursor.style.left = `${cursorX}px`;
-      cursor.style.top = `${cursorY}px`;
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Micro interações do cursor nos links e botões
-    document.querySelectorAll('.cursor-hover').forEach(element => {
-      element.addEventListener('mouseenter', () => {
-        cursor.classList.add('hovered');
-      });
-      element.addEventListener('mouseleave', () => {
-        cursor.classList.remove('hovered');
-      });
-    });
-
-    // Cursor exclusivo para galeria do portfólio
-    document.querySelectorAll('.cursor-portfolio-hover').forEach(element => {
-      element.addEventListener('mouseenter', () => {
-        cursor.classList.add('hovered', 'portfolio-hover');
-      });
-      element.addEventListener('mouseleave', () => {
-        cursor.classList.remove('hovered', 'portfolio-hover');
-      });
-    });
-
-
-    // ==========================================================================
-    // 3. BOTÕES MAGNÉTICOS DE ALTA PERFORMANCE
-    // ==========================================================================
-    const magneticBtns = document.querySelectorAll('.magnetic-btn');
-
-    magneticBtns.forEach(btn => {
-      btn.addEventListener('mousemove', function (e) {
-        const position = this.getBoundingClientRect();
-        const x = e.clientX - position.left - position.width / 2;
-        const y = e.clientY - position.top - position.height / 2;
-
-        // Mover o botão sutilmente em direção ao mouse
-        gsap.to(this, {
-          x: x * 0.35,
-          y: y * 0.35,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-      });
-
-      btn.addEventListener('mouseleave', function () {
-        // Voltar à posição original suavemente
-        gsap.to(this, {
-          x: 0,
-          y: 0,
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.4)'
-        });
-      });
-    });
-
-
-    // ==========================================================================
-    // 5. CABEÇALHO SCROLLED E MENU MOBILE
-    // ==========================================================================
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
-
-
-    // ==========================================================================
-    // 6. ANIMAÇÃO DE BORDAS BENTO MOUSE (EFEITO GLOW DIRECIONAL)
-    // ==========================================================================
-    document.querySelectorAll('.bento-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-        card.style.setProperty('--mouse-x', `${x}%`);
-        card.style.setProperty('--mouse-y', `${y}%`);
-      });
-    });
-
-
-    // ==========================================================================
-    // 7. FILTROS DE PORTFÓLIO E TRANSIÇÃO ELEGANTE
-    // ==========================================================================
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', function () {
-        // Mudar botão ativo
-        filterButtons.forEach(b => b.classList.remove('active-btn'));
-        this.classList.add('active-btn');
-
-        const filterValue = this.getAttribute('data-filter');
-
-        // Animar transição dos cards do portfólio usando GSAP
-        portfolioItems.forEach(item => {
-          const itemCat = item.getAttribute('data-cat');
-
-          if (filterValue === 'all' || itemCat === filterValue) {
-            // Se o card deve aparecer
-            if (item.classList.contains('hidden')) {
-              item.classList.remove('hidden');
-              gsap.fromTo(item,
-                { scale: 0.85, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out', clearProps: 'all' }
-              );
-            }
-          } else {
-            // Se o card deve sumir
-            if (!item.classList.contains('hidden')) {
-              gsap.to(item, {
-                scale: 0.85,
-                opacity: 0,
-                duration: 0.35,
-                ease: 'power2.inOut',
-                onComplete: () => {
-                  item.classList.add('hidden');
-                }
-              });
-            }
-          }
-        });
-
-        // Recarregar os gatilhos de rolagem GSAP após mudança de layout
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-        }, 400);
-      });
-    });
-
-
-    // ==========================================================================
-    // 8. ANIMAÇÕES GSAP NA ROLAGEM DA PÁGINA (SCROLLTRIGGER)
-    // ==========================================================================
-
-    // --- Hero Section ---
-    gsap.from('.hero-tag', {
-      y: 30,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 1,
-      ease: 'power3.out'
-    });
-
-    gsap.from('.hero-title', {
-      y: 50,
-      opacity: 0,
-      duration: 1.2,
-      delay: 0.2,
-      ease: 'power3.out'
-    });
-
-    gsap.from('.hero-description', {
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      delay: 0.4,
-      ease: 'power3.out'
-    });
-
-    gsap.from('.hero-actions', {
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      delay: 0.5,
-      ease: 'power3.out'
-    });
-
-    // --- Seção Serviços (Bento Grid Cards Slide Up) ---
-    gsap.from('.services-bento .bento-card', {
-      scrollTrigger: {
-        trigger: '.services-bento',
-        start: 'top 85%'
-      },
-      y: 60,
-      opacity: 0,
-      stagger: 0.18,
-      duration: 1,
-      ease: 'power3.out'
-    });
-
-    // --- Seção Portfólio (Itens Slide Up) ---
-    gsap.from('.portfolio-grid .portfolio-item', {
-      scrollTrigger: {
-        trigger: '.portfolio-grid',
-        start: 'top 85%'
-      },
-      y: 80,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 1.2,
-      ease: 'power3.out'
-    });
-
-    // --- Seção Processo (Timeline) ---
-    const steps = document.querySelectorAll('.process-step');
-    steps.forEach((step, idx) => {
-      const isEven = idx % 2 === 0;
-
-      gsap.from(step.querySelector('.process-content'), {
-        scrollTrigger: {
-          trigger: step,
-          start: 'top 85%',
-        },
-        x: isEven ? -60 : 60,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      });
-
-      gsap.from(step.querySelector('.process-node'), {
-        scrollTrigger: {
-          trigger: step,
-          start: 'top 85%',
-        },
-        scale: 0,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'back.out(2)'
-      });
-    });
-
-    // --- Contato (Reveal Completo) ---
-    gsap.from('.contact-wrapper', {
-      scrollTrigger: {
-        trigger: '.contact-wrapper',
-        start: 'top 90%'
-      },
-      y: 50,
-      opacity: 0,
-      duration: 1.2,
-      ease: 'power3.out'
-    });
-
-
-    // ==========================================================================
-    // 9. CONTADORES NUMÉRICOS ANIMADOS NAS ESTATÍSTICAS
-    // ==========================================================================
-    const stats = document.querySelectorAll('.stat-num');
-
-    stats.forEach(stat => {
-      const targetVal = parseInt(stat.getAttribute('data-val'));
-
-      ScrollTrigger.create({
-        trigger: stat,
-        start: 'top 90%',
-        onEnter: () => {
-          let countObj = { val: 0 };
-          gsap.to(countObj, {
-            val: targetVal,
-            duration: 2.2,
-            ease: 'power2.out',
-            onUpdate: function () {
-              stat.innerText = Math.floor(countObj.val) + (targetVal === 100 ? '' : '+');
-            }
-          });
-        },
-        once: true // Executa apenas uma vez
-      });
-    });
-
-
-    // ==========================================================================
-    // 10. ENVIO DO FORMULÁRIO COM FEEDBACK EXCLUSIVO (MODAL DE SUCESSO)
-    // ==========================================================================
-    const form = document.getElementById('projectForm');
-    const successModal = document.getElementById('successModal');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      // Simulação realista de envio assíncrono (AJAX / Fetch)
-      const btn = form.querySelector('button[type="submit"]');
-      const origText = btn.innerHTML;
-      btn.innerHTML = 'Enviando... <i data-lucide="loader-2" class="spin-loader"></i>';
-      lucide.createIcons();
-
-      // Micro-animação de loading spinner
-      const loader = btn.querySelector('.spin-loader');
-      gsap.to(loader, { rotation: 360, repeat: -1, ease: 'linear', duration: 1 });
-
-      setTimeout(() => {
-        // Abrir modal de sucesso
-        successModal.classList.add('active');
-
-        // Resetar botão e formulário
-        btn.innerHTML = origText;
-        form.reset();
-
-        // Bloquear rolagem do Lenis enquanto modal está aberto
-        lenis.stop();
-      }, 1500);
-    });
-
-    function closeSuccessModal() {
-      successModal.classList.remove('active');
-      // Reativar rolagem do Lenis
-      lenis.start();
-    }
   </script>
 </body>
 
