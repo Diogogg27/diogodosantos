@@ -274,33 +274,15 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
       font-family: var(--font-display);
-      font-size: clamp(80px, 12vw, 200px);
+      font-size: 650px;
       font-weight: 700;
-      letter-spacing: -6px;
-      color: rgba(224, 225, 221, 0.95);
-      text-shadow: 0 0 80px rgba(13, 27, 42, 0.9), 0 0 160px rgba(13, 27, 42, 0.7);
+      letter-spacing: -30px;
+      color: rgba(224, 225, 221, 0.08);
       white-space: nowrap;
-      z-index: 2;
-      pointer-events: none;
-      user-select: none;
-      line-height: 1;
-    }
-
-    .hero-big-text-accent {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) translateY(70px);
-      font-family: var(--font-display);
-      font-size: clamp(60px, 8vw, 140px);
-      font-weight: 700;
-      letter-spacing: -3px;
-      color: transparent;
-      -webkit-text-stroke: 2px rgba(119, 141, 169, 0.5);
-      text-shadow: 0 0 60px rgba(13, 27, 42, 0.8);
-      white-space: nowrap;
-      z-index: 2;
+      z-index: 0;
       pointer-events: none;
       user-select: none;
       line-height: 1;
@@ -309,6 +291,8 @@
     .morph-scene {
       width: 100%;
       height: 100%;
+      position: relative;
+      z-index: 1;
     }
 
     .morph-canvas {
@@ -969,8 +953,7 @@
         <div class="morph-scene">
           <canvas class="morph-canvas" id="morphCanvas"></canvas>
         </div>
-        <div class="hero-big-text">DESIGN</div>
-        <div class="hero-big-text-accent">GRÁFICO</div>
+        <div class="hero-big-text">PORTFOLIO EM DESTAQUE</div>
       </div>
 
       <div class="hero-content-side">
