@@ -667,12 +667,20 @@
       background: var(--bg-card);
       animation: workScaleDown 0.6s ease-out forwards;
       transform-origin: center center;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), z-index 0s;
     }
 
     .work-item:hover {
-      z-index: 10;
+      z-index: 5;
       animation: workScaleUp 0.6s ease-out forwards;
       box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    .work-item.active {
+      z-index: 100;
+      transform: scale(2.2);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+      position: relative;
     }
 
     @keyframes workScaleUp {
@@ -1800,9 +1808,11 @@
       let isDown = false;
       let startX;
       let scrollLeft;
+      let hasMoved = false;
 
       workTrack.addEventListener('mousedown', (e) => {
         isDown = true;
+        hasMoved = false;
         workTrack.style.cursor = 'grabbing';
         startX = e.pageX - workTrack.offsetLeft;
         scrollLeft = workTrack.scrollLeft;
@@ -1822,12 +1832,34 @@
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - workTrack.offsetLeft;
-        const walk = (x - startX) * 2;
+        const walk = (x - startX) * 1.2;
+        if (Math.abs(walk) > 5) hasMoved = true;
         workTrack.scrollLeft = scrollLeft - walk;
       });
 
       workTrack.style.cursor = 'grab';
     }
+
+    // ==========================================================================
+    // 12. CLICK TO ZOOM WORK ITEMS
+    // ==========================================================================
+    const workItems = document.querySelectorAll('.work-item');
+    workItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        if (hasMoved) return;
+        const isActive = this.classList.contains('active');
+        workItems.forEach(i => i.classList.remove('active'));
+        if (!isActive) {
+          this.classList.add('active');
+        }
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.work-item')) {
+        workItems.forEach(i => i.classList.remove('active'));
+      }
+    });
   </script>
 </body>
 
