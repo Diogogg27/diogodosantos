@@ -1,0 +1,2545 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DS Creative | Agência de Design Gráfico & Digital Premium</title>
+  <meta name="description"
+    content="DS Creative é uma agência de design gráfico de alta fidelidade. Criamos identidades visuais exclusivas, web design de elite e arte digital extraordinária." />
+
+  <!-- Fontes Futurísticas e Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syncopate:wght@700&family=Orbitron:wght@400;700;900&family=Michroma&family=IBM+Plex+Mono:wght@400;600&family=Syne:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. VARIÁVEIS E TEMA (SISTEMA DE DESIGN)
+       ========================================================================== */
+    :root {
+      --bg-dark: #000000;
+      --bg-card: rgba(34, 34, 34, 0.842);
+      --bg-card-hover: rgba(24, 92, 97, 0.418);
+      --border-glass: rgba(36, 222, 247, 0.575);
+      --border-glass-hover: rgba(18, 19, 19, 0.12);
+
+      --primary: #00324686;
+      /* Roxo Neon Elétrico */
+      --primary-rgb: 138, 43, 226;
+      --secondary: #00887d;
+      /* Azul Ciano Cyber */
+      --secondary-rgb: 0, 242, 254;
+      --accent: #082225;
+      /* Rosa Neon Magenta */
+      --accent-rgb: 255, 0, 127;
+
+      --text-primary: #ffffff;
+      --text-secondary: #c2d1e5;
+      --text-muted: #6f88a8;
+
+      --font-display: 'Orbitron', 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', 'Syne', sans-serif;
+      --font-logo: 'Michroma', 'Syncopate', sans-serif;
+      --font-tech: 'IBM Plex Mono', monospace;
+
+      --transition-smooth: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --glow-light: 0 0 22px rgba(0, 220, 255, 0.35);
+      --glow-heavy: 0 0 46px rgba(83, 228, 238, 0.95);
+      --neon-cyan: 0 0 8px rgba(0, 242, 254, 0.7), 0 0 18px rgba(0, 242, 254, 0.45);
+      --neon-blue: 0 0 8px rgba(0, 183, 255, 0.7), 0 0 20px rgba(0, 183, 255, 0.4);
+    }
+
+    /* ==========================================================================
+       2. RESET & SETUP
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    html,
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      scroll-behavior: auto;
+      /* Controlado pelo Lenis */
+    }
+
+    body {
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(0, 183, 255, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(0, 242, 254, 0.16) 0%, transparent 42%),
+        radial-gradient(circle at 50% 50%, rgba(130, 30, 255, 0.08) 0%, transparent 58%),
+        linear-gradient(140deg, #010104 0%, #051018 45%, #02050b 100%);
+      animation: bgPulse 16s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at 50% 35%, rgba(0, 0, 0, 0.9) 0%, transparent 72%);
+      opacity: 0.28;
+      animation: gridDrift 26s linear infinite;
+    }
+
+    @keyframes bgPulse {
+      0% {
+        transform: scale(1) translate3d(0, 0, 0);
+        filter: saturate(100%);
+      }
+
+      100% {
+        transform: scale(1.04) translate3d(0, -8px, 0);
+        filter: saturate(122%);
+      }
+    }
+
+    @keyframes gridDrift {
+      0% {
+        background-position: 0 0, 0 0;
+      }
+
+      100% {
+        background-position: 42px 42px, -42px -42px;
+      }
+    }
+
+    ::selection {
+      background: var(--primary);
+      color: var(--text-primary);
+    }
+
+    /* Scrollbar Customizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(218, 218, 218, 0.3);
+      border-radius: 10px;
+      border: 2px solid var(--bg-dark);
+      transition: var(--transition-smooth);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Canvas de Fundo */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Gradientes Radiais de Iluminação Ambientais */
+    .ambient-glows {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient-glow-1 {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(195, 243, 255, 0.12) 0%, transparent 70%);
+      filter: blur(80px);
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      bottom: -10%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(111, 248, 255, 0.08) 0%, transparent 70%);
+      filter: blur(80px);
+    }
+
+    /* ==========================================================================
+       3. ESTRUTURA GERAL & UTILITIES
+       ========================================================================= */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+    }
+
+    section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 80px 0;
+      }
+    }
+
+    /* Botão Base Premium (Magnético) */
+    .btn-premium {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text-primary);
+      background: rgba(8, 8, 8, 0.801);
+      border: 1px solid rgba(137, 233, 255, 0.45);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      opacity: 0;
+      z-index: -1;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-premium:hover {
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(188, 231, 255, 0.32), var(--neon-cyan);
+      transform: translateY(-2px);
+    }
+
+    .btn-premium:hover::before {
+      opacity: 1;
+    }
+
+    .btn-premium.active-btn {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(15, 44, 58, 0.78), var(--neon-blue);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+    }
+
+    /* Cursor Trail Customizado */
+    #custom-cursor {
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 0.55rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #custom-cursor.hovered {
+      width: 60px;
+      height: 60px;
+      background-color: var(--text-primary);
+      border-color: transparent;
+    }
+
+    #custom-cursor.portfolio-hover::after {
+      content: 'VER';
+    }
+
+    @media (max-width: 1024px) {
+      #custom-cursor {
+        display: none !important;
+      }
+    }
+
+    /* Cabeçalhos de Seção */
+    .section-header {
+      margin-bottom: 70px;
+      max-width: 700px;
+    }
+
+    .section-header span {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--secondary);
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text-primary);
+      text-shadow: 0 0 16px rgba(0, 183, 255, 0.3);
+    }
+
+    /* ==========================================================================
+       4. CABEÇALHO & NAVEGAÇÃO
+       ========================================================================== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      z-index: 1000;
+      transition: var(--transition-smooth);
+    }
+
+    header.scrolled {
+      padding: 5px 0;
+      background: rgba(1, 38, 44, 0.86);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(137, 233, 255, 0.45);
+      box-shadow: 0 8px 30px rgba(0, 183, 255, 0.16);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-logo);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.45));
+    }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Hamburger */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 28px;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: var(--transition-smooth);
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width: 991px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(7, 7, 9, 0.98);
+        backdrop-filter: blur(25px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+        z-index: 1050;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu .nav-link {
+        font-size: 1.4rem;
+        font-family: var(--font-display);
+        font-weight: 700;
+      }
+
+      .nav-menu .btn-premium {
+        margin-top: 20px;
+      }
+    }
+
+    /* ==========================================================================
+       5. HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 140px;
+      padding-bottom: 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-tag {
+      background: rgba(0, 0, 0, 0.61);
+      border: 1px solid rgba(214, 214, 214, 0.25);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: var(--font-tech);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero-tag.alt {
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      color: var(--secondary);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 18px rgba(0, 183, 255, 0.22);
+    }
+
+    .hero-title span.grad {
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% auto;
+      animation: gradientFlow 6s linear infinite;
+    }
+
+    @keyframes gradientFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .hero-title span.outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+      transition: var(--transition-smooth);
+    }
+
+    .hero-title span.outline:hover {
+      -webkit-text-stroke: 1.5px var(--secondary);
+      filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.5));
+    }
+
+    .hero-description {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--text-secondary);
+      max-width: 650px;
+      line-height: 1.6;
+      margin-bottom: 48px;
+      text-shadow: 0 0 12px rgba(0, 183, 255, 0.1);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .hero-scroll-indicator:hover {
+      color: var(--text-primary);
+    }
+
+    .scroll-mouse {
+      width: 24px;
+      height: 40px;
+      border: 2px solid var(--text-muted);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 4px;
+      height: 8px;
+      background-color: var(--secondary);
+      border-radius: 2px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: mouseScroll 1.5s ease-in-out infinite;
+    }
+
+    @keyframes mouseScroll {
+      0% {
+        opacity: 0;
+        top: 6px;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 0;
+        top: 20px;
+      }
+
+      100% {
+        opacity: 0;
+        top: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        padding-top: 120px;
+      }
+
+      .hero-actions .btn-premium {
+        width: 100%;
+      }
+
+      .hero-scroll-indicator {
+        display: none;
+      }
+    }
+
+    /* ==========================================================================
+       6. SEÇÃO ESTATÍSTICAS
+       ========================================================================== */
+    .stats-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border-glass);
+      border-bottom: 1px solid var(--border-glass);
+      background: rgba(7, 7, 9, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--text-primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.35));
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-tech);
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 991px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    /* ==========================================================================
+       7. BENTO SERVICES (SEÇÃO SERVIÇOS)
+       ========================================================================== */
+    .services-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 280px;
+      gap: 24px;
+    }
+
+    .bento-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(164, 230, 245, 0.46);
+      backdrop-filter: blur(12px);
+      border-radius: 32px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+
+    .bento-card:hover {
+      border-color: var(--border-glass-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      box-shadow: var(--glow-light), 0 0 28px rgba(0, 183, 255, 0.24);
+    }
+
+    .bento-card:hover::before {
+      opacity: 1;
+    }
+
+    .bento-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: auto;
+      transition: var(--transition-bounce);
+    }
+
+    .bento-card:hover .bento-icon-box {
+      transform: scale(1.1) rotate(5deg);
+      background: var(--primary);
+      color: var(--text-primary);
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+    }
+
+    .bento-card.cyan-accent:hover .bento-icon-box {
+      background: var(--secondary);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+    }
+
+    .bento-card.pink-accent:hover .bento-icon-box {
+      background: var(--accent);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+    }
+
+    .bento-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .bento-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Modificadores de Grade Bento */
+    .bento-col-2 {
+      grid-column: span 2;
+    }
+
+    .bento-row-2 {
+      grid-row: span 2;
+      justify-content: space-between;
+    }
+
+    .bento-showcase {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Gráficos Abstratos no Hover */
+    .bento-abstract-graphic {
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      width: 140px;
+      height: 140px;
+      border: 2px dashed rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-bounce);
+      pointer-events: none;
+    }
+
+    .bento-abstract-inner {
+      width: 100px;
+      height: 100px;
+      border: 2px solid var(--secondary);
+      opacity: 0.15;
+      border-radius: 50%;
+      transition: var(--transition-bounce);
+    }
+
+    .bento-card:hover .bento-abstract-graphic {
+      transform: rotate(45deg) scale(1.1);
+      border-color: rgba(0, 242, 254, 0.3);
+    }
+
+    .bento-card:hover .bento-abstract-inner {
+      opacity: 0.6;
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+    }
+
+    @media (max-width: 991px) {
+      .services-bento {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 260px;
+      }
+
+      .bento-col-2 {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-bento {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+      }
+
+      .bento-col-2 {
+        grid-column: span 1;
+      }
+
+      .bento-row-2 {
+        grid-row: span 1;
+      }
+
+      .bento-card {
+        padding: 30px;
+        min-height: 250px;
+      }
+
+      .bento-abstract-graphic {
+        display: none;
+      }
+    }
+
+    /* ==========================================================================
+       8. SEÇÃO PORTFÓLIO (FILTRÁVEL E DESSIMÉTRICA)
+       ========================================================================== */
+    .portfolio-filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .portfolio-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(164, 230, 245, 0.46);
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    /* Efeito de Altura Variada (Grid Assimétrico Elegante) */
+    .portfolio-item.tall {
+      grid-row: span 2;
+      height: calc(100% - 32px);
+    }
+
+    .portfolio-img-container {
+      width: 100%;
+      height: 480px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .portfolio-item.tall .portfolio-img-container {
+      height: 700px;
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 40px;
+      background: linear-gradient(to top, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.5) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition-smooth);
+    }
+
+    .portfolio-item:hover {
+      border-color: var(--border-glass-hover);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.56), 0 0 30px rgba(0, 242, 254, 0.22);
+    }
+
+    .portfolio-item:hover .portfolio-img {
+      transform: scale(1.08) rotate(1deg);
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portfolio-cat {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .portfolio-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .portfolio-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Transição ao Filtrar */
+    .portfolio-item {
+      display: block;
+    }
+
+    .portfolio-item.hidden {
+      display: none;
+    }
+
+    @media (max-width: 991px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-item.tall {
+        grid-row: span 1;
+        height: auto;
+      }
+
+      .portfolio-img-container,
+      .portfolio-item.tall .portfolio-img-container {
+        height: 380px;
+      }
+
+      .portfolio-overlay {
+        opacity: 1;
+        transform: translateY(0);
+        padding: 24px;
+        background: linear-gradient(to top, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.3) 100%);
+      }
+    }
+
+    /* ==========================================================================
+       9. SEÇÃO PROCESSO CRIATIVO
+       ========================================================================== */
+    .process-timeline {
+      position: relative;
+      margin-top: 60px;
+    }
+
+    .process-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary), transparent);
+      opacity: 0.3;
+    }
+
+    .process-step {
+      display: flex;
+      margin-bottom: 100px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .process-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .process-step.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .process-content {
+      width: 45%;
+      padding: 40px;
+      background: var(--bg-card);
+      border: 1px solid rgba(164, 230, 245, 0.46);
+      backdrop-filter: blur(10px);
+      border-radius: 32px;
+      transition: var(--transition-smooth);
+    }
+
+    .process-content:hover {
+      border-color: var(--border-glass-hover);
+      transform: translateY(-5px);
+      box-shadow: var(--glow-light), 0 0 24px rgba(0, 183, 255, 0.22);
+    }
+
+    .process-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .process-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .process-content p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .process-node {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 20px;
+      height: 20px;
+      background-color: var(--bg-dark);
+      border: 4px solid var(--secondary);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--secondary);
+      transition: var(--transition-bounce);
+    }
+
+    .process-step:nth-child(even) .process-node {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .process-step:hover .process-node {
+      transform: translate(-50%, 0) scale(1.3);
+    }
+
+    @media (max-width: 768px) {
+      .process-line {
+        left: 20px;
+        transform: none;
+      }
+
+      .process-step,
+      .process-step.reverse {
+        flex-direction: row;
+        margin-bottom: 60px;
+      }
+
+      .process-content {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        padding: 30px;
+      }
+
+      .process-node {
+        left: 20px;
+        transform: translate(-50%, 0);
+      }
+
+      .process-step:hover .process-node {
+        transform: translate(-50%, 0) scale(1.2);
+      }
+    }
+
+    /* ==========================================================================
+       10. SEÇÃO CONTATO & FORMULÁRIO EXCLUSIVO
+       ========================================================================== */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      background: var(--bg-card);
+      border: 1px solid rgba(164, 230, 245, 0.52);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 60px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 0 35px rgba(0, 242, 254, 0.06), 0 0 26px rgba(0, 183, 255, 0.12);
+    }
+
+    .contact-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(138, 43, 226, 0.08) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-meta h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .contact-meta p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+    }
+
+    .contact-detail-text span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-detail-text b {
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    /* Formulário com Inputs Flutuantes */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .form-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 18px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(164, 230, 245, 0.38);
+      border-radius: 16px;
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      background: rgba(0, 183, 255, 0.07);
+      box-shadow: 0 0 0 2px rgba(0, 242, 254, 0.22), 0 0 18px rgba(0, 183, 255, 0.24);
+    }
+
+    .form-label {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    /* Estado Ativo do Input Flutuante */
+    .form-input:focus~.form-label,
+    .form-input:not(:placeholder-shown)~.form-label {
+      top: 0;
+      left: 18px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--secondary);
+      background-color: #0d0d14;
+      padding: 2px 10px;
+      border-radius: 4px;
+    }
+
+    textarea.form-input {
+      height: 150px;
+      resize: none;
+    }
+
+    textarea.form-input~.form-label {
+      top: 24px;
+      transform: none;
+    }
+
+    textarea.form-input:focus~.form-label,
+    textarea.form-input:not(:placeholder-shown)~.form-label {
+      top: 0;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 991px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        padding: 40px;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-wrapper {
+        padding: 30px 20px;
+      }
+    }
+
+    /* ==========================================================================
+       11. FOOTER (RODAPÉ)
+       ========================================================================== */
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 80px 0 40px;
+      background: rgba(7, 7, 9, 0.8);
+      position: relative;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 320px;
+    }
+
+    .footer-links h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      font-size: 0.95rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary);
+      padding-left: 4px;
+    }
+
+    .footer-social-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: var(--transition-bounce);
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: var(--primary);
+      color: var(--text-primary);
+      border-color: transparent;
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 183, 255, 0.45), var(--neon-blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-bottom-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* Modal de Sucesso Customizado */
+    .success-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 7, 9, 0.85);
+      backdrop-filter: blur(15px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .success-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .success-content {
+      background: #0d0d14;
+      border: 1px solid var(--border-glass-hover);
+      padding: 50px 40px;
+      border-radius: 32px;
+      text-align: center;
+      max-width: 420px;
+      box-shadow: var(--glow-heavy), 0 0 28px rgba(0, 242, 254, 0.25);
+      transform: scale(0.85);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .success-modal.active .success-content {
+      transform: scale(1);
+    }
+
+    .success-icon-box {
+      width: 80px;
+      height: 80px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 2px solid var(--secondary);
+      color: var(--secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(0, 242, 254, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 242, 254, 0);
+      }
+    }
+
+    .success-content h4 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .success-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cursor Personalizado -->
+  <div id="custom-cursor"></div>
+
+  <!-- Iluminação e Partículas -->
+  <canvas id="particle-canvas"></canvas>
+  <div class="ambient-glows">
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+  </div>
+
+  <!-- ==========================================================================
+       CABECALHO / NAVBAR
+       ========================================================================== */ -->
+  <header id="header">
+    <div class="container nav-wrapper">
+      <a href="#inicio" class="logo cursor-hover">
+        <span>DS</span>CREATIVE<span class="logo-dot"></span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#inicio" class="nav-link cursor-hover">Início</a>
+        <a href="#servicos" class="nav-link cursor-hover">Serviços</a>
+        <a href="#portfolio" class="nav-link cursor-hover">Portfólio</a>
+        <a href="#processo" class="nav-link cursor-hover">Nosso Processo</a>
+        <a href="#contato" class="nav-link cursor-hover">Contato</a>
+        <a href="#contato" class="btn-premium magnetic-btn cursor-hover">Falar com Designer</a>
+      </nav>
+
+      <button class="menu-toggle cursor-hover" id="menuToggle" aria-label="Abrir Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== */ -->
+  <section class="hero-section" id="inicio">
+    <div class="container hero-content">
+      <div class="hero-tags">
+        <span class="hero-tag">Estúdio Boutique</span>
+        <span class="hero-tag alt">Design de Impacto</span>
+      </div>
+      <h1 class="hero-title">
+        DESIGN QUE<br>
+        <span class="grad">TRANSFORMA</span><br>
+        E IMPULSIONA<span class="outline"> VISÕES</span>
+      </h1>
+      <p class="hero-description">
+        Combinamos arte visual contemporânea com engenharia criativa para construir identidades de marca marcantes e
+        plataformas digitais ultra-sofisticadas que dominam o mercado.
+      </p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-premium active-btn magnetic-btn cursor-hover">Ver Portfólio <i
+            data-lucide="arrow-right"></i></a>
+        <a href="#contato" class="btn-premium magnetic-btn cursor-hover">Iniciar Projeto</a>
+      </div>
+    </div>
+    <a href="#servicos" class="hero-scroll-indicator cursor-hover">
+      <span>Scroll Down</span>
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ==========================================================================
+       SEÇÃO ESTATÍSTICAS
+       ========================================================================== */ -->
+  <section class="stats-section">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <div class="stat-num" data-val="150">0</div>
+        <div class="stat-label">Projetos Entregues</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-val="9">0</div>
+        <div class="stat-label">Anos de Experiência</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-val="35">0</div>
+        <div class="stat-label">Prêmios de Design</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-val="100">0</div>
+        <div class="stat-label">% Satisfação</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SEÇÃO SERVIÇOS (BENTO BOX GRID)
+       ========================================================================== */ -->
+  <section id="servicos">
+    <div class="container">
+      <div class="section-header">
+        <span>O QUE FAZEMOS</span>
+        <h2>Nossas especialidades criativas de alto nível</h2>
+      </div>
+
+      <div class="services-bento">
+        <!-- Bento Card 1: Branding -->
+        <div class="bento-card bento-col-2 bento-row-2">
+          <div class="bento-icon-box">
+            <i data-lucide="crown"></i>
+          </div>
+          <div class="bento-abstract-graphic">
+            <div class="bento-abstract-inner"></div>
+          </div>
+          <div class="bento-showcase">
+            <div></div> <!-- Espaço reservado -->
+            <div>
+              <h3>Branding & Identidade</h3>
+              <p>Modelamos identidades visuais conceituais, marcas memoráveis e diretrizes estéticas completas que
+                diferenciam sua empresa instantaneamente e elevam seu valor percebido no mercado.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Card 2: Web Design -->
+        <div class="bento-card cyan-accent">
+          <div class="bento-icon-box">
+            <i data-lucide="layout"></i>
+          </div>
+          <h3>UI/UX & Web Design</h3>
+          <p>Interfaces digitais ultra-modernas com fluidez de carregamento extraordinária e experiência do usuário
+            polida.</p>
+        </div>
+
+        <!-- Bento Card 3: Editorial -->
+        <div class="bento-card pink-accent">
+          <div class="bento-icon-box">
+            <i data-lucide="book-open"></i>
+          </div>
+          <h3>Design Editorial</h3>
+          <p>Publicações de alta costura, catálogos elegantes, livros artísticos e materiais impressos premium.</p>
+        </div>
+
+        <!-- Bento Card 4: Motion & 3D -->
+        <div class="bento-card bento-col-2 pink-accent">
+          <div class="bento-icon-box">
+            <i data-lucide="play"></i>
+          </div>
+          <h3>3D & Motion Graphics</h3>
+          <p>Animações fluidas, vídeos promocionais cinematográficos e modelos 3D futuristas de alta fidelidade técnica.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SEÇÃO PORTFÓLIO
+       ========================================================================== */ -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <span>PORTFÓLIO SELECIONADO</span>
+        <h2>Trabalhos que contam histórias impactantes</h2>
+      </div>
+
+      <!-- Filtros Dinâmicos -->
+      <div class="portfolio-filters">
+        <button class="btn-premium active-btn filter-btn cursor-hover" data-filter="all">Todos</button>
+        <button class="btn-premium filter-btn cursor-hover" data-filter="branding">Branding</button>
+        <button class="btn-premium filter-btn cursor-hover" data-filter="web">Web Design</button>
+        <button class="btn-premium filter-btn cursor-hover" data-filter="editorial">Editorial</button>
+        <button class="btn-premium filter-btn cursor-hover" data-filter="motion">Poster/Art</button>
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div class="portfolio-grid">
+        <!-- Item 1: Branding -->
+        <div class="portfolio-item tall cursor-portfolio-hover" data-cat="branding">
+          <div class="portfolio-img-container">
+            <img src="assets/branding.png" alt="Aetheria Luxury Skincare" class="portfolio-img" loading="lazy">
+          </div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Branding</span>
+            <h3 class="portfolio-title">Aetheria Cosmetics</h3>
+            <p class="portfolio-desc">Identidade de marca e embalagens minimalistas matte com detalhes metálicos
+              luxuosos.</p>
+          </div>
+        </div>
+
+        <!-- Item 2: Web Design -->
+        <div class="portfolio-item cursor-portfolio-hover" data-cat="web">
+          <div class="portfolio-img-container">
+            <img src="assets/webdesign.png" alt="Crypto Hub Dashboard" class="portfolio-img" loading="lazy">
+          </div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Web Design</span>
+            <h3 class="portfolio-title">Nexus Crypto UI</h3>
+            <p class="portfolio-desc">Painel financeiro futurista utilizando glassmorphism, glows intensos e
+              micro-interações fluidas.</p>
+          </div>
+        </div>
+
+        <!-- Item 3: Editorial -->
+        <div class="portfolio-item cursor-portfolio-hover" data-cat="editorial">
+          <div class="portfolio-img-container">
+            <img src="assets/editorial.png" alt="Elegance Editorial Cover" class="portfolio-img" loading="lazy">
+          </div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Editorial</span>
+            <h3 class="portfolio-title">Revista Époque</h3>
+            <p class="portfolio-desc">Criação editorial e diagramação artística de revista de alta costura
+              contemporânea.</p>
+          </div>
+        </div>
+
+        <!-- Item 4: Motion/Art -->
+        <div class="portfolio-item tall cursor-portfolio-hover" data-cat="motion">
+          <div class="portfolio-img-container">
+            <img src="assets/poster.png" alt="Neon Rave Poster" class="portfolio-img" loading="lazy">
+          </div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Poster / Motion</span>
+            <h3 class="portfolio-title">Techno Soundwave</h3>
+            <p class="portfolio-desc">Poster futurista experimental em neon ultravioleta e formas 3D orgânicas
+              distorcidas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SEÇÃO NOSSO PROCESSO
+       ========================================================================== */ -->
+  <section id="processo">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin: 0 auto 80px;">
+        <span>COMO TRABALHAMOS</span>
+        <h2>O caminho do conceito à excelência visual</h2>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-line"></div>
+
+        <!-- Etapa 1 -->
+        <div class="process-step">
+          <div class="process-node"></div>
+          <div class="process-content">
+            <div class="process-number">01</div>
+            <h3>Descoberta & Briefing</h3>
+            <p>Mergulhamos fundo no ecossistema da sua marca para extrair o núcleo conceitual do projeto. Mapeamos os
+              objetivos, analisamos a concorrência e estabelecemos as metas estéticas.</p>
+          </div>
+        </div>
+
+        <!-- Etapa 2 -->
+        <div class="process-step reverse">
+          <div class="process-node"></div>
+          <div class="process-content">
+            <div class="process-number">02</div>
+            <h3>Conceituação & Direção de Arte</h3>
+            <p>Nossa equipe de criação desenvolve painéis semânticos (moodboards) e esboça os primeiros conceitos
+              visuais originais de alta fidelidade para serem apresentados estrategicamente.</p>
+          </div>
+        </div>
+
+        <!-- Etapa 3 -->
+        <div class="process-step">
+          <div class="process-node"></div>
+          <div class="process-content">
+            <div class="process-number">03</div>
+            <h3>Refinamento & Detalhes</h3>
+            <p>Com seus feedbacks, esculpimos cada pixel de forma milimétrica. Ajustamos a tipografia, afinamos a paleta
+              cromática e adicionamos os acabamentos premium e transições dinâmicas.</p>
+          </div>
+        </div>
+
+        <!-- Etapa 4 -->
+        <div class="process-step reverse">
+          <div class="process-node"></div>
+          <div class="process-content">
+            <div class="process-number">04</div>
+            <h3>Entrega & Impacto</h3>
+            <p>Fornecemos arquivos prontos em todas as resoluções profissionais e formatos modernos, além de dar o
+              suporte técnico completo no lançamento do site ou ativação da identidade visual.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SEÇÃO CONTATO
+       ========================================================================== */ -->
+  <section id="contato">
+    <div class="container">
+      <div class="contact-wrapper">
+        <!-- Detalhes de contato -->
+        <div class="contact-info">
+          <div class="contact-meta">
+            <span>CONVERSE CONOSCO</span>
+            <h3>Vamos criar algo extraordinário juntos?</h3>
+            <p>Estamos sempre abertos a novas colaborações inspiradoras de design. Nos envie uma mensagem e
+              responderemos em até 24 horas.</p>
+          </div>
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <div class="contact-icon">
+                <i data-lucide="mail"></i>
+              </div>
+              <div class="contact-detail-text">
+                <span>E-mail</span>
+                <b>dscreativedesigngrafico@gmail.com</b>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="contact-icon">
+                <i data-lucide="phone"></i>
+              </div>
+              <div class="contact-detail-text">
+                <span>WhatsApp</span>
+                <b>(64) 99340-5740</b>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="contact-icon">
+                <i data-lucide="map-pin"></i>
+              </div>
+              <div class="contact-detail-text">
+                <span>Estúdio</span>
+                <b>Morrinhos, Goiás, Brasil</b>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário dinâmico -->
+        <form class="contact-form" id="projectForm">
+          <div class="form-group">
+            <input type="text" id="name" class="form-input cursor-hover" placeholder=" " required autocomplete="off">
+            <label for="name" class="form-label">Seu Nome</label>
+          </div>
+
+          <div class="form-group">
+            <input type="email" id="email" class="form-input cursor-hover" placeholder=" " required autocomplete="off">
+            <label for="email" class="form-label">E-mail Corporativo</label>
+          </div>
+
+          <div class="form-group">
+            <input type="tel" id="whatsapp" class="form-input cursor-hover" placeholder=" " required autocomplete="off">
+            <label for="whatsapp" class="form-label">WhatsApp</label>
+          </div>
+
+          <div class="form-group">
+            <textarea id="message" class="form-input cursor-hover" placeholder=" " required></textarea>
+            <label for="message" class="form-label">Fale um pouco sobre o projeto...</label>
+          </div>
+
+          <button type="submit" class="btn-premium active-btn magnetic-btn cursor-hover"
+            style="width: 100%; height: 58px;">Enviar Mensagem <i data-lucide="send"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       RODAPÉ (FOOTER)
+       ========================================================================== */ -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#inicio" class="logo cursor-hover">
+            <span>DS</span>CREATIVE<span class="logo-dot"></span>
+          </a>
+          <p>Uma agência de criação focada em moldar marcas fortes e produtos digitais que ditam tendências visuais
+            contemporâneas.</p>
+          <div class="footer-social-row">
+            <a href="#" class="social-btn cursor-hover" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="#" class="social-btn cursor-hover" aria-label="Behance"><i data-lucide="behance"></i></a>
+            <a href="#" class="social-btn cursor-hover" aria-label="Dribbble"><i data-lucide="dribbble"></i></a>
+            <a href="#" class="social-btn cursor-hover" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>Sitemap</h4>
+          <ul>
+            <li><a href="#inicio" class="cursor-hover">Início</a></li>
+            <li><a href="#servicos" class="cursor-hover">Serviços</a></li>
+            <li><a href="#portfolio" class="cursor-hover">Portfólio</a></li>
+            <li><a href="#processo" class="cursor-hover">Nosso Processo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4>Especialidades</h4>
+          <ul>
+            <li><a href="#servicos" class="cursor-hover">Identidade Visual</a></li>
+            <li><a href="#servicos" class="cursor-hover">Websites Exclusivos</a></li>
+            <li><a href="#servicos" class="cursor-hover">Criação Editorial</a></li>
+            <li><a href="#servicos" class="cursor-hover">Animação & Motion 3D</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 DS Creative. Todos os direitos reservados. Design e Tecnologia de Elite.</p>
+        <div class="footer-bottom-links">
+          <a href="#" class="cursor-hover">Termos de Uso</a>
+          <a href="#" class="cursor-hover">Privacidade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de Sucesso -->
+  <div class="success-modal" id="successModal">
+    <div class="success-content">
+      <div class="success-icon-box">
+        <i data-lucide="check" style="width: 40px; height: 40px;"></i>
+      </div>
+      <h4>Mensagem Enviada!</h4>
+      <p>Obrigado pelo contato. Um de nossos principais designers entrará em contato via e-mail ou WhatsApp nas próximas
+        horas.</p>
+      <button class="btn-premium cursor-hover" onclick="closeSuccessModal()" style="width: 120px;">Fechar</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       12. SCRIPTS - INTERATIVIDADES E ANIMAÇÕES
+       ========================================================================== */ -->
+  <!-- GSAP e ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    // Inicializar Lucide Icons
+    lucide.createIcons();
+
+    // Registrar plugins do GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ==========================================================================
+    // 1. LENIS SMOOTH SCROLLING
+    // ==========================================================================
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Conectar ScrollTrigger ao Lenis
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Suavizar clique em links internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          lenis.scrollTo(targetElement, { offset: -50 });
+
+          // Fechar menu mobile se estiver aberto
+          document.getElementById('navMenu').classList.remove('active');
+          document.getElementById('menuToggle').classList.remove('active');
+        }
+      });
+    });
+
+
+    // ==========================================================================
+    // 2. CURSOR TRAIL CUSTOMIZADO
+    // ==========================================================================
+    const cursor = document.getElementById('custom-cursor');
+    let cursorX = 0, cursorY = 0;
+    let targetX = 0, targetY = 0;
+    const speed = 0.15; // Velocidade do lag suave do cursor
+
+    document.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
+
+    function animateCursor() {
+      // Interpolar posições para rolagem suavizada
+      cursorX += (targetX - cursorX) * speed;
+      cursorY += (targetY - cursorY) * speed;
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Micro interações do cursor nos links e botões
+    document.querySelectorAll('.cursor-hover').forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        cursor.classList.add('hovered');
+      });
+      element.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hovered');
+      });
+    });
+
+    // Cursor exclusivo para galeria do portfólio
+    document.querySelectorAll('.cursor-portfolio-hover').forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        cursor.classList.add('hovered', 'portfolio-hover');
+      });
+      element.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hovered', 'portfolio-hover');
+      });
+    });
+
+
+    // ==========================================================================
+    // 3. CANVAS DE PARTÍCULAS INTERATIVO (FONDO ORGÂNICO)
+    // ==========================================================================
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 140 };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    class WireframeCube {
+      constructor() {
+        this.reset();
+        // Distribuir inicialmente pela tela
+        this.y = Math.random() * canvas.height;
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = -60; // Começar logo acima da tela
+        this.z = Math.random() * 200 - 100;
+        this.size = Math.random() * 45 + 15; // Tamanho entre 15px e 60px
+
+        // Velocidades
+        this.speedX = Math.random() * 0.3 - 0.15;
+        this.speedY = Math.random() * 0.4 + 0.1; // Flutuar lentamente para baixo
+
+        // Ângulos e velocidades de rotação
+        this.ax = Math.random() * Math.PI;
+        this.ay = Math.random() * Math.PI;
+        this.az = Math.random() * Math.PI;
+        this.rotSpeedX = Math.random() * 0.005 + 0.002;
+        this.rotSpeedY = Math.random() * 0.005 + 0.002;
+        this.rotSpeedZ = Math.random() * 0.005 + 0.002;
+
+        this.opacity = Math.random() * 0.07 + 0.03; // Opacidade ultra sutil (0.03 a 0.10)
+        // Cor baseada nas novas cores de marca do usuário (Azul Elétrico / Ciano)
+        this.color = Math.random() > 0.5 ? 'rgba(0, 183, 255, ' : 'rgba(0, 242, 254, ';
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        this.ax += this.rotSpeedX;
+        this.ay += this.rotSpeedY;
+        this.az += this.rotSpeedZ;
+
+        // Afastamento suave ao passar o mouse
+        if (mouse.x !== null && mouse.y !== null) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < mouse.radius) {
+            const force = (mouse.radius - distance) / mouse.radius;
+            const dirX = dx / distance;
+            const dirY = dy / distance;
+            this.x -= dirX * force * 1.2;
+            this.y -= dirY * force * 1.2;
+          }
+        }
+
+        // Resetar ao sair das bordas
+        if (this.y > canvas.height + 60 || this.x < -60 || this.x > canvas.width + 60) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        const s = this.size / 2;
+        // Vértices locais do cubo 3D
+        let vertices = [
+          { x: -s, y: -s, z: -s },
+          { x: s, y: -s, z: -s },
+          { x: s, y: s, z: -s },
+          { x: -s, y: s, z: -s },
+          { x: -s, y: -s, z: s },
+          { x: s, y: -s, z: s },
+          { x: s, y: s, z: s },
+          { x: -s, y: s, z: s }
+        ];
+
+        let proj = [];
+        const cosX = Math.cos(this.ax), sinX = Math.sin(this.ax);
+        const cosY = Math.cos(this.ay), sinY = Math.sin(this.ay);
+        const cosZ = Math.cos(this.az), sinZ = Math.sin(this.az);
+
+        vertices.forEach(v => {
+          // Rotação X
+          let y1 = v.y * cosX - v.z * sinX;
+          let z1 = v.y * sinX + v.z * cosX;
+
+          // Rotação Y
+          let x2 = v.x * cosY - z1 * sinY;
+          let z2 = v.x * sinY + z1 * cosY;
+
+          // Rotação Z
+          let x3 = x2 * cosZ - y1 * sinZ;
+          let y3 = x2 * sinZ + y1 * cosZ;
+
+          proj.push({
+            x: this.x + x3,
+            y: this.y + y3
+          });
+        });
+
+        const edges = [
+          [0, 1], [1, 2], [2, 3], [3, 0], // face traseira
+          [4, 5], [5, 6], [6, 7], [7, 4], // face frontal
+          [0, 4], [1, 5], [2, 6], [3, 7]  // conexões
+        ];
+
+        // Desenhar arestas
+        ctx.strokeStyle = this.color + this.opacity + ')';
+        ctx.lineWidth = 0.7;
+        edges.forEach(edge => {
+          ctx.beginPath();
+          ctx.moveTo(proj[edge[0]].x, proj[edge[0]].y);
+          ctx.lineTo(proj[edge[1]].x, proj[edge[1]].y);
+          ctx.stroke();
+        });
+
+        // Desenhar vértices como pequenos pontos brilhantes
+        ctx.fillStyle = this.color + (this.opacity * 1.5) + ')';
+        proj.forEach(pt => {
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+    }
+
+    let cubes = [];
+
+    function initCubes() {
+      cubes = [];
+      const density = Math.floor((canvas.width * canvas.height) / 55000);
+      const count = Math.min(Math.max(density, 12), 30); // Entre 12 e 30 cubos para performance fluida a 60fps
+      for (let i = 0; i < count; i++) {
+        cubes.push(new WireframeCube());
+      }
+    }
+    initCubes();
+    window.addEventListener('resize', initCubes);
+
+    function animateCubes() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      cubes.forEach(c => {
+        c.update();
+        c.draw();
+      });
+      requestAnimationFrame(animateCubes);
+    }
+    animateCubes();
+
+
+    // ==========================================================================
+    // 4. BOTÕES MAGNÉTICOS DE ALTA PERFORMANCE
+    // ==========================================================================
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', function (e) {
+        const position = this.getBoundingClientRect();
+        const x = e.clientX - position.left - position.width / 2;
+        const y = e.clientY - position.top - position.height / 2;
+
+        // Mover o botão sutilmente em direção ao mouse
+        gsap.to(this, {
+          x: x * 0.35,
+          y: y * 0.35,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      btn.addEventListener('mouseleave', function () {
+        // Voltar à posição original suavemente
+        gsap.to(this, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.4)'
+        });
+      });
+    });
+
+
+    // ==========================================================================
+    // 5. CABEÇALHO SCROLLED E MENU MOBILE
+    // ==========================================================================
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+
+    // ==========================================================================
+    // 6. ANIMAÇÃO DE BORDAS BENTO MOUSE (EFEITO GLOW DIRECIONAL)
+    // ==========================================================================
+    document.querySelectorAll('.bento-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        card.style.setProperty('--mouse-x', `${x}%`);
+        card.style.setProperty('--mouse-y', `${y}%`);
+      });
+    });
+
+
+    // ==========================================================================
+    // 7. FILTROS DE PORTFÓLIO E TRANSIÇÃO ELEGANTE
+    // ==========================================================================
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        // Mudar botão ativo
+        filterButtons.forEach(b => b.classList.remove('active-btn'));
+        this.classList.add('active-btn');
+
+        const filterValue = this.getAttribute('data-filter');
+
+        // Animar transição dos cards do portfólio usando GSAP
+        portfolioItems.forEach(item => {
+          const itemCat = item.getAttribute('data-cat');
+
+          if (filterValue === 'all' || itemCat === filterValue) {
+            // Se o card deve aparecer
+            if (item.classList.contains('hidden')) {
+              item.classList.remove('hidden');
+              gsap.fromTo(item,
+                { scale: 0.85, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out', clearProps: 'all' }
+              );
+            }
+          } else {
+            // Se o card deve sumir
+            if (!item.classList.contains('hidden')) {
+              gsap.to(item, {
+                scale: 0.85,
+                opacity: 0,
+                duration: 0.35,
+                ease: 'power2.inOut',
+                onComplete: () => {
+                  item.classList.add('hidden');
+                }
+              });
+            }
+          }
+        });
+
+        // Recarregar os gatilhos de rolagem GSAP após mudança de layout
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 400);
+      });
+    });
+
+
+    // ==========================================================================
+    // 8. ANIMAÇÕES GSAP NA ROLAGEM DA PÁGINA (SCROLLTRIGGER)
+    // ==========================================================================
+
+    // --- Hero Section ---
+    gsap.from('.hero-tag', {
+      y: 30,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 1,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.hero-title', {
+      y: 50,
+      opacity: 0,
+      duration: 1.2,
+      delay: 0.2,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.hero-description', {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.4,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.hero-actions', {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.5,
+      ease: 'power3.out'
+    });
+
+    // --- Seção Serviços (Bento Grid Cards Slide Up) ---
+    gsap.from('.services-bento .bento-card', {
+      scrollTrigger: {
+        trigger: '.services-bento',
+        start: 'top 85%'
+      },
+      y: 60,
+      opacity: 0,
+      stagger: 0.18,
+      duration: 1,
+      ease: 'power3.out'
+    });
+
+    // --- Seção Portfólio (Itens Slide Up) ---
+    gsap.from('.portfolio-grid .portfolio-item', {
+      scrollTrigger: {
+        trigger: '.portfolio-grid',
+        start: 'top 85%'
+      },
+      y: 80,
+      opacity: 0,
+      stagger: 0.2,
+      duration: 1.2,
+      ease: 'power3.out'
+    });
+
+    // --- Seção Processo (Timeline) ---
+    const steps = document.querySelectorAll('.process-step');
+    steps.forEach((step, idx) => {
+      const isEven = idx % 2 === 0;
+
+      gsap.from(step.querySelector('.process-content'), {
+        scrollTrigger: {
+          trigger: step,
+          start: 'top 85%',
+        },
+        x: isEven ? -60 : 60,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+      });
+
+      gsap.from(step.querySelector('.process-node'), {
+        scrollTrigger: {
+          trigger: step,
+          start: 'top 85%',
+        },
+        scale: 0,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'back.out(2)'
+      });
+    });
+
+    // --- Contato (Reveal Completo) ---
+    gsap.from('.contact-wrapper', {
+      scrollTrigger: {
+        trigger: '.contact-wrapper',
+        start: 'top 90%'
+      },
+      y: 50,
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power3.out'
+    });
+
+
+    // ==========================================================================
+    // 9. CONTADORES NUMÉRICOS ANIMADOS NAS ESTATÍSTICAS
+    // ==========================================================================
+    const stats = document.querySelectorAll('.stat-num');
+
+    stats.forEach(stat => {
+      const targetVal = parseInt(stat.getAttribute('data-val'));
+
+      ScrollTrigger.create({
+        trigger: stat,
+        start: 'top 90%',
+        onEnter: () => {
+          let countObj = { val: 0 };
+          gsap.to(countObj, {
+            val: targetVal,
+            duration: 2.2,
+            ease: 'power2.out',
+            onUpdate: function () {
+              stat.innerText = Math.floor(countObj.val) + (targetVal === 100 ? '' : '+');
+            }
+          });
+        },
+        once: true // Executa apenas uma vez
+      });
+    });
+
+
+    // ==========================================================================
+    // 10. ENVIO DO FORMULÁRIO COM FEEDBACK EXCLUSIVO (MODAL DE SUCESSO)
+    // ==========================================================================
+    const form = document.getElementById('projectForm');
+    const successModal = document.getElementById('successModal');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simulação realista de envio assíncrono (AJAX / Fetch)
+      const btn = form.querySelector('button[type="submit"]');
+      const origText = btn.innerHTML;
+      btn.innerHTML = 'Enviando... <i data-lucide="loader-2" class="spin-loader"></i>';
+      lucide.createIcons();
+
+      // Micro-animação de loading spinner
+      const loader = btn.querySelector('.spin-loader');
+      gsap.to(loader, { rotation: 360, repeat: -1, ease: 'linear', duration: 1 });
+
+      setTimeout(() => {
+        // Abrir modal de sucesso
+        successModal.classList.add('active');
+
+        // Resetar botão e formulário
+        btn.innerHTML = origText;
+        form.reset();
+
+        // Bloquear rolagem do Lenis enquanto modal está aberto
+        lenis.stop();
+      }, 1500);
+    });
+
+    function closeSuccessModal() {
+      successModal.classList.remove('active');
+      // Reativar rolagem do Lenis
+      lenis.start();
+    }
+  </script>
+</body>
+
+</html>
