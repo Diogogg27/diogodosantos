@@ -723,6 +723,7 @@
       padding: 24px;
       opacity: 0;
       transition: opacity 0.5s ease;
+      pointer-events: none;
     }
 
     .work-item:hover .work-item-overlay {
@@ -1848,24 +1849,22 @@
     // ==========================================================================
     // 12. CLICK TO ZOOM WORK ITEMS
     // ==========================================================================
-    const workItems = document.querySelectorAll('.work-item');
-
-    workItems.forEach(item => {
-      item.addEventListener('click', function(e) {
+    document.querySelectorAll('.work-item').forEach(item => {
+      item.onclick = function(e) {
         e.stopPropagation();
-        const isActive = this.classList.contains('active');
-        workItems.forEach(i => i.classList.remove('active'));
-        if (!isActive) {
+        const wasActive = this.classList.contains('active');
+        document.querySelectorAll('.work-item').forEach(i => i.classList.remove('active'));
+        if (!wasActive) {
           this.classList.add('active');
         }
-      });
+      };
     });
 
-    document.addEventListener('click', function(e) {
+    document.body.onclick = function(e) {
       if (!e.target.closest('.work-item')) {
-        workItems.forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.work-item').forEach(i => i.classList.remove('active'));
       }
-    });
+    };
   </script>
 </body>
 
