@@ -643,48 +643,45 @@
       letter-spacing: -2px;
     }
 
-    /* 3D Ring Carousel */
+    /* 3D Ring Carousel - exatamente como o original */
     .ring-stage {
       width: 100%;
-      height: 70vh;
+      height: 80vh;
       overflow: hidden;
       background: transparent;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transform-style: preserve-3d;
+      user-select: none;
     }
 
     .ring-wrap {
       perspective: 2000px;
       width: 300px;
       height: 400px;
-      position: relative;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .ring {
       width: 100%;
       height: 100%;
+      position: relative;
       transform-style: preserve-3d;
       cursor: grab;
-      position: relative;
-    }
-
-    .ring.dragging {
-      cursor: grabbing;
+      user-select: none;
     }
 
     .ring .img {
       width: 300px;
       height: 400px;
       position: absolute;
-      top: 0;
-      left: 0;
       background-size: cover;
       background-position: center;
       backface-visibility: hidden;
-      border-radius: 8px;
       transform-origin: 50% 50% 500px;
+      user-select: none;
     }
 
     .ring .img:hover {
@@ -1469,73 +1466,77 @@
 
   <script>
     window.addEventListener('load', function() {
-      var xPos = 0;
-      var images = [
-        'assets/STUDIO 1.png',
-        'assets/STUDIO 2.png',
-        'assets/STUDIO 3.png',
-        'assets/STUDIO 4.png',
-        'assets/STUDIO 5.png',
-        'assets/Prancheta 1.png',
-        'assets/Prancheta 2.png',
-        'assets/Prancheta 3.png',
-        'assets/Prancheta 4.png',
-        'assets/02. Fast Food Mockup.png'
-      ];
+      try {
+        var xPos = 0;
+        var images = [
+          'assets/STUDIO 1.png',
+          'assets/STUDIO 2.png',
+          'assets/STUDIO 3.png',
+          'assets/STUDIO 4.png',
+          'assets/STUDIO 5.png',
+          'assets/Prancheta 1.png',
+          'assets/Prancheta 2.png',
+          'assets/Prancheta 3.png',
+          'assets/Prancheta 4.png',
+          'assets/02. Fast Food Mockup.png'
+        ];
 
-      function getBgPos(i) {
-        return (100 - gsap.utils.wrap(0, 360, gsap.getProperty('.ring', 'rotationY') - 180 - i * 36) / 360 * 500) + 'px 0px';
-      }
+        function getBgPos(i) {
+          return (100 - gsap.utils.wrap(0, 360, gsap.getProperty('.ring', 'rotationY') - 180 - i * 36) / 360 * 500) + 'px 0px';
+        }
 
-      gsap.timeline()
-        .set('.ring', { rotationY: 180, cursor: 'grab' })
-        .set('.ring .img', {
-          rotateY: function(i) { return i * -36; },
-          transformOrigin: '50% 50% 500px',
-          z: -500,
-          backgroundImage: function(i) { return 'url(' + images[i] + ')'; },
-          backgroundPosition: function(i) { return getBgPos(i); },
-          backfaceVisibility: 'hidden'
-        })
-        .from('.ring .img', {
-          duration: 1.5,
-          y: 200,
-          opacity: 0,
-          stagger: 0.1,
-          ease: 'expo'
-        })
-        .add(function() {
-          $('.ring .img').on('mouseenter', function(e) {
-            var current = e.currentTarget;
-            gsap.to('.ring .img', { opacity: function(i, t) { return (t == current) ? 1 : 0.5; }, ease: 'power3' });
+        gsap.timeline()
+          .set('.ring', { rotationY: 180, cursor: 'grab' })
+          .set('.ring .img', {
+            rotateY: function(i) { return i * -36; },
+            transformOrigin: '50% 50% 500px',
+            z: -500,
+            backgroundImage: function(i) { return 'url(' + images[i] + ')'; },
+            backgroundPosition: function(i) { return getBgPos(i); },
+            backfaceVisibility: 'hidden'
+          })
+          .from('.ring .img', {
+            duration: 1.5,
+            y: 200,
+            opacity: 0,
+            stagger: 0.1,
+            ease: 'expo'
+          })
+          .add(function() {
+            $('.ring .img').on('mouseenter', function(e) {
+              var current = e.currentTarget;
+              gsap.to('.ring .img', { opacity: function(i, t) { return (t == current) ? 1 : 0.5; }, ease: 'power3' });
+            });
+            $('.ring .img').on('mouseleave', function() {
+              gsap.to('.ring .img', { opacity: 1, ease: 'power2.inOut' });
+            });
+          }, '-=0.5');
+
+        $(window).on('mousedown touchstart', dragStart);
+        $(window).on('mouseup touchend', dragEnd);
+
+        function dragStart(e) {
+          if (e.touches) e.clientX = e.touches[0].clientX;
+          xPos = Math.round(e.clientX);
+          gsap.set('.ring', { cursor: 'grabbing' });
+          $(window).on('mousemove touchmove', drag);
+        }
+
+        function drag(e) {
+          if (e.touches) e.clientX = e.touches[0].clientX;
+          gsap.to('.ring', {
+            rotationY: '-=' + ((Math.round(e.clientX) - xPos) % 360),
+            onUpdate: function() { gsap.set('.ring .img', { backgroundPosition: function(i) { return getBgPos(i); } }); }
           });
-          $('.ring .img').on('mouseleave', function() {
-            gsap.to('.ring .img', { opacity: 1, ease: 'power2.inOut' });
-          });
-        }, '-=0.5');
+          xPos = Math.round(e.clientX);
+        }
 
-      $(window).on('mousedown touchstart', dragStart);
-      $(window).on('mouseup touchend', dragEnd);
-
-      function dragStart(e) {
-        if (e.touches) e.clientX = e.touches[0].clientX;
-        xPos = Math.round(e.clientX);
-        gsap.set('.ring', { cursor: 'grabbing' });
-        $(window).on('mousemove touchmove', drag);
-      }
-
-      function drag(e) {
-        if (e.touches) e.clientX = e.touches[0].clientX;
-        gsap.to('.ring', {
-          rotationY: '-=' + ((Math.round(e.clientX) - xPos) % 360),
-          onUpdate: function() { gsap.set('.ring .img', { backgroundPosition: function(i) { return getBgPos(i); } }); }
-        });
-        xPos = Math.round(e.clientX);
-      }
-
-      function dragEnd(e) {
-        $(window).off('mousemove touchmove', drag);
-        gsap.set('.ring', { cursor: 'grab' });
+        function dragEnd(e) {
+          $(window).off('mousemove touchmove', drag);
+          gsap.set('.ring', { cursor: 'grab' });
+        }
+      } catch(err) {
+        console.log('Ring carousel error:', err);
       }
     });
   </script>
