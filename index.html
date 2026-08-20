@@ -254,14 +254,18 @@
       top: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column;
       overflow: hidden;
     }
 
-    .morph-scene {
-      position: relative;
+    .hero-3d-side {
       flex: 1;
+      position: relative;
       z-index: 1;
+    }
+
+    .morph-scene {
+      width: 100%;
+      height: 100%;
     }
 
     .morph-canvas {
@@ -269,35 +273,49 @@
       height: 100%;
     }
 
-    .hero-content {
+    .hero-content-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px;
       position: relative;
       z-index: 2;
-      text-align: center;
-      padding: 48px 24px 60px;
-      background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
+      background: linear-gradient(135deg, var(--bg-dark) 0%, rgba(27, 38, 59, 0.8) 100%);
+    }
+
+    .hero-profile-img {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      margin-bottom: 32px;
+      box-shadow: 0 0 40px rgba(119, 141, 169, 0.2);
     }
 
     .hero-tag {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       padding: 6px 16px;
       border: 1px solid rgba(119, 141, 169, 0.3);
       border-radius: 50px;
+      width: fit-content;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 10vw, 8rem);
+      font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 700;
-      line-height: 0.9;
-      letter-spacing: -3px;
-      margin-bottom: 24px;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
     }
 
     .hero-title .outline {
@@ -310,25 +328,54 @@
       -webkit-text-stroke: 1.5px var(--accent);
     }
 
-    .hero-subtitle {
+    .hero-bio {
       font-family: var(--font-body);
-      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      font-size: 0.95rem;
       color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 32px;
       line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 500px;
+    }
+
+    .hero-bio-highlight {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .hero-skills-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .hero-skill-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent);
+      padding: 6px 14px;
+      border: 1px solid var(--border-glass);
+      border-radius: 6px;
+      letter-spacing: 1px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
     }
 
     .hero-cta {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       text-decoration: none;
       color: var(--text-primary);
-      padding: 16px 32px;
+      padding: 14px 28px;
       border: 1px solid rgba(119, 141, 169, 0.3);
       border-radius: 50px;
       transition: var(--transition-smooth);
@@ -341,9 +388,19 @@
       transform: translateY(-2px);
     }
 
+    .hero-cta.primary {
+      background: var(--secondary);
+      border-color: var(--secondary);
+    }
+
+    .hero-cta.primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
     .scroll-indicator {
       position: absolute;
-      bottom: 20px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
@@ -355,7 +412,7 @@
 
     .scroll-indicator span {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -371,6 +428,44 @@
     @keyframes scrollPulse {
       0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
       50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    @media (max-width: 991px) {
+      .hero-sticky {
+        flex-direction: column;
+      }
+
+      .hero-3d-side {
+        height: 50vh;
+      }
+
+      .hero-content-side {
+        height: 50vh;
+        padding: 32px 24px;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-profile-img {
+        width: 160px;
+        height: 160px;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
+      .hero-bio {
+        font-size: 0.85rem;
+      }
+
+      .hero-skills-row {
+        justify-content: center;
+      }
+
+      .hero-cta-row {
+        justify-content: center;
+      }
     }
 
     /* ==========================================================================
@@ -830,20 +925,40 @@
   <!-- Hero Section -->
   <section class="hero-stage">
     <div class="hero-sticky">
-      <div class="morph-scene">
-        <canvas class="morph-canvas" id="morphCanvas"></canvas>
+      <div class="hero-3d-side">
+        <div class="morph-scene">
+          <canvas class="morph-canvas" id="morphCanvas"></canvas>
+        </div>
       </div>
 
-      <div class="hero-content">
+      <div class="hero-content-side">
+        <img src="assets/DIOGOSANTOS.PERFIL.png" alt="Diogo dos Santos" class="hero-profile-img">
+        
         <div class="hero-tag">Design Gráfico & Edição de Vídeo</div>
+        
         <h1 class="hero-title">
           DIOGO<br>
           <span class="outline">DOS SANTOS</span>
         </h1>
-        <p class="hero-subtitle">
-          Meu nome é Diogo, tenho 36 anos e sou apaixonado por design gráfico. Nos últimos 4 anos, tenho me dedicado intensamente ao estudo e à prática desta arte.
+
+        <p class="hero-bio">
+          <span class="hero-bio-highlight">Meu nome é Diogo, tenho 36 anos e sou apaixonado por design gráfico.</span> Nos últimos 4 anos, tenho me dedicado intensamente ao estudo e à prática desta arte, desenvolvendo minhas habilidades e expandindo meu conhecimento técnico nos programas da Adobe, como <span class="hero-bio-highlight">Photoshop e Premiere</span>.
         </p>
-        <a href="#work" class="hero-cta">Ver Trabalhos →</a>
+        <p class="hero-bio">
+          Minha dedicação e paixão pelo design gráfico são impulsionadas pela crença de que a <span class="hero-bio-highlight">criatividade pode transformar marcas</span>, contar histórias poderosas e cativar audiências.
+        </p>
+
+        <div class="hero-skills-row">
+          <span class="hero-skill-tag">Photoshop</span>
+          <span class="hero-skill-tag">Premiere Pro</span>
+          <span class="hero-skill-tag">After Effects</span>
+          <span class="hero-skill-tag">Illustrator</span>
+        </div>
+
+        <div class="hero-cta-row">
+          <a href="#work" class="hero-cta primary">Ver Trabalhos →</a>
+          <a href="#contact" class="hero-cta">Falar Comigo</a>
+        </div>
       </div>
 
       <div class="scroll-indicator">
