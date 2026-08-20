@@ -2166,13 +2166,17 @@
         var moved = false;
         var startX = 0;
         var startPos = 0;
+        var running = false;
+        var rafId = 0;
         var last = performance.now();
 
         function apply() {
-          track.style.transform = 'translateX(' + pos + 'px)';
+          track.style.transform = 'translate3d(' + pos + 'px, 0, 0)';
         }
 
         function frame(now) {
+          if (!running) return;
+          rafId = requestAnimationFrame(frame);
           var dt = Math.min(0.05, (now - last) / 1000);
           last = now;
           if (!dragging) {
@@ -2181,8 +2185,23 @@
             if (pos > 0) pos -= half;
             apply();
           }
-          requestAnimationFrame(frame);
         }
+
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              if (!running) {
+                running = true;
+                last = performance.now();
+                rafId = requestAnimationFrame(frame);
+              }
+            } else {
+              running = false;
+              cancelAnimationFrame(rafId);
+            }
+          });
+        }, { threshold: 0.02 });
+        io.observe(row);
 
         row.addEventListener('mousedown', function(e) {
           dragging = true;
@@ -2235,7 +2254,6 @@
         });
 
         apply();
-        requestAnimationFrame(frame);
       }
 
       function buildRow(itemList, reverse, speed) {
@@ -2244,7 +2262,14 @@
         var track = document.createElement('div');
         track.className = 'marquee-track';
         var set = itemList.map(function(item) { return item.cloneNode(true); });
-        set.forEach(function(clone) { track.appendChild(clone); });
+        set.forEach(function(clone) {
+          var imgs = clone.querySelectorAll('img');
+          imgs.forEach(function(im) {
+            im.decoding = 'async';
+            im.draggable = false;
+          });
+          track.appendChild(clone);
+        });
         set.forEach(function(clone) { track.appendChild(clone.cloneNode(true)); });
         row.appendChild(track);
         initMarquee(row, track, speed, reverse);
