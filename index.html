@@ -646,13 +646,13 @@
     /* 3D Ring Carousel */
     .ring-stage {
       width: 100%;
-      height: 100vh;
+      height: 70vh;
       overflow: hidden;
       background: transparent;
       position: relative;
     }
 
-    .ring-container {
+    .ring-stage .container {
       perspective: 2000px;
       width: 300px;
       height: 400px;
@@ -662,18 +662,18 @@
       transform: translate(-50%, -50%);
     }
 
-    .ring {
+    .ring-stage .ring {
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
       cursor: grab;
     }
 
-    .ring.dragging {
+    .ring-stage .ring.dragging {
       cursor: grabbing;
     }
 
-    .ring .img {
+    .ring-stage .ring .img {
       width: 300px;
       height: 400px;
       position: absolute;
@@ -684,7 +684,7 @@
       transform-origin: 50% 50% 500px;
     }
 
-    .ring .img:hover {
+    .ring-stage .ring .img:hover {
       filter: brightness(1.1);
     }
 
