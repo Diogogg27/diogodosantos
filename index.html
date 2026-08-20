@@ -627,44 +627,86 @@
       letter-spacing: -2px;
     }
 
-    /* Dynamic Horizontal Scroll Library */
-    .work-track {
-      display: flex;
-      gap: 16px;
+    /* Dynamic Responsive Grid Library */
+    .work-filters {
+      max-width: 1200px;
+      margin: 0 auto 40px;
       padding: 0 40px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      cursor: grab;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .work-track:active {
-      cursor: grabbing;
+    .work-filter {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--border-glass);
+      border-radius: 50px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .work-track::-webkit-scrollbar {
-      display: none;
+    .work-filter:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .work-filter.active {
+      background: var(--accent);
+      color: var(--bg-dark);
+      border-color: var(--accent);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-auto-rows: 300px;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .js .work-item {
+      opacity: 0;
+      transform: translateY(40px);
     }
 
     .work-item {
-      flex: 0 0 350px;
-      height: 450px;
       position: relative;
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      scroll-snap-align: start;
       background: var(--bg-card);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+      will-change: opacity, transform;
+    }
+
+    .work-item.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .work-item:hover {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
     .work-item.tall {
-      height: 550px;
+      grid-row: span 2;
     }
 
     .work-item.wide {
-      width: 500px;
+      grid-column: span 2;
+    }
+
+    .work-item.hidden {
+      display: none;
     }
 
     .work-item img {
@@ -681,7 +723,7 @@
     .work-item-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(13, 27, 42, 0.95) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(13, 27, 42, 0.95) 0%, transparent 55%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -691,7 +733,8 @@
       pointer-events: none;
     }
 
-    .work-item:hover .work-item-overlay {
+    .work-item:hover .work-item-overlay,
+    .work-item:focus-within .work-item-overlay {
       opacity: 1;
     }
 
@@ -734,6 +777,152 @@
       color: var(--accent);
       letter-spacing: 2px;
       text-transform: uppercase;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 27, 42, 0.96);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-figure {
+      margin: 0;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lightbox.open .lightbox-figure {
+      transform: scale(1);
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .lightbox-caption {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .lightbox-cat {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .lightbox-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 6px;
+    }
+
+    .lightbox-close,
+    .lightbox-nav {
+      position: absolute;
+      z-index: 2;
+      background: rgba(27, 38, 59, 0.7);
+      border: 1px solid var(--border-glass);
+      color: var(--text-primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+      line-height: 1;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-nav:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .lightbox-close {
+      top: 24px;
+      right: 24px;
+    }
+
+    .lightbox-prev {
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-next {
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-count {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .work-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        grid-auto-rows: 240px;
+        padding: 0 20px;
+      }
+      .work-filters {
+        padding: 0 20px;
+      }
+      .work-header,
+      .work-counter {
+        padding: 0 20px;
+      }
+      .work-item.wide {
+        grid-column: span 1;
+      }
+      .lightbox-prev {
+        left: 12px;
+      }
+      .lightbox-next {
+        right: 12px;
+      }
+      .lightbox-close {
+        top: 16px;
+        right: 16px;
+      }
     }
 
     /* ==========================================================================
@@ -1053,8 +1242,21 @@
       <h2 class="work-heading reveal reveal-delay-1">Biblioteca de Trabalhos</h2>
     </div>
 
-    <div class="work-track">
-      <div class="work-item tall">
+    <div class="work-filters">
+      <button class="work-filter active" data-filter="all">Todos</button>
+      <button class="work-filter" data-filter="studio">Studio</button>
+      <button class="work-filter" data-filter="mockup">Mockup</button>
+      <button class="work-filter" data-filter="design">Design</button>
+      <button class="work-filter" data-filter="logo">Logo</button>
+      <button class="work-filter" data-filter="social">Social Media</button>
+      <button class="work-filter" data-filter="projeto">Projetos</button>
+      <button class="work-filter" data-filter="fotografia">Fotografia</button>
+      <button class="work-filter" data-filter="ia3d">IA & 3D</button>
+      <button class="work-filter" data-filter="extras">Extras</button>
+    </div>
+
+    <div class="work-grid">
+      <div class="work-item tall" data-category="studio">
         <img src="assets/STUDIO 1.png" alt="Trabalho 1">
         <div class="work-item-overlay">
           <span class="work-item-cat">Studio</span>
@@ -1062,7 +1264,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="studio">
         <img src="assets/STUDIO 2.png" alt="Trabalho 2">
         <div class="work-item-overlay">
           <span class="work-item-cat">Studio</span>
@@ -1070,7 +1272,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="studio">
         <img src="assets/STUDIO 3.png" alt="Trabalho 3">
         <div class="work-item-overlay">
           <span class="work-item-cat">Studio</span>
@@ -1078,7 +1280,7 @@
         </div>
       </div>
 
-      <div class="work-item tall">
+      <div class="work-item tall" data-category="studio">
         <img src="assets/STUDIO 4.png" alt="Trabalho 4">
         <div class="work-item-overlay">
           <span class="work-item-cat">Studio</span>
@@ -1086,7 +1288,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="studio">
         <img src="assets/STUDIO 5.png" alt="Trabalho 5">
         <div class="work-item-overlay">
           <span class="work-item-cat">Studio</span>
@@ -1094,7 +1296,7 @@
         </div>
       </div>
 
-      <div class="work-item wide">
+      <div class="work-item wide" data-category="mockup">
         <img src="assets/Prancheta 1.png" alt="Trabalho 6">
         <div class="work-item-overlay">
           <span class="work-item-cat">Mockup</span>
@@ -1102,7 +1304,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="mockup">
         <img src="assets/Prancheta 2.png" alt="Trabalho 7">
         <div class="work-item-overlay">
           <span class="work-item-cat">Mockup</span>
@@ -1110,7 +1312,7 @@
         </div>
       </div>
 
-      <div class="work-item tall">
+      <div class="work-item tall" data-category="mockup">
         <img src="assets/Prancheta 3.png" alt="Trabalho 8">
         <div class="work-item-overlay">
           <span class="work-item-cat">Mockup</span>
@@ -1118,7 +1320,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="mockup">
         <img src="assets/Prancheta 4.png" alt="Trabalho 9">
         <div class="work-item-overlay">
           <span class="work-item-cat">Mockup</span>
@@ -1126,7 +1328,7 @@
         </div>
       </div>
 
-      <div class="work-item wide">
+      <div class="work-item wide" data-category="mockup">
         <img src="assets/02. Fast Food Mockup.png" alt="Trabalho 10">
         <div class="work-item-overlay">
           <span class="work-item-cat">Mockup</span>
@@ -1134,7 +1336,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="design">
         <img src="assets/02.png" alt="Trabalho 11">
         <div class="work-item-overlay">
           <span class="work-item-cat">Design</span>
@@ -1142,7 +1344,7 @@
         </div>
       </div>
 
-      <div class="work-item tall">
+      <div class="work-item tall" data-category="mockup">
         <img src="assets/146-shopping-bag-mockup-01.png" alt="Trabalho 12">
         <div class="work-item-overlay">
           <span class="work-item-cat">Mockup</span>
@@ -1150,7 +1352,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="design">
         <img src="assets/60.png" alt="Trabalho 13">
         <div class="work-item-overlay">
           <span class="work-item-cat">Design</span>
@@ -1158,7 +1360,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="logo">
         <img src="assets/Free Embossed Paper Logo Mockup.png" alt="Trabalho 14">
         <div class="work-item-overlay">
           <span class="work-item-cat">Logo</span>
@@ -1166,7 +1368,7 @@
         </div>
       </div>
 
-      <div class="work-item wide">
+      <div class="work-item wide" data-category="fotografia">
         <img src="assets/Gellato_Doces_engraved_sand_2K_202607302246.jpeg" alt="Trabalho 15">
         <div class="work-item-overlay">
           <span class="work-item-cat">Fotografia</span>
@@ -1174,7 +1376,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="extras">
         <img src="assets/sticker_minimalist_sticker.png" alt="Trabalho 16">
         <div class="work-item-overlay">
           <span class="work-item-cat">Sticker</span>
@@ -1182,7 +1384,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="design">
         <img src="assets/Artboard 3.png" alt="Trabalho 17">
         <div class="work-item-overlay">
           <span class="work-item-cat">Design</span>
@@ -1190,7 +1392,7 @@
         </div>
       </div>
 
-      <div class="work-item tall">
+      <div class="work-item tall" data-category="social">
         <img src="assets/FEED-MORANGO_1ARQUIVO.png" alt="Trabalho 18">
         <div class="work-item-overlay">
           <span class="work-item-cat">Social Media</span>
@@ -1198,7 +1400,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="social">
         <img src="assets/FEED-TODOS-SABORESARQUIVO.png" alt="Trabalho 19">
         <div class="work-item-overlay">
           <span class="work-item-cat">Social Media</span>
@@ -1206,7 +1408,7 @@
         </div>
       </div>
 
-      <div class="work-item wide">
+      <div class="work-item wide" data-category="logo">
         <img src="assets/MISTERDOG-LOGO-GAROTA 2 HOT.png" alt="Trabalho 20">
         <div class="work-item-overlay">
           <span class="work-item-cat">Logo</span>
@@ -1214,7 +1416,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="social">
         <img src="assets/PASCOA-POST.png" alt="Trabalho 21">
         <div class="work-item-overlay">
           <span class="work-item-cat">Social Media</span>
@@ -1222,7 +1424,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="projeto">
         <img src="assets/projeto-01.jpeg" alt="Trabalho 22">
         <div class="work-item-overlay">
           <span class="work-item-cat">Projeto</span>
@@ -1230,7 +1432,7 @@
         </div>
       </div>
 
-      <div class="work-item tall">
+      <div class="work-item tall" data-category="projeto">
         <img src="assets/projeto-03.jpeg" alt="Trabalho 23">
         <div class="work-item-overlay">
           <span class="work-item-cat">Projeto</span>
@@ -1238,7 +1440,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="projeto">
         <img src="assets/projeto-04.diogo.png" alt="Trabalho 24">
         <div class="work-item-overlay">
           <span class="work-item-cat">Projeto</span>
@@ -1246,7 +1448,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="projeto">
         <img src="assets/projeto-13.png" alt="Trabalho 25">
         <div class="work-item-overlay">
           <span class="work-item-cat">Projeto</span>
@@ -1254,7 +1456,7 @@
         </div>
       </div>
 
-      <div class="work-item wide">
+      <div class="work-item wide" data-category="projeto">
         <img src="assets/projeto-15.png" alt="Trabalho 26">
         <div class="work-item-overlay">
           <span class="work-item-cat">Projeto</span>
@@ -1262,7 +1464,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="extras">
         <img src="assets/promo Magnus.png" alt="Trabalho 27">
         <div class="work-item-overlay">
           <span class="work-item-cat">Promo</span>
@@ -1270,7 +1472,7 @@
         </div>
       </div>
 
-      <div class="work-item tall">
+      <div class="work-item tall" data-category="ia3d">
         <img src="assets/Gemini_Generated_Image_b7iukdb7iukdb7iu.png" alt="Trabalho 28">
         <div class="work-item-overlay">
           <span class="work-item-cat">IA</span>
@@ -1278,7 +1480,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="ia3d">
         <img src="assets/A_stunning_professional_3D_transformation_202605172004.jpeg" alt="Trabalho 29">
         <div class="work-item-overlay">
           <span class="work-item-cat">3D</span>
@@ -1286,7 +1488,7 @@
         </div>
       </div>
 
-      <div class="work-item">
+      <div class="work-item" data-category="fotografia">
         <img src="assets/agora_depois_da_mordida_no_202605171342.jpeg" alt="Trabalho 30">
         <div class="work-item-overlay">
           <span class="work-item-cat">Fotografia</span>
@@ -1296,10 +1498,25 @@
     </div>
 
     <div class="work-counter">
-      <span class="work-count">30 Projetos</span>
-      <span class="work-scroll-hint">← Arraste para o lado →</span>
+      <span class="work-count" id="workCount">30 Projetos</span>
+      <span class="work-scroll-hint">Clique na imagem para ampliar</span>
     </div>
   </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Fechar">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Anterior">&#8592;</button>
+    <button class="lightbox-nav lightbox-next" aria-label="Próximo">&#8594;</button>
+    <figure class="lightbox-figure">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+      <figcaption class="lightbox-caption">
+        <span class="lightbox-cat" id="lightboxCat"></span>
+        <h3 class="lightbox-title" id="lightboxTitle"></h3>
+      </figcaption>
+    </figure>
+    <span class="lightbox-count" id="lightboxCount"></span>
+  </div>
 
   <!-- Quote Section -->
   <section class="quote-section">
@@ -1735,29 +1952,116 @@
 
   <script>
     (function() {
-      var workTrack = document.querySelector('.work-track');
-      if (!workTrack) return;
+      document.documentElement.classList.add('js');
 
-      var isDown = false;
-      var startX;
-      var scrollLeft;
+      var grid = document.querySelector('.work-grid');
+      var items = Array.prototype.slice.call(document.querySelectorAll('.work-item'));
+      var countEl = document.getElementById('workCount');
+      var filters = Array.prototype.slice.call(document.querySelectorAll('.work-filter'));
+      var activeFilter = 'all';
 
-      workTrack.addEventListener('mousedown', function(e) {
-        isDown = true;
-        startX = e.pageX - workTrack.offsetLeft;
-        scrollLeft = workTrack.scrollLeft;
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      items.forEach(function(item) { revealObserver.observe(item); });
+
+      function applyFilter(filter) {
+        var visible = [];
+        items.forEach(function(item) {
+          var show = filter === 'all' || item.getAttribute('data-category') === filter;
+          item.classList.toggle('hidden', !show);
+          if (show) {
+            visible.push(item);
+            item.classList.add('in-view');
+          }
+        });
+        if (countEl) {
+          countEl.textContent = visible.length + (visible.length === 1 ? ' Projeto' : ' Projetos');
+        }
+        return visible;
+      }
+
+      filters.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filters.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          activeFilter = btn.getAttribute('data-filter');
+          applyFilter(activeFilter);
+        });
       });
 
-      document.addEventListener('mouseup', function() {
-        isDown = false;
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightboxImg');
+      var lightboxCat = document.getElementById('lightboxCat');
+      var lightboxTitle = document.getElementById('lightboxTitle');
+      var lightboxCount = document.getElementById('lightboxCount');
+      var lightboxItems = [];
+      var currentIndex = 0;
+
+      function renderLightbox() {
+        var item = lightboxItems[currentIndex];
+        var img = item.querySelector('img');
+        var cat = item.querySelector('.work-item-cat');
+        var title = item.querySelector('.work-item-title');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCat.textContent = cat ? cat.textContent : '';
+        lightboxTitle.textContent = title ? title.textContent : '';
+        lightboxCount.textContent = (currentIndex + 1) + ' / ' + lightboxItems.length;
+      }
+
+      function openLightbox(index) {
+        lightboxItems = applyFilter(activeFilter);
+        if (!lightboxItems.length) return;
+        currentIndex = (index + lightboxItems.length) % lightboxItems.length;
+        renderLightbox();
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function navigate(dir) {
+        currentIndex = (currentIndex + dir + lightboxItems.length) % lightboxItems.length;
+        renderLightbox();
+      }
+
+      grid.addEventListener('click', function(e) {
+        var item = e.target.closest('.work-item');
+        if (!item) return;
+        openLightbox(items.indexOf(item));
       });
 
-      document.addEventListener('mousemove', function(e) {
-        if (!isDown) return;
-        e.preventDefault();
-        var x = e.pageX - workTrack.offsetLeft;
-        var walk = (x - startX) * 1.5;
-        workTrack.scrollLeft = scrollLeft - walk;
+      document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+      document.querySelector('.lightbox-prev').addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigate(-1);
+      });
+      document.querySelector('.lightbox-next').addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigate(1);
+      });
+
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
       });
     })();
   </script>
