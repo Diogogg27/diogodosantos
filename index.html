@@ -2312,7 +2312,7 @@
         var moved = false;
         var startX = 0;
         var startPos = 0;
-        var running = false;
+        var running = true;
         var rafId = 0;
         var last = performance.now();
 
@@ -2348,6 +2348,8 @@
           });
         }, { threshold: 0.02 });
         io.observe(row);
+        rafId = requestAnimationFrame(frame);
+        apply();
 
         row.addEventListener('mousedown', function(e) {
           dragging = true;
@@ -2402,7 +2404,7 @@
         apply();
       }
 
-      function buildRow(itemList, reverse, speed) {
+      function buildRow(itemList, reverse) {
         var row = document.createElement('div');
         row.className = 'marquee-row' + (reverse ? ' reverse' : '');
         var track = document.createElement('div');
@@ -2418,14 +2420,17 @@
         });
         set.forEach(function(clone) { track.appendChild(clone.cloneNode(true)); });
         row.appendChild(track);
-        initMarquee(row, track, speed, reverse);
         return row;
       }
 
       container.innerHTML = '';
       var half = Math.ceil(items.length / 2);
-      container.appendChild(buildRow(items.slice(0, half), false, 100));
-      container.appendChild(buildRow(items.slice(half), true, 140));
+      var row1 = buildRow(items.slice(0, half), false);
+      var row2 = buildRow(items.slice(half), true);
+      container.appendChild(row1);
+      container.appendChild(row2);
+      initMarquee(row1, row1.querySelector('.marquee-track'), 100, false);
+      initMarquee(row2, row2.querySelector('.marquee-track'), 140, true);
 
       var lightbox = document.getElementById('lightbox');
       var lightboxImg = document.getElementById('lightboxImg');
