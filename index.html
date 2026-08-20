@@ -643,49 +643,113 @@
       letter-spacing: -2px;
     }
 
-    /* 3D Ring Carousel - exatamente como o original */
-    .ring-stage {
-      width: 100%;
-      height: 80vh;
-      overflow: hidden;
-      background: transparent;
+    /* Dynamic Horizontal Scroll Library */
+    .work-track {
+      display: flex;
+      gap: 16px;
+      padding: 0 40px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+    }
+
+    .work-track:active {
+      cursor: grabbing;
+    }
+
+    .work-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .work-item {
+      flex: 0 0 350px;
+      height: 450px;
       position: relative;
-      transform-style: preserve-3d;
-      user-select: none;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      scroll-snap-align: start;
+      background: var(--bg-card);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .ring-wrap {
-      perspective: 2000px;
-      width: 300px;
-      height: 400px;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .work-item.tall {
+      height: 550px;
     }
 
-    .ring {
+    .work-item.wide {
+      width: 500px;
+    }
+
+    .work-item img {
       width: 100%;
       height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      cursor: grab;
-      user-select: none;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .ring .img {
-      width: 300px;
-      height: 400px;
+    .work-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .work-item-overlay {
       position: absolute;
-      background-size: cover;
-      background-position: center;
-      backface-visibility: hidden;
-      transform-origin: 50% 50% 500px;
-      user-select: none;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13, 27, 42, 0.95) 0%, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
     }
 
-    .ring .img:hover {
-      filter: brightness(1.1);
+    .work-item:hover .work-item-overlay {
+      opacity: 1;
+    }
+
+    .work-item-cat {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .work-item-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .work-counter {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .work-count {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .work-scroll-hint {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     /* ==========================================================================
@@ -1006,26 +1070,251 @@
       <h2 class="work-heading reveal reveal-delay-1">Biblioteca de Trabalhos</h2>
     </div>
 
-    <div class="ring-stage">
-      <div class="ring-wrap">
-        <div class="ring">
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
-          <div class="img"></div>
+    <div class="work-track">
+      <div class="work-item tall">
+        <img src="assets/STUDIO 1.png" alt="Trabalho 1">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Studio</span>
+          <h3 class="work-item-title">Projeto 1</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/STUDIO 2.png" alt="Trabalho 2">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Studio</span>
+          <h3 class="work-item-title">Projeto 2</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/STUDIO 3.png" alt="Trabalho 3">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Studio</span>
+          <h3 class="work-item-title">Projeto 3</h3>
+        </div>
+      </div>
+
+      <div class="work-item tall">
+        <img src="assets/STUDIO 4.png" alt="Trabalho 4">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Studio</span>
+          <h3 class="work-item-title">Projeto 4</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/STUDIO 5.png" alt="Trabalho 5">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Studio</span>
+          <h3 class="work-item-title">Projeto 5</h3>
+        </div>
+      </div>
+
+      <div class="work-item wide">
+        <img src="assets/Prancheta 1.png" alt="Trabalho 6">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Mockup</span>
+          <h3 class="work-item-title">Projeto 6</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/Prancheta 2.png" alt="Trabalho 7">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Mockup</span>
+          <h3 class="work-item-title">Projeto 7</h3>
+        </div>
+      </div>
+
+      <div class="work-item tall">
+        <img src="assets/Prancheta 3.png" alt="Trabalho 8">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Mockup</span>
+          <h3 class="work-item-title">Projeto 8</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/Prancheta 4.png" alt="Trabalho 9">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Mockup</span>
+          <h3 class="work-item-title">Projeto 9</h3>
+        </div>
+      </div>
+
+      <div class="work-item wide">
+        <img src="assets/02. Fast Food Mockup.png" alt="Trabalho 10">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Mockup</span>
+          <h3 class="work-item-title">Fast Food</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/02.png" alt="Trabalho 11">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Design</span>
+          <h3 class="work-item-title">Projeto 11</h3>
+        </div>
+      </div>
+
+      <div class="work-item tall">
+        <img src="assets/146-shopping-bag-mockup-01.png" alt="Trabalho 12">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Mockup</span>
+          <h3 class="work-item-title">Shopping Bag</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/60.png" alt="Trabalho 13">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Design</span>
+          <h3 class="work-item-title">Projeto 13</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/Free Embossed Paper Logo Mockup.png" alt="Trabalho 14">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Logo</span>
+          <h3 class="work-item-title">Logo Mockup</h3>
+        </div>
+      </div>
+
+      <div class="work-item wide">
+        <img src="assets/Gellato_Doces_engraved_sand_2K_202607302246.jpeg" alt="Trabalho 15">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Fotografia</span>
+          <h3 class="work-item-title">Gellato Doces</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/sticker_minimalist_sticker.png" alt="Trabalho 16">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Sticker</span>
+          <h3 class="work-item-title">Sticker</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/Artboard 3.png" alt="Trabalho 17">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Design</span>
+          <h3 class="work-item-title">Projeto 17</h3>
+        </div>
+      </div>
+
+      <div class="work-item tall">
+        <img src="assets/FEED-MORANGO_1ARQUIVO.png" alt="Trabalho 18">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Social Media</span>
+          <h3 class="work-item-title">Feed Morango</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/FEED-TODOS-SABORESARQUIVO.png" alt="Trabalho 19">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Social Media</span>
+          <h3 class="work-item-title">Feed Sabores</h3>
+        </div>
+      </div>
+
+      <div class="work-item wide">
+        <img src="assets/MISTERDOG-LOGO-GAROTA 2 HOT.png" alt="Trabalho 20">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Logo</span>
+          <h3 class="work-item-title">Mister Dog</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/PASCOA-POST.png" alt="Trabalho 21">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Social Media</span>
+          <h3 class="work-item-title">Páscoa</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/projeto-01.jpeg" alt="Trabalho 22">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Projeto</span>
+          <h3 class="work-item-title">Projeto 22</h3>
+        </div>
+      </div>
+
+      <div class="work-item tall">
+        <img src="assets/projeto-03.jpeg" alt="Trabalho 23">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Projeto</span>
+          <h3 class="work-item-title">Projeto 23</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/projeto-04.diogo.png" alt="Trabalho 24">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Projeto</span>
+          <h3 class="work-item-title">Projeto 24</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/projeto-13.png" alt="Trabalho 25">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Projeto</span>
+          <h3 class="work-item-title">Projeto 25</h3>
+        </div>
+      </div>
+
+      <div class="work-item wide">
+        <img src="assets/projeto-15.png" alt="Trabalho 26">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Projeto</span>
+          <h3 class="work-item-title">Projeto 26</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/promo Magnus.png" alt="Trabalho 27">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Promo</span>
+          <h3 class="work-item-title">Magnus</h3>
+        </div>
+      </div>
+
+      <div class="work-item tall">
+        <img src="assets/Gemini_Generated_Image_b7iukdb7iukdb7iu.png" alt="Trabalho 28">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">IA</span>
+          <h3 class="work-item-title">Gerado por IA</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/A_stunning_professional_3D_transformation_202605172004.jpeg" alt="Trabalho 29">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">3D</span>
+          <h3 class="work-item-title">Transformação 3D</h3>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <img src="assets/agora_depois_da_mordida_no_202605171342.jpeg" alt="Trabalho 30">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Fotografia</span>
+          <h3 class="work-item-title">Antes e Depois</h3>
         </div>
       </div>
     </div>
 
     <div class="work-counter">
       <span class="work-count">30 Projetos</span>
-      <span class="work-scroll-hint">← Arraste para girar →</span>
+      <span class="work-scroll-hint">← Arraste para o lado →</span>
     </div>
   </section>
 
@@ -1465,80 +1754,32 @@
   </script>
 
   <script>
-    window.addEventListener('load', function() {
-      try {
-        var xPos = 0;
-        var images = [
-          'assets/STUDIO 1.png',
-          'assets/STUDIO 2.png',
-          'assets/STUDIO 3.png',
-          'assets/STUDIO 4.png',
-          'assets/STUDIO 5.png',
-          'assets/Prancheta 1.png',
-          'assets/Prancheta 2.png',
-          'assets/Prancheta 3.png',
-          'assets/Prancheta 4.png',
-          'assets/02. Fast Food Mockup.png'
-        ];
+    (function() {
+      var workTrack = document.querySelector('.work-track');
+      if (!workTrack) return;
 
-        function getBgPos(i) {
-          return (100 - gsap.utils.wrap(0, 360, gsap.getProperty('.ring', 'rotationY') - 180 - i * 36) / 360 * 500) + 'px 0px';
-        }
+      var isDown = false;
+      var startX;
+      var scrollLeft;
 
-        gsap.timeline()
-          .set('.ring', { rotationY: 180, cursor: 'grab' })
-          .set('.ring .img', {
-            rotateY: function(i) { return i * -36; },
-            transformOrigin: '50% 50% 500px',
-            z: -500,
-            backgroundImage: function(i) { return 'url(' + images[i] + ')'; },
-            backgroundPosition: function(i) { return getBgPos(i); },
-            backfaceVisibility: 'hidden'
-          })
-          .from('.ring .img', {
-            duration: 1.5,
-            y: 200,
-            opacity: 0,
-            stagger: 0.1,
-            ease: 'expo'
-          })
-          .add(function() {
-            $('.ring .img').on('mouseenter', function(e) {
-              var current = e.currentTarget;
-              gsap.to('.ring .img', { opacity: function(i, t) { return (t == current) ? 1 : 0.5; }, ease: 'power3' });
-            });
-            $('.ring .img').on('mouseleave', function() {
-              gsap.to('.ring .img', { opacity: 1, ease: 'power2.inOut' });
-            });
-          }, '-=0.5');
+      workTrack.addEventListener('mousedown', function(e) {
+        isDown = true;
+        startX = e.pageX - workTrack.offsetLeft;
+        scrollLeft = workTrack.scrollLeft;
+      });
 
-        $(window).on('mousedown touchstart', dragStart);
-        $(window).on('mouseup touchend', dragEnd);
+      document.addEventListener('mouseup', function() {
+        isDown = false;
+      });
 
-        function dragStart(e) {
-          if (e.touches) e.clientX = e.touches[0].clientX;
-          xPos = Math.round(e.clientX);
-          gsap.set('.ring', { cursor: 'grabbing' });
-          $(window).on('mousemove touchmove', drag);
-        }
-
-        function drag(e) {
-          if (e.touches) e.clientX = e.touches[0].clientX;
-          gsap.to('.ring', {
-            rotationY: '-=' + ((Math.round(e.clientX) - xPos) % 360),
-            onUpdate: function() { gsap.set('.ring .img', { backgroundPosition: function(i) { return getBgPos(i); } }); }
-          });
-          xPos = Math.round(e.clientX);
-        }
-
-        function dragEnd(e) {
-          $(window).off('mousemove touchmove', drag);
-          gsap.set('.ring', { cursor: 'grab' });
-        }
-      } catch(err) {
-        console.log('Ring carousel error:', err);
-      }
-    });
+      document.addEventListener('mousemove', function(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        var x = e.pageX - workTrack.offsetLeft;
+        var walk = (x - startX) * 1.5;
+        workTrack.scrollLeft = scrollLeft - walk;
+      });
+    })();
   </script>
 </body>
 
