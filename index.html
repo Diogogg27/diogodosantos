@@ -1827,17 +1827,12 @@
         scrollLeft = workTrack.scrollLeft;
       });
 
-      workTrack.addEventListener('mouseleave', () => {
+      document.addEventListener('mouseup', () => {
         isDown = false;
-        workTrack.classList.remove('dragging');
+        if (workTrack) workTrack.classList.remove('dragging');
       });
 
-      workTrack.addEventListener('mouseup', () => {
-        isDown = false;
-        workTrack.classList.remove('dragging');
-      });
-
-      workTrack.addEventListener('mousemove', (e) => {
+      document.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - workTrack.offsetLeft;
@@ -1845,26 +1840,47 @@
         workTrack.scrollLeft = scrollLeft - walk;
       });
     }
+  </script>
 
-    // ==========================================================================
-    // 12. CLICK TO ZOOM WORK ITEMS
-    // ==========================================================================
-    document.querySelectorAll('.work-item').forEach(item => {
-      item.onclick = function(e) {
-        e.stopPropagation();
-        const wasActive = this.classList.contains('active');
-        document.querySelectorAll('.work-item').forEach(i => i.classList.remove('active'));
-        if (!wasActive) {
-          this.classList.add('active');
+  <script>
+    (function() {
+      let dragMoved = false;
+      let dragStartX = 0;
+
+      document.addEventListener('mousedown', function(e) {
+        dragMoved = false;
+        dragStartX = e.clientX;
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (Math.abs(e.clientX - dragStartX) > 8) {
+          dragMoved = true;
         }
-      };
-    });
+      });
 
-    document.body.onclick = function(e) {
-      if (!e.target.closest('.work-item')) {
-        document.querySelectorAll('.work-item').forEach(i => i.classList.remove('active'));
-      }
-    };
+      document.addEventListener('click', function(e) {
+        var item = e.target.closest('.work-item');
+        if (item) {
+          e.stopPropagation();
+          if (dragMoved) {
+            dragMoved = false;
+            return;
+          }
+          var wasActive = item.classList.contains('active');
+          document.querySelectorAll('.work-item.active').forEach(function(i) {
+            i.classList.remove('active');
+          });
+          if (!wasActive) {
+            item.classList.add('active');
+          }
+          dragMoved = false;
+        } else {
+          document.querySelectorAll('.work-item.active').forEach(function(i) {
+            i.classList.remove('active');
+          });
+        }
+      }, true);
+    })();
   </script>
 </body>
 
