@@ -23,22 +23,22 @@
        1. VARIÁVEIS E TEMA
        ========================================================================== */
     :root {
-      --bg-dark: #0a0a0f;
-      --bg-card: rgba(20, 20, 28, 0.7);
-      --bg-card-hover: rgba(30, 30, 42, 0.8);
-      --border-glass: rgba(255, 255, 255, 0.08);
-      --border-glass-hover: rgba(255, 255, 255, 0.15);
+      --bg-dark: #0d1b2a;
+      --bg-card: rgba(27, 38, 59, 0.7);
+      --bg-card-hover: rgba(65, 90, 119, 0.4);
+      --border-glass: rgba(119, 141, 169, 0.2);
+      --border-glass-hover: rgba(119, 141, 169, 0.35);
 
-      --primary: #6366f1;
-      --primary-rgb: 99, 102, 241;
-      --secondary: #8b5cf6;
-      --secondary-rgb: 139, 92, 246;
-      --accent: #a78bfa;
-      --accent-rgb: 167, 139, 250;
+      --primary: #1b263b;
+      --primary-rgb: 27, 38, 59;
+      --secondary: #415a77;
+      --secondary-rgb: 65, 90, 119;
+      --accent: #778da9;
+      --accent-rgb: 119, 141, 169;
 
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
+      --text-primary: #e0e1dd;
+      --text-secondary: #a8b2c1;
+      --text-muted: #6b7a8d;
 
       --font-display: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
@@ -154,7 +154,7 @@
     .corner-cross::after {
       content: '';
       position: absolute;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(119, 141, 169, 0.2);
     }
 
     .corner-cross::before {
@@ -223,7 +223,7 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: var(--text-primary);
+      background: var(--accent);
       transition: width 0.3s ease;
     }
 
@@ -246,7 +246,7 @@
        ========================================================================== */
     .hero-stage {
       position: relative;
-      height: 300vh;
+      height: 200vh;
     }
 
     .hero-sticky {
@@ -254,14 +254,13 @@
       top: 0;
       height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
       overflow: hidden;
     }
 
     .morph-scene {
-      position: absolute;
-      inset: 0;
+      position: relative;
+      flex: 1;
       z-index: 1;
     }
 
@@ -274,8 +273,8 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 0 24px;
-      max-width: 900px;
+      padding: 48px 24px 60px;
+      background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
     }
 
     .hero-tag {
@@ -288,7 +287,7 @@
       color: var(--accent);
       margin-bottom: 24px;
       padding: 6px 16px;
-      border: 1px solid rgba(167, 139, 250, 0.3);
+      border: 1px solid rgba(119, 141, 169, 0.3);
       border-radius: 50px;
     }
 
@@ -298,12 +297,12 @@
       font-weight: 700;
       line-height: 0.9;
       letter-spacing: -3px;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .hero-title .outline {
       color: transparent;
-      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3);
+      -webkit-text-stroke: 1.5px rgba(224, 225, 221, 0.3);
       transition: var(--transition-smooth);
     }
 
@@ -313,10 +312,10 @@
 
     .hero-subtitle {
       font-family: var(--font-body);
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
       color: var(--text-secondary);
       max-width: 600px;
-      margin: 0 auto 40px;
+      margin: 0 auto 32px;
       line-height: 1.7;
     }
 
@@ -330,21 +329,21 @@
       text-decoration: none;
       color: var(--text-primary);
       padding: 16px 32px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(119, 141, 169, 0.3);
       border-radius: 50px;
       transition: var(--transition-smooth);
       letter-spacing: 1px;
     }
 
     .hero-cta:hover {
-      background: var(--primary);
-      border-color: var(--primary);
+      background: var(--secondary);
+      border-color: var(--secondary);
       transform: translateY(-2px);
     }
 
     .scroll-indicator {
       position: absolute;
-      bottom: 40px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
@@ -1067,8 +1066,8 @@
         uTime: { value: 0 },
         uScrollProgress: { value: 0 },
         uMouse: { value: new THREE.Vector2(0, 0) },
-        uColor1: { value: new THREE.Color(0x6366f1) },
-        uColor2: { value: new THREE.Color(0x8b5cf6) },
+        uColor1: { value: new THREE.Color(0x1b263b) },
+        uColor2: { value: new THREE.Color(0x415a77) },
       },
       vertexShader: `
         uniform float uTime;
