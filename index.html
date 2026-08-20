@@ -641,26 +641,17 @@
     .marquee-row {
       display: flex;
       overflow: hidden;
+      cursor: grab;
+    }
+
+    .marquee-row.dragging {
+      cursor: grabbing;
     }
 
     .marquee-track {
       display: flex;
       flex: 0 0 auto;
-      animation: marquee-scroll var(--marquee-speed, 60s) linear infinite;
       will-change: transform;
-    }
-
-    .marquee-row.reverse .marquee-track {
-      animation-direction: reverse;
-    }
-
-    .marquee-row:hover .marquee-track {
-      animation-play-state: paused;
-    }
-
-    @keyframes marquee-scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
     }
 
     .work-item {
@@ -671,9 +662,16 @@
       margin-right: 16px;
       border-radius: 16px;
       overflow: hidden;
-      cursor: pointer;
+      cursor: grab;
       background: var(--bg-card);
       transition: box-shadow 0.3s ease;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .marquee-row.dragging .work-item {
+      cursor: grabbing;
     }
 
     .work-item:hover {
@@ -2159,23 +2157,104 @@
 
       if (countEl) countEl.textContent = items.length + ' Projetos';
 
+      var suppressClick = false;
+
+      function initMarquee(row, track, speed, reverse) {
+        var half = track.scrollWidth / 2;
+        var pos = 0;
+        var dragging = false;
+        var moved = false;
+        var startX = 0;
+        var startPos = 0;
+        var last = performance.now();
+
+        function apply() {
+          track.style.transform = 'translateX(' + pos + 'px)';
+        }
+
+        function frame(now) {
+          var dt = Math.min(0.05, (now - last) / 1000);
+          last = now;
+          if (!dragging) {
+            pos += (reverse ? speed : -speed) * dt;
+            if (pos <= -half) pos += half;
+            if (pos > 0) pos -= half;
+            apply();
+          }
+          requestAnimationFrame(frame);
+        }
+
+        row.addEventListener('mousedown', function(e) {
+          dragging = true;
+          moved = false;
+          startX = e.pageX;
+          startPos = pos;
+          row.classList.add('dragging');
+          e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+          if (!dragging) return;
+          var dx = e.pageX - startX;
+          if (Math.abs(dx) > 4) moved = true;
+          pos = startPos + dx;
+          apply();
+        });
+
+        document.addEventListener('mouseup', function() {
+          if (dragging) {
+            dragging = false;
+            row.classList.remove('dragging');
+            if (moved) suppressClick = true;
+          }
+        });
+
+        row.addEventListener('touchstart', function(e) {
+          dragging = true;
+          moved = false;
+          startX = e.touches[0].pageX;
+          startPos = pos;
+          row.classList.add('dragging');
+        }, { passive: true });
+
+        document.addEventListener('touchmove', function(e) {
+          if (!dragging) return;
+          e.preventDefault();
+          var dx = e.touches[0].pageX - startX;
+          if (Math.abs(dx) > 4) moved = true;
+          pos = startPos + dx;
+          apply();
+        }, { passive: false });
+
+        document.addEventListener('touchend', function() {
+          if (dragging) {
+            dragging = false;
+            row.classList.remove('dragging');
+            if (moved) suppressClick = true;
+          }
+        });
+
+        apply();
+        requestAnimationFrame(frame);
+      }
+
       function buildRow(itemList, reverse, speed) {
         var row = document.createElement('div');
         row.className = 'marquee-row' + (reverse ? ' reverse' : '');
         var track = document.createElement('div');
         track.className = 'marquee-track';
-        track.style.setProperty('--marquee-speed', speed);
         var set = itemList.map(function(item) { return item.cloneNode(true); });
         set.forEach(function(clone) { track.appendChild(clone); });
         set.forEach(function(clone) { track.appendChild(clone.cloneNode(true)); });
         row.appendChild(track);
+        initMarquee(row, track, speed, reverse);
         return row;
       }
 
       container.innerHTML = '';
       var half = Math.ceil(items.length / 2);
-      container.appendChild(buildRow(items.slice(0, half), false, '55s'));
-      container.appendChild(buildRow(items.slice(half), true, '75s'));
+      container.appendChild(buildRow(items.slice(0, half), false, 100));
+      container.appendChild(buildRow(items.slice(half), true, 140));
 
       var lightbox = document.getElementById('lightbox');
       var lightboxImg = document.getElementById('lightboxImg');
@@ -2216,6 +2295,7 @@
       }
 
       document.addEventListener('click', function(e) {
+        if (suppressClick) { suppressClick = false; return; }
         var item = e.target.closest('.work-item');
         if (!item || !container.contains(item)) return;
         var idx = parseInt(item.getAttribute('data-index'), 10);
