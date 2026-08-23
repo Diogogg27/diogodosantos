@@ -1238,109 +1238,137 @@
       border-color: var(--accent);
     }
 
+    /* Grid mosaico minimalista - Busybox style */
     .video-grid {
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 40px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 240px;
+      grid-auto-flow: dense;
+      gap: 14px;
     }
 
-    .video-card {
+    .v-box-cont {
       position: relative;
-      border-radius: 16px;
       overflow: hidden;
-      aspect-ratio: 9 / 14;
+      cursor: crosshair;
       background: var(--bg-card);
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-      transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      transition: border-color 0.4s ease, background 0.4s ease;
     }
 
-    .video-card:hover {
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      transform: translateY(-4px);
+    .v-box-cont.multiple-col {
+      grid-column: span 2;
     }
 
-    .video-card img {
+    .v-box-cont.multiple-row {
+      grid-row: span 2;
+    }
+
+    .v-box-cont:hover {
+      border-color: var(--border-glass-hover);
+      background: rgba(27, 38, 59, 0.85);
+    }
+
+    .v-box {
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+
+    .v-box img,
+    .v-box video {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .video-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .video-card-play {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(13, 27, 42, 0.35);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.5s ease;
     }
 
-    .video-card:hover .video-card-play {
+    .v-box .v-poster {
+      opacity: 0.92;
+    }
+
+    .v-box-cont:hover .v-poster {
+      opacity: 0;
+    }
+
+    .v-box-cont:hover .v-preview {
       opacity: 1;
     }
 
-    .video-card-play::after {
-      content: '';
-      width: 0;
-      height: 0;
-      border-left: 22px solid rgba(255, 255, 255, 0.95);
-      border-top: 14px solid transparent;
-      border-bottom: 14px solid transparent;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+    .v-box video {
+      object-fit: cover;
+      filter: saturate(1.1) contrast(1.05);
     }
 
-    .video-card-overlay {
+    .v-meta {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(13, 27, 42, 0.95) 0%, transparent 50%);
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 22px;
+      gap: 4px;
+      z-index: 3;
       pointer-events: none;
     }
 
-    .video-card-cat {
+    .v-cat {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .v-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.25;
+    }
+
+    .v-dur {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      z-index: 3;
       font-family: var(--font-mono);
       font-size: 0.62rem;
       font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .video-card-title {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.3;
-    }
-
-    .video-card-duration {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      background: rgba(13, 27, 42, 0.8);
+      letter-spacing: 1.5px;
+      color: var(--text-secondary);
+      background: rgba(13, 27, 42, 0.72);
       border: 1px solid var(--border-glass);
-      border-radius: 6px;
-      padding: 4px 9px;
-      letter-spacing: 1px;
+      border-radius: 100px;
+      padding: 3px 10px;
+      backdrop-filter: blur(6px);
+    }
+
+    .v-corner {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      z-index: 3;
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid var(--accent);
+      border-left: 1px solid var(--accent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .v-box-cont:hover .v-corner {
+      opacity: 1;
     }
 
     /* Video Player Modal */
@@ -1426,8 +1454,14 @@
         padding: 0 20px;
       }
       .video-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
+        gap: 10px;
+      }
+      .v-box-cont.multiple-col,
+      .v-box-cont.multiple-row {
+        grid-column: span 1;
+        grid-row: span 1;
       }
       .video-modal {
         padding: 16px;
@@ -2839,52 +2873,92 @@
         v.dur = v.dur;
       });
 
+      var gridCells = [];
+      var previewVideos = [];
+
+      function createContaining() {
+        var pattern = [
+          '', 'multiple-col', 'multiple-row', '', '', 'multiple-col', '', '', 'multiple-row', '', '', 'multiple-col'
+        ];
+        return function(i) {
+          if (i < pattern.length) return pattern[i];
+          return '';
+        };
+      }
+      var getSpan = createContaining();
+
       function renderGrid() {
         grid.innerHTML = '';
+        gridCells = [];
+        previewVideos = [];
         var list = currentFilter === 'all'
           ? VIDEOS
           : VIDEOS.filter(function(v) { return v.cat === currentFilter; });
-        list.forEach(function(v) {
-          var card = document.createElement('div');
-          card.className = 'video-card';
-          card.setAttribute('data-slug', v.slug);
-          card.setAttribute('role', 'button');
-          card.setAttribute('tabindex', '0');
-          card.setAttribute('aria-label', v.title);
+        list.forEach(function(v, i) {
+          var cont = document.createElement('div');
+          var span = getSpan(i);
+          cont.className = 'v-box-cont' + (span ? ' ' + span : '');
+          cont.setAttribute('data-slug', v.slug);
+          cont.setAttribute('role', 'button');
+          cont.setAttribute('tabindex', '0');
+          cont.setAttribute('aria-label', v.title);
 
-          var img = document.createElement('img');
-          img.src = BASE + '/posters/' + v.slug + '_poster.jpg';
-          img.alt = v.title;
-          img.loading = 'lazy';
-          img.decoding = 'async';
+          var box = document.createElement('div');
+          box.className = 'v-box';
 
-          var play = document.createElement('div');
-          play.className = 'video-card-play';
+          var poster = document.createElement('img');
+          poster.className = 'v-poster';
+          poster.src = BASE + '/posters/' + v.slug + '_poster.jpg';
+          poster.alt = v.title;
+          poster.loading = 'lazy';
+          poster.decoding = 'async';
+
+          var preview = document.createElement('video');
+          preview.className = 'v-preview';
+          preview.muted = true;
+          preview.loop = true;
+          preview.playsInline = true;
+          preview.preload = 'none';
+          preview.src = BASE + '/videos/' + v.slug + '.mp4';
 
           var dur = document.createElement('span');
-          dur.className = 'video-card-duration';
+          dur.className = 'v-dur';
           dur.textContent = v.dur;
 
-          var overlay = document.createElement('div');
-          overlay.className = 'video-card-overlay';
+          var corner = document.createElement('span');
+          corner.className = 'v-corner';
+
+          var meta = document.createElement('div');
+          meta.className = 'v-meta';
           var cat = document.createElement('span');
-          cat.className = 'video-card-cat';
+          cat.className = 'v-cat';
           cat.textContent = v.cat.charAt(0).toUpperCase() + v.cat.slice(1);
           var title = document.createElement('h3');
-          title.className = 'video-card-title';
+          title.className = 'v-title';
           title.textContent = v.title;
-          overlay.appendChild(cat);
-          overlay.appendChild(title);
+          meta.appendChild(cat);
+          meta.appendChild(title);
 
-          card.appendChild(img);
-          card.appendChild(play);
-          card.appendChild(dur);
-          card.appendChild(overlay);
-          card.addEventListener('click', function() { openVideo(v); });
-          card.addEventListener('keydown', function(e) {
+          box.appendChild(poster);
+          box.appendChild(preview);
+          cont.appendChild(box);
+          cont.appendChild(dur);
+          cont.appendChild(corner);
+          cont.appendChild(meta);
+          cont.addEventListener('click', function() { openVideo(v); });
+          cont.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(v); }
           });
-          grid.appendChild(card);
+          cont.addEventListener('mouseenter', function() {
+            if (preview.readyState === 0) preview.load();
+            var p = preview.play();
+            if (p && p.catch) p.catch(function() {});
+          });
+          cont.addEventListener('mouseleave', function() {
+            preview.pause();
+            preview.currentTime = 0;
+          });
+          grid.appendChild(cont);
         });
       }
 
@@ -2930,6 +3004,8 @@
       renderGrid();
     })();
   </script>
+  <!-- Polyfill for safari and Edge, normally I would use feature detection in js and add the script dynamically -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.5/web-animations-next-lite.min.js"></script>
 </body>
 
 </html>
