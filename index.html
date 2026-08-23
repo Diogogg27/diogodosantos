@@ -1171,6 +1171,268 @@
         padding: 24px;
       }
     }
+
+    /* ==========================================================================
+       15. VIDEOMAKER SECTION (Biblioteca de Vídeos)
+       ========================================================================== */
+    .video-section {
+      position: relative;
+      padding: 160px 0;
+    }
+
+    .video-header {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 40px;
+    }
+
+    .video-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .video-heading {
+      font-family: 'Michroma', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: -2px;
+    }
+
+    .video-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      padding: 0 40px;
+    }
+
+    .video-filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: rgba(27, 38, 59, 0.5);
+      border: 1px solid var(--border-glass);
+      border-radius: 100px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .video-filter-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-glass-hover);
+    }
+
+    .video-filter-btn.active {
+      color: var(--text-primary);
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+    }
+
+    .video-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 9 / 14;
+      background: var(--bg-card);
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .video-card:hover {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .video-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .video-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .video-card-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 27, 42, 0.35);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .video-card:hover .video-card-play {
+      opacity: 1;
+    }
+
+    .video-card-play::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 22px solid rgba(255, 255, 255, 0.95);
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+    }
+
+    .video-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13, 27, 42, 0.95) 0%, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px;
+      pointer-events: none;
+    }
+
+    .video-card-cat {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .video-card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .video-card-duration {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: rgba(13, 27, 42, 0.8);
+      border: 1px solid var(--border-glass);
+      border-radius: 6px;
+      padding: 4px 9px;
+      letter-spacing: 1px;
+    }
+
+    /* Video Player Modal */
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 27, 42, 0.97);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      backdrop-filter: blur(10px);
+      padding: 40px;
+    }
+
+    .video-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .video-modal-figure {
+      max-width: min(90vw, 900px);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .video-modal.open .video-modal-figure {
+      transform: scale(1);
+    }
+
+    .video-modal video {
+      width: 100%;
+      max-height: 75vh;
+      border-radius: 12px;
+      background: #000;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .video-modal-caption {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .video-modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 2;
+      background: rgba(27, 38, 59, 0.7);
+      border: 1px solid var(--border-glass);
+      color: var(--text-primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+      line-height: 1;
+    }
+
+    .video-modal-close:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .video-section {
+        padding: 100px 0;
+      }
+      .video-header,
+      .video-filters,
+      .video-grid {
+        padding: 0 20px;
+      }
+      .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
+      }
+      .video-modal {
+        padding: 16px;
+      }
+    }
   </style>
 </head>
 
@@ -1194,6 +1456,7 @@
       <nav class="topbar-nav">
         <a href="#about">Sobre</a>
         <a href="#work">Trabalhos</a>
+        <a href="#video">Vídeos</a>
         <a href="#contact">Contato</a>
       </nav>
   </header>
@@ -1789,6 +2052,37 @@
     </div>
   </section>
 
+  <!-- Videomaker Section -->
+  <section class="video-section" id="video">
+    <div class="video-header">
+      <div class="video-label reveal">Videomaker</div>
+      <h2 class="video-heading reveal reveal-delay-1">Biblioteca de Vídeos</h2>
+    </div>
+
+    <div class="video-filters reveal" id="videoFilters">
+      <button class="video-filter-btn active" data-filter="all">Todos</button>
+      <button class="video-filter-btn" data-filter="petshop">Petshop</button>
+      <button class="video-filter-btn" data-filter="educacao">Colégio</button>
+      <button class="video-filter-btn" data-filter="moda">Moda</button>
+      <button class="video-filter-btn" data-filter="motion">Motion 3D</button>
+      <button class="video-filter-btn" data-filter="caricatura">Caricaturas</button>
+      <button class="video-filter-btn" data-filter="ia">IA Experimental</button>
+    </div>
+
+    <div class="video-grid" id="videoGrid"></div>
+  </section>
+
+  <div class="video-modal" id="videoModal" aria-hidden="true">
+    <button class="video-modal-close" aria-label="Fechar">&times;</button>
+    <figure class="video-modal-figure">
+      <video id="videoModalPlayer" controls playsinline preload="metadata"></video>
+      <figcaption class="video-modal-caption">
+        <span class="lightbox-cat" id="videoModalCat"></span>
+        <h3 class="lightbox-title" id="videoModalTitle"></h3>
+      </figcaption>
+    </figure>
+  </div>
+
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox-close" aria-label="Fechar">&times;</button>
@@ -1881,6 +2175,7 @@
         <ul>
           <li><a href="#about">Sobre</a></li>
           <li><a href="#work">Trabalhos</a></li>
+          <li><a href="#video">Vídeos</a></li>
           <li><a href="#contact">Contato</a></li>
         </ul>
       </div>
@@ -2491,6 +2786,148 @@
         if (e.key === 'ArrowLeft') navigate(-1);
         if (e.key === 'ArrowRight') navigate(1);
       });
+    })();
+
+    /* ==========================================================================
+       VIDEOMAKER - Biblioteca de Vídeos
+       ========================================================================== */
+    (function() {
+      var BASE = 'https://portfolio-videos-ingest.dscreativedesigngrafico.workers.dev';
+      var VIDEOS = [
+        { slug: 'bom-sucesso-vittarmax-petshop',    cat: 'petshop',    title: 'Vittamax — Bom Sucesso',        dur: '0:47' },
+        { slug: 'bom-sucesso-golden-trato-urin',   cat: 'petshop',    title: 'Golden Trato Urinário',         dur: '0:39' },
+        { slug: 'bom-sucesso-m-line-racao',        cat: 'petshop',    title: 'M-Line Ração Premium',          dur: '0:41' },
+        { slug: 'bom-sucesso-linha-premium-natural', cat: 'petshop',  title: 'Linha Premium Natural',         dur: '1:10' },
+        { slug: 'vet-care-super-premium',          cat: 'petshop',    title: 'Vet Care Super Premium',        dur: '0:54' },
+        { slug: 'saber-supremo-cara-nova',         cat: 'educacao',   title: 'Colégio Saber Supremo — Cara Nova', dur: '0:48' },
+        { slug: 'saber-supremo-video-02',          cat: 'educacao',   title: 'Colégio Saber Supremo — Vídeo 02', dur: '1:09' },
+        { slug: 'saber-supremo-video-01',          cat: 'educacao',   title: 'Colégio Saber Supremo — Vídeo 01', dur: '1:05' },
+        { slug: 'moda-feminina-keila-godoy',       cat: 'moda',       title: 'Moda Feminina — Keila Godoy',   dur: '2:00' },
+        { slug: 'motion-3d-alphacap',              cat: 'motion',     title: 'Motion 3D — AlphaCap',         dur: '0:46' },
+        { slug: 'golliraz-animacao-01',            cat: 'caricatura', title: 'Golliraz — Animação 01',        dur: '0:09' },
+        { slug: 'golliraz-animacao-02',            cat: 'caricatura', title: 'Golliraz — Animação 02',        dur: '0:09' },
+        { slug: 'golliraz-animacao-03',            cat: 'caricatura', title: 'Golliraz — Animação 03',        dur: '0:09' },
+        { slug: 'golliraz-animacao-04',            cat: 'caricatura', title: 'Golliraz — Animação 04',        dur: '0:09' },
+        { slug: 'dscreative-post-instagram-02',    cat: 'moda',       title: 'Post Instagram — DS Crative',   dur: '0:57' },
+        { slug: 'sequencia-01',                    cat: 'motion',     title: 'Sequência 01',                 dur: '0:57' },
+        { slug: 'video-4-corte-prontos',           cat: 'motion',     title: 'Vídeo 4 — Cortes Prontos',      dur: '0:35' },
+        { slug: 'visao-de-dono-prt2',              cat: 'petshop',    title: 'Visão de Dono — Parte 2',       dur: '1:40' },
+        { slug: 'reels-vertical-9-16',             cat: 'ia',         title: 'Reel Vertical 9:16',            dur: '1:28' },
+        { slug: 'torta-gelada-slomotion',          cat: 'motion',     title: 'Torta Gelada — Slow Motion',    dur: '0:10' },
+        { slug: 'whatsapp-2025-11-04',             cat: 'motion',     title: 'Campanha — Novembro 2025',      dur: '0:42' },
+        { slug: 'firefly-veo-image-to-01',         cat: 'ia',         title: 'Firefly Veo — Image to Video 01', dur: '0:08' },
+        { slug: 'firefly-veo-image-to-02',         cat: 'ia',         title: 'Firefly Veo — Image to Video 02', dur: '0:08' },
+        { slug: 'model-veo-3-1-task-image',        cat: 'ia',         title: 'Model Veo 3.1 — Task Image',   dur: '0:10' }
+      ];
+
+      function fmtTime(sec) {
+        var m = Math.floor(sec / 60);
+        var s = Math.floor(sec % 60);
+        return m + ':' + (s < 10 ? '0' : '') + s;
+      }
+
+      var grid = document.getElementById('videoGrid');
+      var filters = document.getElementById('videoFilters');
+      var modal = document.getElementById('videoModal');
+      var player = document.getElementById('videoModalPlayer');
+      var modalCat = document.getElementById('videoModalCat');
+      var modalTitle = document.getElementById('videoModalTitle');
+
+      var currentFilter = 'all';
+
+      VIDEOS.forEach(function(v) {
+        v.dur = v.dur;
+      });
+
+      function renderGrid() {
+        grid.innerHTML = '';
+        var list = currentFilter === 'all'
+          ? VIDEOS
+          : VIDEOS.filter(function(v) { return v.cat === currentFilter; });
+        list.forEach(function(v) {
+          var card = document.createElement('div');
+          card.className = 'video-card';
+          card.setAttribute('data-slug', v.slug);
+          card.setAttribute('role', 'button');
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('aria-label', v.title);
+
+          var img = document.createElement('img');
+          img.src = BASE + '/posters/' + v.slug + '_poster.jpg';
+          img.alt = v.title;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+
+          var play = document.createElement('div');
+          play.className = 'video-card-play';
+
+          var dur = document.createElement('span');
+          dur.className = 'video-card-duration';
+          dur.textContent = v.dur;
+
+          var overlay = document.createElement('div');
+          overlay.className = 'video-card-overlay';
+          var cat = document.createElement('span');
+          cat.className = 'video-card-cat';
+          cat.textContent = v.cat.charAt(0).toUpperCase() + v.cat.slice(1);
+          var title = document.createElement('h3');
+          title.className = 'video-card-title';
+          title.textContent = v.title;
+          overlay.appendChild(cat);
+          overlay.appendChild(title);
+
+          card.appendChild(img);
+          card.appendChild(play);
+          card.appendChild(dur);
+          card.appendChild(overlay);
+          card.addEventListener('click', function() { openVideo(v); });
+          card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(v); }
+          });
+          grid.appendChild(card);
+        });
+      }
+
+      function openVideo(v) {
+        player.src = BASE + '/videos/' + v.slug + '.mp4';
+        player.poster = BASE + '/posters/' + v.slug + '_poster.jpg';
+        modalCat.textContent = v.cat.charAt(0).toUpperCase() + v.cat.slice(1);
+        modalTitle.textContent = v.title;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        player.play().catch(function() {});
+      }
+
+      function closeVideo() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        player.pause();
+        player.removeAttribute('src');
+        player.load();
+      }
+
+      filters.addEventListener('click', function(e) {
+        var btn = e.target.closest('.video-filter-btn');
+        if (!btn) return;
+        currentFilter = btn.getAttribute('data-filter');
+        filters.querySelectorAll('.video-filter-btn').forEach(function(b) {
+          b.classList.toggle('active', b === btn);
+        });
+        renderGrid();
+      });
+
+      modal.querySelector('.video-modal-close').addEventListener('click', closeVideo);
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeVideo();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (!modal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeVideo();
+      });
+
+      renderGrid();
     })();
   </script>
 </body>
