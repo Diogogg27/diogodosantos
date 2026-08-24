@@ -208,6 +208,10 @@
     }
 
     .topbar-name {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       font-family: var(--font-futurist);
       font-weight: 700;
       letter-spacing: 4px;
@@ -1813,14 +1817,16 @@
 
   <!-- Header -->
   <header class="topbar">
-    <div class="topbar-name">Diogo dos Santos</div>
-      <nav class="topbar-nav">
-        <a href="#about">Sobre</a>
-        <a href="#work">Trabalhos</a>
-        <a href="#video">Vídeos</a>
-        <a href="#webdev">Web Dev</a>
-        <a href="#contact">Contato</a>
-      </nav>
+    <nav class="topbar-nav topbar-nav-left">
+      <a href="#about">Sobre</a>
+      <a href="#contact">Contato</a>
+    </nav>
+    <div class="topbar-name">Diogo Santos</div>
+    <nav class="topbar-nav topbar-nav-right">
+      <a href="#work">Trabalhos</a>
+      <a href="#video">Vídeos</a>
+      <a href="#webdev">Web Dev</a>
+    </nav>
   </header>
 
   <!-- Hero Section -->
