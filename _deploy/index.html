@@ -695,7 +695,7 @@
       border-radius: 16px;
       overflow: hidden;
       cursor: grab;
-      background: var(--bg-card);
+      background: var(--card-grad);
       transition: box-shadow 0.3s ease;
       -webkit-user-select: none;
       user-select: none;
@@ -1156,20 +1156,17 @@
     }
 
     .tool-card {
-      background: #f5f3ef;
+      background-image: var(--card-grad);
       border: 1px solid rgba(27, 38, 59, 0.08);
       border-radius: 20px;
       padding: 32px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-image 0.3s ease;
     }
-
-    .tool-card:nth-child(2n) { background: #dfdcd6; }
-    .tool-card:nth-child(3n) { background: #efece5; }
 
     .tool-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(13, 27, 42, 0.14);
-      background: #e2dfd8;
+      box-shadow: 0 20px 40px rgba(13, 27, 42, 0.24);
+      background-image: var(--card-grad-hover);
     }
 
     .tool-card-name {
@@ -1235,20 +1232,17 @@
     }
 
     .webdev-card {
-      background: #f5f3ef;
+      background-image: var(--card-grad);
       border: 1px solid rgba(27, 38, 59, 0.08);
       border-radius: 20px;
       padding: 32px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-image 0.3s ease;
     }
-
-    .webdev-card:nth-child(2n) { background: #dfdcd6; }
-    .webdev-card:nth-child(3n) { background: #efece5; }
 
     .webdev-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(13, 27, 42, 0.14);
-      background: #e2dfd8;
+      box-shadow: 0 20px 40px rgba(13, 27, 42, 0.24);
+      background-image: var(--card-grad-hover);
     }
 
     .webdev-card-name {
