@@ -2920,7 +2920,7 @@
           preview.loop = true;
           preview.playsInline = true;
           preview.preload = 'none';
-          preview.src = BASE + '/videos/' + v.slug + '.mp4';
+          preview.src = BASE + '/videos/' + v.slug + '.mp4?v=2';
 
           var dur = document.createElement('span');
           dur.className = 'v-dur';
@@ -2964,7 +2964,7 @@
       }
 
       function openVideo(v) {
-        player.src = BASE + '/videos/' + v.slug + '.mp4';
+        player.src = BASE + '/videos/' + v.slug + '.mp4?v=2';
         player.poster = BASE + '/posters/' + v.slug + '_poster.jpg';
         modalCat.textContent = v.cat.charAt(0).toUpperCase() + v.cat.slice(1);
         modalTitle.textContent = v.title;
