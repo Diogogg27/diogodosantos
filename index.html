@@ -2115,6 +2115,14 @@
         </div>
       </div>
 
+      <div class="work-item" data-category="design">
+        <img src="assets/thumbs/Gym fitness motivational quote post.jpg" data-full="assets/Gym fitness motivational quote post.png" alt="Gym Fitness Motivational Quote">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">Design</span>
+          <h3 class="work-item-title">Gym Fitness Motivational</h3>
+        </div>
+      </div>
+
       <div class="work-item" data-category="mockup">
         <img src="assets/thumbs/Mug in Hand Mockup by Creatsy®.jpg" data-full="assets/Mug in Hand Mockup by Creatsy®.png" alt="Mockup Caneca">
         <div class="work-item-overlay">
@@ -3027,7 +3035,7 @@
 
       items.forEach(function(item, i) { item.setAttribute('data-index', i); });
 
-      if (countEl) countEl.textContent = items.length + ' Projetos';
+      if (countEl) countEl.textContent = (items.length / 2) + ' Projetos';
 
       var suppressClick = false;
 
