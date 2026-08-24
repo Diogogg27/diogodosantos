@@ -289,13 +289,8 @@
 
     .hero-big-text {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      text-align: center;
       font-family: 'Michroma', sans-serif;
-      font-size: 220px;
+      font-size: clamp(40px, 10vw, 200px);
       font-weight: 400;
       letter-spacing: -10px;
       color: rgba(224, 225, 221, 0.08);
@@ -304,6 +299,16 @@
       pointer-events: none;
       user-select: none;
       line-height: 1;
+    }
+
+    .hero-big-left {
+      top: 8%;
+      left: 2%;
+    }
+
+    .hero-big-right {
+      bottom: 8%;
+      right: 2%;
     }
 
     .morph-scene {
@@ -1824,7 +1829,8 @@
         <div class="morph-scene">
           <canvas class="morph-canvas" id="morphCanvas"></canvas>
         </div>
-        <div class="hero-big-text">PORTFOLIO</div>
+        <div class="hero-big-text hero-big-left">PORT</div>
+        <div class="hero-big-text hero-big-right">FOLIO</div>
       </div>
 
       <div class="hero-content-side">
