@@ -1248,6 +1248,169 @@
       border: 1px solid rgba(27, 38, 59, 0.12);
       border-radius: 100px;
       padding: 4px 10px;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .webdev-tag::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(27, 38, 59, 0.06);
+      transform: translateX(-110%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .webdev-card:hover .webdev-tag {
+      color: #0d1b2a;
+      border-color: rgba(27, 38, 59, 0.3);
+    }
+
+    .webdev-card:hover .webdev-tag::before {
+      transform: translateX(0);
+    }
+
+    .webdev-tag > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Terminal Typewriter */
+    .webdev-terminal {
+      margin-top: 0;
+      margin-bottom: 60px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(13, 27, 42, 0.35);
+      font-family: var(--font-mono);
+    }
+
+    .webdev-terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 12px 16px;
+    }
+
+    .webdev-terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .webdev-terminal-dot.r { background: #ff5f57; }
+    .webdev-terminal-dot.y { background: #febc2e; }
+    .webdev-terminal-dot.g { background: #28c840; }
+
+    .webdev-terminal-title {
+      margin-left: 10px;
+      font-size: 0.75rem;
+      color: #8b949e;
+      letter-spacing: 0.5px;
+    }
+
+    .webdev-terminal-code {
+      padding: 22px 24px;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      min-height: 210px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .webdev-terminal-code .tok-k {
+      color: #79c0ff;
+    }
+    .webdev-terminal-code .tok-f {
+      color: #d2a8ff;
+    }
+    .webdev-terminal-code .tok-n {
+      color: #7ee787;
+    }
+    .webdev-terminal-code .tok-s {
+      color: #a5d6ff;
+    }
+    .webdev-terminal-code .tok-c {
+      color: #8b949e;
+      font-style: italic;
+    }
+    .webdev-terminal-code .tok-p {
+      color: #ffa657;
+    }
+
+    .webdev-terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.05em;
+      background: #7ee787;
+      vertical-align: text-bottom;
+      margin-left: 4px;
+      animation: webdev-blink 1s step-end infinite;
+    }
+
+    @keyframes webdev-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Core Web Vitals counters */
+    .webdev-vitals {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .webdev-vital {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .webdev-vital::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(120px 60px at 50% 0%, rgba(121, 192, 255, 0.12), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .webdev-vital:hover::after {
+      opacity: 1;
+    }
+
+    .webdev-vital-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #8b949e;
+      margin-bottom: 10px;
+    }
+
+    .webdev-vital-value {
+      font-family: 'Michroma', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #7ee787;
+      line-height: 1.1;
+    }
+
+    .webdev-vital-desc {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: #8b949e;
+      margin-top: 8px;
     }
 
     @media (max-width: 768px) {
@@ -1256,6 +1419,14 @@
       }
       .webdev-grid {
         grid-template-columns: 1fr;
+      }
+      .webdev-vitals {
+        grid-template-columns: 1fr;
+      }
+      .webdev-terminal-code {
+        font-size: 0.72rem;
+        padding: 16px;
+        min-height: 260px;
       }
     }
 
@@ -2305,6 +2476,34 @@
       otimizada e core web vitals saudáveis.
     </p>
 
+    <div class="webdev-terminal reveal reveal-delay-3">
+      <div class="webdev-terminal-bar">
+        <span class="webdev-terminal-dot r"></span>
+        <span class="webdev-terminal-dot y"></span>
+        <span class="webdev-terminal-dot g"></span>
+        <span class="webdev-terminal-title">dscreative — portfolio.js</span>
+      </div>
+      <code class="webdev-terminal-code" id="webdevTerminal"></code>
+    </div>
+
+    <div class="webdev-vitals reveal reveal-delay-4">
+      <div class="webdev-vital">
+        <div class="webdev-vital-label">LCP</div>
+        <div class="webdev-vital-value"><span class="vital-num" data-target="0.8" data-decimals="1">0.0</span>s</div>
+        <p class="webdev-vital-desc">Largest Contentful Paint — imagem/produto carrega rápido</p>
+      </div>
+      <div class="webdev-vital">
+        <div class="webdev-vital-label">INP</div>
+        <div class="webdev-vital-value"><span class="vital-num" data-target="120">0</span>ms</div>
+        <p class="webdev-vital-desc">Interaction to Next Paint — resposta imediata ao clique</p>
+      </div>
+      <div class="webdev-vital">
+        <div class="webdev-vital-label">CLS</div>
+        <div class="webdev-vital-value"><span class="vital-num" data-target="0.01" data-decimals="2">0.00</span></div>
+        <p class="webdev-vital-desc">Cumulative Layout Shift — layout estável, sem "pulos"</p>
+      </div>
+    </div>
+
     <div class="webdev-grid">
       <div class="webdev-card reveal">
         <h3 class="webdev-card-name">Landing Pages & Páginas de Campanha</h3>
@@ -3208,6 +3407,98 @@
       });
 
       renderGrid();
+    })();
+
+    /* ==========================================================================
+       WEB DEV - Terminal typewriter + Core Web Vitals counters
+       ========================================================================== */
+    (function() {
+      var terminal = document.getElementById('webdevTerminal');
+      if (!terminal) return;
+
+      var LINES = [
+        { t: 'k', v: 'const' }, { t: 'n', v: ' ' }, { t: 'f', v: 'portfolio' }, { t: 'p', v: ' = {' }, 
+        { t: 'c', v: '\n  // DS Crative — build do front-end' },
+        { t: 'k', v: '\n  stack' }, { t: 'p', v: ': [' }, { t: 's', v: "'HTML5'" }, { t: 'p', v: ', ' }, { t: 's', v: "'CSS3'" }, { t: 'p', v: ', ' }, { t: 's', v: "'JavaScript'" }, { t: 'p', v: '],' },
+        { t: 'k', v: '\n  deploy' }, { t: 'p', v: ': [' }, { t: 's', v: "'Cloudflare Pages'" }, { t: 'p', v: ', ' }, { t: 's', v: "'Git'" }, { t: 'p', v: '],' },
+        { t: 'k', v: '\n  performance' }, { t: 'p', v: ': {' },
+        { t: 'c', v: '\n    // Core Web Vitals dentro do alvo' },
+        { t: 'k', v: '\n    lcp' }, { t: 'p', v: ': ' }, { t: 'n', v: '0.8s' }, { t: 'p', v: ',' },
+        { t: 'k', v: '\n    inp' }, { t: 'p', v: ': ' }, { t: 'n', v: '120ms' }, { t: 'p', v: ',' },
+        { t: 'k', v: '\n    cls' }, { t: 'p', v: ': ' }, { t: 'n', v: '0.01' }, { t: 'p', v: ',' },
+        { t: 'p', v: '\n  },' },
+        { t: 'c', v: '\n  // design to code — pixel perfect' },
+        { t: 'k', v: '\n  deliver ' }, { t: 'p', v: '=> ' }, { t: 'n', v: 'pixelPerfect' }, { t: 'p', v: '()' },
+        { t: 'c', v: '\n  /* feito por Diogo dos Santos */' },
+        { t: 'n', v: '\n' }
+      ];
+
+      var cursor = document.createElement('span');
+      cursor.className = 'webdev-terminal-cursor';
+
+      var idx = 0;
+      var linePos = 0;
+      var html = '';
+      var running = false;
+
+      function esc(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function step() {
+        if (!terminal) return;
+        if (idx >= LINES.length) {
+          if (running) return;
+          running = true;
+          setTimeout(function() {
+            idx = 0; linePos = 0; html = '';
+            running = false;
+            step();
+          }, 4200);
+          return;
+        }
+        if (linePos === 0) html += '<span class="tok-' + LINES[idx].t + '">';
+        html += esc(LINES[idx].v[linePos]);
+        linePos++;
+        if (linePos >= LINES[idx].v.length) {
+          html += '</span>';
+          idx++;
+          linePos = 0;
+        }
+        terminal.innerHTML = html;
+        terminal.appendChild(cursor);
+        setTimeout(step, 24 + Math.random() * 26);
+      }
+      step();
+
+      var seen = false;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) {
+          if (en.isIntersecting && !seen) {
+            seen = true;
+            document.querySelectorAll('.vital-num').forEach(animateVital);
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.35 });
+      var vitals = document.querySelector('.webdev-vitals');
+      if (vitals) io.observe(vitals);
+
+      function animateVital(el) {
+        var target = parseFloat(el.getAttribute('data-target'));
+        var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        var duration = 1600;
+        var start = null;
+        function frame(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * eased).toFixed(decimals);
+          if (p < 1) requestAnimationFrame(frame);
+          else el.textContent = target.toFixed(decimals);
+        }
+        requestAnimationFrame(frame);
+      }
     })();
   </script>
   <!-- Polyfill for safari and Edge, normally I would use feature detection in js and add the script dynamically -->
