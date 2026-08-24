@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Michroma&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Michroma&family=Poiret+One&display=swap"
     rel="stylesheet">
 
   <!-- Three.js -->
@@ -21,17 +21,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <style>
-    /* Northura Font */
-    @font-face {
-      font-family: 'Northura Black';
-      src: url('assets/fonts/Northura-Black.woff2') format('woff2'),
-           url('assets/fonts/Northura-Black.otf') format('opentype');
-      font-weight: 900;
-      font-style: normal;
-      font-display: swap;
-    }
-
-/* ==========================================================================
+    /* ==========================================================================
        1. VARIÁVEIS E TEMA
        ========================================================================== */
     :root {
@@ -55,7 +45,7 @@
       --font-display: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --font-north: 'Northura Black', sans-serif;
+      --font-futurist: 'Poiret One', cursive;
 
       --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -218,11 +208,11 @@
     }
 
     .topbar-name {
-      font-family: var(--font-north);
-      font-weight: 900;
+      font-family: var(--font-futurist);
+      font-weight: 400;
       letter-spacing: 4px;
       text-transform: uppercase;
-      background: linear-gradient(90deg, #c6c6c6, #D0DADA);
+      background: linear-gradient(90deg, #6D7C8B, #BBB7AF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -235,11 +225,11 @@
     }
 
     .topbar-nav a {
-      font-family: var(--font-north);
+      font-family: var(--font-futurist);
       font-size: 0.72rem;
-      font-weight: 900;
+      font-weight: 400;
       text-decoration: none;
-      background: linear-gradient(90deg, #c6c6c6, #D0DADA);
+      background: linear-gradient(90deg, #6D7C8B, #BBB7AF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -559,13 +549,13 @@
     }
 
     .about-heading {
-      font-family: var(--font-north);
+      font-family: var(--font-futurist);
       font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-      font-weight: 900;
+      font-weight: 400;
       line-height: 1.25;
       margin-bottom: 32px;
       letter-spacing: 0.5px;
-      background: linear-gradient(90deg, #c6c6c6, #D0DADA);
+      background: linear-gradient(90deg, #6D7C8B, #BBB7AF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -659,11 +649,11 @@
     }
 
     .work-heading {
-      font-family: var(--font-north);
+      font-family: var(--font-futurist);
       font-size: clamp(1.7rem, 4vw, 2.8rem);
-      font-weight: 900;
+      font-weight: 400;
       letter-spacing: 0.5px;
-      background: linear-gradient(90deg, #c6c6c6, #D0DADA);
+      background: linear-gradient(90deg, #6D7C8B, #BBB7AF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1144,10 +1134,10 @@
     }
 
     .tools-name {
-      font-family: var(--font-north);
+      font-family: var(--font-futurist);
       font-size: clamp(1.2rem, 2.8vw, 2rem);
-      font-weight: 900;
-      background: linear-gradient(270deg, #c6c6c6, #D0DADA);
+      font-weight: 400;
+      background: linear-gradient(270deg, #6D7C8B, #BBB7AF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1217,11 +1207,11 @@
     }
 
     .webdev-heading {
-      font-family: var(--font-north);
+      font-family: var(--font-futurist);
       font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-      font-weight: 900;
+      font-weight: 400;
       letter-spacing: 0.5px;
-      background: linear-gradient(90deg, #c6c6c6, #D0DADA);
+      background: linear-gradient(90deg, #6D7C8B, #BBB7AF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1518,11 +1508,11 @@
     }
 
     .video-heading {
-      font-family: var(--font-north);
+      font-family: var(--font-futurist);
       font-size: clamp(1.7rem, 4vw, 2.8rem);
-      font-weight: 900;
+      font-weight: 400;
       letter-spacing: 0.5px;
-      background: linear-gradient(90deg, #c6c6c6, #D0DADA);
+      background: linear-gradient(90deg, #6D7C8B, #BBB7AF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
