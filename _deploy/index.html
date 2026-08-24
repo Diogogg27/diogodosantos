@@ -21,7 +21,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <style>
-    /* ==========================================================================
+    /* Northura Font */
+    @font-face {
+      font-family: 'Northura Black';
+      src: url('assets/fonts/Northura-Black.woff2') format('woff2'),
+           url('assets/fonts/Northura-Black.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+/* ==========================================================================
        1. VARIÁVEIS E TEMA
        ========================================================================== */
     :root {
@@ -45,7 +55,7 @@
       --font-display: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --font-barge: 'Pixeloza', sans-serif;
+      --font-north: 'Northura Black', sans-serif;
 
       --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -208,8 +218,7 @@
     }
 
     .topbar-name {
-      font-family: var(--font-barge);
-      font-size: 0.9rem;
+      font-family: var(--font-north);
       font-weight: 900;
       letter-spacing: 4px;
       text-transform: uppercase;
@@ -226,7 +235,7 @@
     }
 
     .topbar-nav a {
-      font-family: var(--font-barge);
+      font-family: var(--font-north);
       font-size: 0.72rem;
       font-weight: 900;
       text-decoration: none;
@@ -550,7 +559,7 @@
     }
 
     .about-heading {
-      font-family: var(--font-barge);
+      font-family: var(--font-north);
       font-size: clamp(1.5rem, 3.5vw, 2.4rem);
       font-weight: 900;
       line-height: 1.25;
@@ -650,7 +659,7 @@
     }
 
     .work-heading {
-      font-family: var(--font-barge);
+      font-family: var(--font-north);
       font-size: clamp(1.7rem, 4vw, 2.8rem);
       font-weight: 900;
       letter-spacing: 0.5px;
@@ -1135,7 +1144,7 @@
     }
 
     .tools-name {
-      font-family: var(--font-barge);
+      font-family: var(--font-north);
       font-size: clamp(1.2rem, 2.8vw, 2rem);
       font-weight: 900;
       background: linear-gradient(270deg, #c6c6c6, #D0DADA);
@@ -1208,7 +1217,7 @@
     }
 
     .webdev-heading {
-      font-family: var(--font-barge);
+      font-family: var(--font-north);
       font-size: clamp(1.5rem, 3.5vw, 2.4rem);
       font-weight: 900;
       letter-spacing: 0.5px;
@@ -1509,7 +1518,7 @@
     }
 
     .video-heading {
-      font-family: var(--font-barge);
+      font-family: var(--font-north);
       font-size: clamp(1.7rem, 4vw, 2.8rem);
       font-weight: 900;
       letter-spacing: 0.5px;
