@@ -2173,6 +2173,30 @@
         </div>
       </div>
 
+      <div class="work-item" data-category="ia3d">
+        <img src="assets/thumbs/ia-paper-red.jpg" data-full="assets/ia-paper-red.jpg" alt="Trabalho 31">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">IA</span>
+          <h3 class="work-item-title">Estilo Papel Vermelho</h3>
+        </div>
+      </div>
+
+      <div class="work-item" data-category="ia3d">
+        <img src="assets/thumbs/ia-kinder-ovo.jpg" data-full="assets/ia-kinder-ovo.jpg" alt="Trabalho 32">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">IA</span>
+          <h3 class="work-item-title">Ovo Explorer</h3>
+        </div>
+      </div>
+
+      <div class="work-item" data-category="ia3d">
+        <img src="assets/thumbs/ia-paper-white.jpg" data-full="assets/ia-paper-white.jpg" alt="Trabalho 33">
+        <div class="work-item-overlay">
+          <span class="work-item-cat">IA</span>
+          <h3 class="work-item-title">Estilo Papel Branco</h3>
+        </div>
+      </div>
+
       <div class="work-item" data-category="design">
         <img src="assets/thumbs/Gym fitness motivational quote post.jpg" data-full="assets/Gym fitness motivational quote post.png" alt="Gym Fitness Motivational Quote">
         <div class="work-item-overlay">
@@ -2431,7 +2455,7 @@
     </div>
 
     <div class="work-counter">
-      <span class="work-count" id="workCount">30 Projetos</span>
+      <span class="work-count" id="workCount">33 Projetos</span>
       <span class="work-scroll-hint">Clique na imagem para ampliar</span>
     </div>
   </section>
@@ -3085,7 +3109,7 @@
 
       items.forEach(function(item, i) { item.setAttribute('data-index', i); });
 
-      if (countEl) countEl.textContent = (items.length / 2) + ' Projetos';
+      if (countEl) countEl.textContent = Math.round(items.length / 2) + ' Projetos';
 
       var suppressClick = false;
 
